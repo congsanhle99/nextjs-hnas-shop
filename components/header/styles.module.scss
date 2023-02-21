@@ -165,3 +165,91 @@
     }
   }
 }
+
+// main header - logo - search input
+.main {
+  position: relative;
+  height: 70px;
+  display: flex;
+  align-items: center;
+
+  &__container {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .logo {
+    img {
+      width: 180px;
+    }
+  }
+
+  .search {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    background: #eeeeeebe;
+    height: 40px;
+    border-radius: 6px;
+
+    input {
+      border: none;
+      outline: none;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      padding-left: 1rem;
+    }
+
+    &__icon {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      background: $pink-color;
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+      cursor: pointer;
+
+      svg {
+        width: 21px;
+        height: 21px;
+        fill: #fff;
+      }
+    }
+  }
+  .cart {
+    position: relative;
+
+    svg {
+      width: 35px;
+      height: 35px;
+      fill: #666;
+      cursor: pointer;
+
+      &:hover {
+        fill: $pink-color;
+      }
+    }
+
+    span {
+      position: absolute;
+      top: -5px;
+      right: -10px;
+      background: $pink-color;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-weight: 600;
+      color: #fff;
+    }
+  }
+}
