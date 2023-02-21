@@ -21,7 +21,7 @@ const Top = () => {
               src="https://www.seekpng.com/png/full/47-477206_vietnam-war-flag-of-vietnam-south-vietnam-indochina.png"
               alt="flag"
             />
-            <span>VietNam / vnd</span>
+            <span>VietNam / VND</span>
           </li>
           <li className={styles.li}>
             <MdSecurity />

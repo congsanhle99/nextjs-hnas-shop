@@ -30,4 +30,8 @@ $pink-color: rgb(252, 70, 100);
   border-radius: 4px;
 }
 
-$red-color: blue;
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
