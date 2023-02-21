@@ -31,7 +31,7 @@
     display: flex;
     gap: 16px;
 
-    li {
+    .li {
       position: relative;
       display: flex;
       align-items: center;
@@ -89,9 +89,78 @@
         span {
           color: #000;
         }
+
         svg {
           fill: #333;
         }
+      }
+
+      // responsive menu top
+      // nhỏ hơn 670px thì apply css bên dưới
+      @media (max-width: 670px) {
+        &:nth-of-type(2),
+        &:nth-of-type(3),
+        &:nth-of-type(4) {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+// user menu
+.menu {
+  width: 280px;
+  position: absolute;
+  box-shadow: $shadow-1;
+  top: 100%;
+  right: 0;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 1rem 0;
+
+  h4 {
+    text-align: center;
+  }
+
+  .flex {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    padding: 0 1rem;
+  }
+
+  ul {
+    li {
+      height: 30px;
+
+      a {
+        width: 100%;
+        padding-left: 1rem !important;
+      }
+
+      &:hover {
+        background: #eeeeeebe;
+      }
+    }
+  }
+
+  &__img {
+    width: 100px !important;
+    height: 100px !important;
+  }
+
+  .col {
+    display: flex;
+    flex-direction: column;
+
+    span {
+      &:last-of-type {
+        font-size: 14px;
+        color: $pink-color;
+        text-decoration: underline;
       }
     }
   }

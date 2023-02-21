@@ -1,2 +1,33 @@
 $shadow-1: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+$blue-color: #2f82ff;
+$pink-color: rgb(252, 70, 100);
+
+.btn_primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background-color: $pink-color;
+  color: #fff;
+  border: 2px solid $pink-color;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.btn_outlined {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background-color: #fff;
+  color: $pink-color;
+  border: 2px solid $pink-color;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 4px;
+}
+
 $red-color: blue;
