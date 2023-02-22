@@ -5,11 +5,13 @@ import { MdSecurity } from "react-icons/md";
 import { BsSuitHeart } from "react-icons/bs";
 import { RiAccountPinCircleLine, RiArrowDropDownFill } from "react-icons/ri";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 import UserMenu from "./UserMenu";
 
 const Top = () => {
-  const [loggedIn, setLoggedIn] = useState(true);
+  // const [loggedIn, setLoggedIn] = useState(true);
   const [visible, setVisible] = useState(false);
+  const { data: session } = useSession();
 
   return (
     <div className={styles.top}>
@@ -40,14 +42,11 @@ const Top = () => {
             </Link>
           </li>
           <li className={styles.li} onMouseOver={() => setVisible(true)} onMouseLeave={() => setVisible(false)}>
-            {loggedIn ? (
+            {session ? (
               <li className={styles.li}>
                 <div className={styles.flex}>
-                  <img
-                    src="https://e7.pngegg.com/pngimages/1008/377/png-clipart-computer-icons-avatar-user-profile-avatar-heroes-black-hair-thumbnail.png"
-                    alt="avatar"
-                  />
-                  <span>Dannn</span>
+                  <img src={session.user.image} alt="avatar" />
+                  <span>{session.user.name}</span>
                   <RiArrowDropDownFill />
                 </div>
               </li>
@@ -60,7 +59,7 @@ const Top = () => {
                 </div>
               </li>
             )}
-            {visible && <UserMenu log={loggedIn} />}
+            {visible && <UserMenu session={session} />}
           </li>
         </ul>
       </div>
