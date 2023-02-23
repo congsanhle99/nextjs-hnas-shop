@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from "react";
 import styles from "../styles/signin.module.scss";
@@ -8,26 +9,27 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import Link from "next/link";
 import LoginInput from "../components/inputs/loginInput/LoginInput";
-
+import CircleIconBtn from "../components/buttons/circleIconBtn/circleIconBtn";
+import { getProviders } from "next-auth/react";
+import { signIn } from "next-auth/react";
+//
 const initialValue = {
   login_email: "",
   login_password: "",
 };
 
-const signin = () => {
+const signin = ({ providers }) => {
+  console.log("providers", providers);
   const [user, setUser] = useState(initialValue);
   const { login_email, login_password } = user;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log("name", name);
-    console.log("name", [name]);
-    console.log("value", value);
     setUser({ ...user, [name]: value });
   };
   console.log("user", user);
   const loginValidation = Yup.object({
-    login_email: Yup.string().required("Email Address is required.").email("Please enter a valid email address."),
+    login_email: Yup.string().required("Please enter a valid email address.").email("Email Address is required."),
     login_password: Yup.string().required("Please enter a password."),
   });
   return (
@@ -70,9 +72,26 @@ const signin = () => {
                     placeholder="Password"
                     onChange={handleChange}
                   />
+                  <CircleIconBtn type="submit" text="Sign In" />
+                  <div className={styles.forgot}>
+                    <Link href="/forget">Forgot Password ?</Link>
+                  </div>
                 </Form>
               )}
             </Formik>
+            <div className={styles.login__socials}>
+              <span className={styles.or}>Or continue with</span>
+              <div className={styles.login__socials_wrap}>
+                {providers.map((provider) => (
+                  <div key={provider.name}>
+                    <button className={styles.social__btn} onClick={() => signIn(provider.id)}>
+                      <img src={`../../icons/${provider.id}.png`} alt="icons" />
+                      Sign in with {provider.name}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -82,3 +101,10 @@ const signin = () => {
 };
 
 export default signin;
+
+export async function getServerSideProps(context) {
+  const providers = Object.values(await getProviders());
+  return {
+    props: { providers },
+  };
+}
