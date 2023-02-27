@@ -1,7 +1,8 @@
 $shadow-1: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-$blue-color: #2f82ff;
+$blue-color: rgb(47, 130, 255);
 $pink-color: rgb(252, 70, 100);
-$error-color: #ff0000;
+$success-color: rgb(75, 181, 67);
+$error-color: rgb(255, 0, 0);
 
 .btn_primary {
   display: flex;

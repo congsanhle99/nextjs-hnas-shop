@@ -13,6 +13,8 @@ import LoginInput from "../components/inputs/loginInput/LoginInput";
 import CircleIconBtn from "../components/buttons/circleIconBtn/circleIconBtn";
 import { getProviders } from "next-auth/react";
 import { signIn } from "next-auth/react";
+import DotLoader from "../components/loaders/dotLoader/DotLoader";
+import Router from "next/router";
 //
 const initialValue = {
   // for login
@@ -67,6 +69,9 @@ const signin = ({ providers }) => {
       });
       setUser({ ...user, success: data.message, error: "" });
       setLoading(false);
+      setTimeout(() => {
+        Router.push("/");
+      }, 2000);
     } catch (error) {
       setLoading(false);
       setUser({ ...user, success: "", error: error.response.data.message });
@@ -75,6 +80,7 @@ const signin = ({ providers }) => {
 
   return (
     <>
+      {loading && <DotLoader loading={loading} />}
       <Header />
       <div className={styles.login}>
         {/* login */}

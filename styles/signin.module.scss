@@ -157,9 +157,14 @@
 
 .register_success,
 .register_error {
-  margin-top: 16px;
+  margin-top: 12px;
+  font-size: 18px;
 }
 
 .register_error {
   color: $error-color;
+}
+
+.register_success {
+  color: $success-color;
 }
