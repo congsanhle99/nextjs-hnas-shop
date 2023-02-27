@@ -11,9 +11,11 @@
   "dependencies": {
     "@next-auth/mongodb-adapter": "^1.1.1",
     "@reduxjs/toolkit": "^1.9.2",
+    "bcrypt": "^5.1.0",
     "eslint": "8.34.0",
     "eslint-config-next": "13.1.6",
     "formik": "^2.2.9",
+    "jsonwebtoken": "^9.0.0",
     "mongodb": "^5.0.1",
     "mongoose": "^6.9.2",
     "next": "^12.2.3",
