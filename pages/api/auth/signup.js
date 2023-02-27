@@ -1,5 +1,5 @@
 import nc from "next-connect";
-import { connectDb } from "../../../utils/db";
+import { connectDb, disconnectDb } from "../../../utils/db";
 import { validationEmail } from "../../../utils/validation";
 import User from "../../../models/User";
 import bcrypt from "bcrypt";
@@ -36,6 +36,10 @@ handler.post(async (req, res) => {
     });
     const url = `${process.env.BASE_URL}/activate/${activation_token}`;
     sendMail(email, url, "", "Activate your account");
+    await disconnectDb();
+    res.json({
+      message: "Resister success! Please activate your email!",
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

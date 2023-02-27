@@ -154,3 +154,12 @@
     border: 1px solid $pink-color;
   }
 }
+
+.register_success,
+.register_error {
+  margin-top: 16px;
+}
+
+.register_error {
+  color: $error-color;
+}

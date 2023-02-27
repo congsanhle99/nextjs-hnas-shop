@@ -6,6 +6,7 @@ import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import { BiLeftArrowAlt } from "react-icons/bi";
 import { Formik, Form } from "formik";
+import axios from "axios";
 import * as Yup from "yup";
 import Link from "next/link";
 import LoginInput from "../components/inputs/loginInput/LoginInput";
@@ -22,12 +23,16 @@ const initialValue = {
   email: "",
   password: "",
   conf_password: "",
+  // sign up
+  success: "",
+  error: "",
 };
 
 const signin = ({ providers }) => {
   console.log("providers", providers);
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(initialValue);
-  const { login_email, login_password, name, email, password, conf_password } = user;
+  const { login_email, login_password, name, email, password, conf_password, success, error } = user;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,6 +55,24 @@ const signin = ({ providers }) => {
       .required("Confirm password.")
       .oneOf([Yup.ref("password")], "Password must match."),
   });
+
+  // call api to validate info user
+  const signUpHandler = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.post("/api/auth/signup", {
+        name,
+        email,
+        password,
+      });
+      setUser({ ...user, success: data.message, error: "" });
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      setUser({ ...user, success: "", error: error.response.data.message });
+    }
+  };
+
   return (
     <>
       <Header />
@@ -129,6 +152,7 @@ const signin = ({ providers }) => {
                 conf_password,
               }}
               validationSchema={registerValidation}
+              onSubmit={() => signUpHandler()}
             >
               {(form) => (
                 <Form>
@@ -152,6 +176,8 @@ const signin = ({ providers }) => {
                 </Form>
               )}
             </Formik>
+            <div className={styles.register_success}>{success && <span>{success}</span>}</div>
+            <div className={styles.register_error}>{error && <span>{error}</span>}</div>
           </div>
         </div>
       </div>
