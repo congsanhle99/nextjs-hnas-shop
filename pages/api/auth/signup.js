@@ -4,6 +4,7 @@ import { validationEmail } from "../../../utils/validation";
 import User from "../../../models/User";
 import bcrypt from "bcrypt";
 import { createActivationToken } from "../../../utils/token";
+import { sendMail } from "../../../utils/sendEmails";
 const handler = nc();
 
 handler.post(async (req, res) => {
@@ -33,8 +34,8 @@ handler.post(async (req, res) => {
     const activation_token = createActivationToken({
       id: addUser._id.toString(),
     });
-    console.log("activation_token", activation_token);
-    res.send(activation_token);
+    const url = `${process.env.BASE_URL}/activate/${activation_token}`;
+    sendMail(email, url, "", "Activate your account");
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
