@@ -13,7 +13,7 @@ import DotLoader from "../../components/loaders/dotLoader/DotLoader";
 
 const Forgot = () => {
   const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState("aaaaaaaaaa");
+  const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
