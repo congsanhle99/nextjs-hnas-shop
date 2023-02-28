@@ -1,20 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState } from "react";
-import styles from "../styles/signin.module.scss";
-import Header from "../components/header/Header";
-import Footer from "../components/footer/Footer";
-import { BiLeftArrowAlt } from "react-icons/bi";
-import { Formik, Form } from "formik";
 import axios from "axios";
-import * as Yup from "yup";
+import { Form, Formik } from "formik";
+import { getCsrfToken, getProviders, getSession, signIn } from "next-auth/react";
 import Link from "next/link";
-import LoginInput from "../components/inputs/loginInput/LoginInput";
-import CircleIconBtn from "../components/buttons/circleIconBtn/circleIconBtn";
-import { getProviders } from "next-auth/react";
-import { signIn } from "next-auth/react";
-import DotLoader from "../components/loaders/dotLoader/DotLoader";
 import Router from "next/router";
+import React, { useState } from "react";
+import { BiLeftArrowAlt } from "react-icons/bi";
+import * as Yup from "yup";
+import CircleIconBtn from "../components/buttons/circleIconBtn/circleIconBtn";
+import Footer from "../components/footer/Footer";
+import Header from "../components/header/Header";
+import LoginInput from "../components/inputs/loginInput/LoginInput";
+import DotLoader from "../components/loaders/dotLoader/DotLoader";
+import styles from "../styles/signin.module.scss";
 //
 const initialValue = {
   // for login
@@ -28,13 +27,15 @@ const initialValue = {
   // sign up
   success: "",
   error: "",
+  // sign in
+  login_error: "",
 };
 
-const signin = ({ providers }) => {
+const signin = ({ providers, csrfToken, callbackUrl }) => {
   console.log("providers", providers);
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(initialValue);
-  const { login_email, login_password, name, email, password, conf_password, success, error } = user;
+  const { login_email, login_password, name, email, password, conf_password, success, error, login_error } = user;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -58,7 +59,7 @@ const signin = ({ providers }) => {
       .oneOf([Yup.ref("password")], "Password must match."),
   });
 
-  // call api to validate info user
+  // call api to validate register user
   const signUpHandler = async () => {
     try {
       setLoading(true);
@@ -69,7 +70,13 @@ const signin = ({ providers }) => {
       });
       setUser({ ...user, success: data.message, error: "" });
       setLoading(false);
-      setTimeout(() => {
+      setTimeout(async () => {
+        let options = {
+          redirect: false,
+          email: email,
+          password: password,
+        };
+        const res = await signIn("credentials", options);
         Router.push("/");
       }, 2000);
     } catch (error) {
@@ -78,12 +85,32 @@ const signin = ({ providers }) => {
     }
   };
 
+  const signInHandler = async () => {
+    setLoading(true);
+    let options = {
+      redirect: false,
+      email: login_email,
+      password: login_password,
+    };
+    const res = await signIn("credentials", options);
+    setUser({ ...user, success: "", error: "" });
+    setLoading(false);
+    if (res?.error) {
+      setLoading(false);
+      setUser({ ...user, login_error: res?.error });
+    } else {
+      return Router.push(callbackUrl || "/");
+    }
+  };
+
   return (
     <>
       {loading && <DotLoader loading={loading} />}
       <Header />
       <div className={styles.login}>
-        {/* login */}
+        {
+          //#region login
+        }
         <div className={styles.login__container}>
           <div className={styles.login__header}>
             <div className={styles.back__svg}>
@@ -103,9 +130,13 @@ const signin = ({ providers }) => {
                 login_password,
               }}
               validationSchema={loginValidation}
+              onSubmit={() => {
+                signInHandler();
+              }}
             >
               {(form) => (
-                <Form>
+                <Form method="post" action="/api/auth/signin/email">
+                  <input type="text" name="csrfToken" defaultValue={csrfToken} />
                   <LoginInput
                     type="text"
                     name="login_email"
@@ -121,6 +152,7 @@ const signin = ({ providers }) => {
                     onChange={handleChange}
                   />
                   <CircleIconBtn type="submit" text="Sign In" />
+                  {login_error && <span className={styles.register_error}>{login_error}</span>}
                   <div className={styles.forgot}>
                     <Link href="/forget">Forgot Password ?</Link>
                   </div>
@@ -130,21 +162,30 @@ const signin = ({ providers }) => {
             <div className={styles.login__socials}>
               <span className={styles.or}>Or continue with</span>
               <div className={styles.login__socials_wrap}>
-                {providers.map((provider) => (
-                  <div key={provider.name}>
-                    <button className={styles.social__btn} onClick={() => signIn(provider.id)}>
-                      <img src={`../../icons/${provider.id}.png`} alt="icons" />
-                      Sign in with {provider.name}
-                    </button>
-                  </div>
-                ))}
+                {providers.map((provider) => {
+                  if (provider.name == "Credentials") {
+                    return;
+                  }
+                  return (
+                    <div key={provider.name}>
+                      <button className={styles.social__btn} onClick={() => signIn(provider.id)}>
+                        <img src={`../../icons/${provider.id}.png`} alt="icons" />
+                        Sign in with {provider.name}
+                      </button>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
         </div>
-        {/* end login */}
+        {
+          //#endregion
+        }
 
-        {/* register */}
+        {
+          //#region register
+        }
         <div className={styles.login__container}>
           <div className={styles.login__form}>
             <h1>Sign Up</h1>
@@ -186,6 +227,9 @@ const signin = ({ providers }) => {
             <div className={styles.register_error}>{error && <span>{error}</span>}</div>
           </div>
         </div>
+        {
+          //#endregion
+        }
       </div>
       <Footer />
     </>
@@ -195,8 +239,25 @@ const signin = ({ providers }) => {
 export default signin;
 
 export async function getServerSideProps(context) {
+  const { req, query } = context;
+  console.log("context".context);
+
+  const session = await getSession({ req });
+  console.log("session".session);
+  const { callbackUrl } = query;
+  console.log("callbackUrl".callbackUrl);
+
+  if (session) {
+    return {
+      redirect: {
+        destination: callbackUrl,
+      },
+    };
+  }
+
+  const csrfToken = await getCsrfToken(context);
   const providers = Object.values(await getProviders());
   return {
-    props: { providers },
+    props: { providers, csrfToken, callbackUrl },
   };
 }
