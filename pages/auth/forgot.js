@@ -1,25 +1,45 @@
+import axios from "axios";
 import { Form, Formik } from "formik";
 import Link from "next/link";
 import React, { useState } from "react";
 import { BiLeftArrowAlt } from "react-icons/bi";
 import * as Yup from "yup";
+import CircleIconBtn from "../../components/buttons/circleIconBtn/circleIconBtn";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 import LoginInput from "../../components/inputs/loginInput/LoginInput";
 import styles from "../../styles/forgot.module.scss";
-import CircleIconBtn from "../../components/buttons/circleIconBtn/circleIconBtn";
+import DotLoader from "../../components/loaders/dotLoader/DotLoader";
 
 const Forgot = () => {
   const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("aaaaaaaaaa");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const forgotHandler = () => {};
+
+  const forgotHandler = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.post("/api/auth/forgot", {
+        email,
+      });
+      setSuccess(data.message);
+      setError("");
+      setLoading(false);
+      setEmail("");
+    } catch (error) {
+      setLoading(false);
+      setError(error.response.data.message);
+      setSuccess("");
+    }
+  };
   const emailValidation = Yup.object({
     email: Yup.string().required("Please enter a valid email address.").email("Email is not in the correct format."),
   });
   return (
     <>
+      {loading && <DotLoader loading={loading} />}
+
       <Header />
       <div className={styles.forgot}>
         <div className="">
@@ -51,7 +71,10 @@ const Forgot = () => {
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 <CircleIconBtn type="submit" text="Send" />
-                {error && <span className={styles.register_error}>{error}</span>}
+                <div style={{ marginTop: "16px" }}>
+                  {error && <span className={styles.error}>{error}</span>}
+                  {success && <span className={styles.success}>{success}</span>}
+                </div>
               </Form>
             )}
           </Formik>

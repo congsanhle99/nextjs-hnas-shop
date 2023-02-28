@@ -5,6 +5,7 @@ import User from "../../../models/User";
 import bcrypt from "bcrypt";
 import { createActivationToken } from "../../../utils/token";
 import { sendMail } from "../../../utils/sendEmails";
+import { activateEmailTemplate } from "../../../emails/activateEmailTemplate";
 const handler = nc();
 
 handler.post(async (req, res) => {
@@ -35,7 +36,7 @@ handler.post(async (req, res) => {
       id: addUser._id.toString(),
     });
     const url = `${process.env.BASE_URL}/activate/${activation_token}`;
-    sendMail(email, url, "", "Activate your account");
+    sendMail(email, url, "", "Activate your account", activateEmailTemplate);
     await disconnectDb();
     res.json({
       message: "Resister success! Please activate your email!",

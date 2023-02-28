@@ -12,7 +12,6 @@ import CircleIconBtn from "../components/buttons/circleIconBtn/circleIconBtn";
 import Footer from "../components/footer/Footer";
 import Header from "../components/header/Header";
 import LoginInput from "../components/inputs/loginInput/LoginInput";
-import DotLoader from "../components/loaders/dotLoader/DotLoader";
 import styles from "../styles/signin.module.scss";
 //
 const initialValue = {
@@ -105,7 +104,6 @@ const signin = ({ providers, csrfToken, callbackUrl }) => {
 
   return (
     <>
-      {loading && <DotLoader loading={loading} />}
       <Header />
       <div className={styles.login}>
         {
