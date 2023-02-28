@@ -155,16 +155,16 @@
   }
 }
 
-.register_success,
-.register_error {
+.success,
+.error {
   margin-top: 12px;
   font-size: 18px;
 }
 
-.register_error {
+.error {
   color: $error-color;
 }
 
-.register_success {
+.success {
   color: $success-color;
 }

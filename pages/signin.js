@@ -152,9 +152,9 @@ const signin = ({ providers, csrfToken, callbackUrl }) => {
                     onChange={handleChange}
                   />
                   <CircleIconBtn type="submit" text="Sign In" />
-                  {login_error && <span className={styles.register_error}>{login_error}</span>}
+                  {login_error && <span className={styles.error}>{login_error}</span>}
                   <div className={styles.forgot}>
-                    <Link href="/forget">Forgot Password ?</Link>
+                    <Link href="/auth/forgot">Forgot Password ?</Link>
                   </div>
                 </Form>
               )}
@@ -223,8 +223,8 @@ const signin = ({ providers, csrfToken, callbackUrl }) => {
                 </Form>
               )}
             </Formik>
-            <div className={styles.register_success}>{success && <span>{success}</span>}</div>
-            <div className={styles.register_error}>{error && <span>{error}</span>}</div>
+            <div className={styles.success}>{success && <span>{success}</span>}</div>
+            <div className={styles.error}>{error && <span>{error}</span>}</div>
           </div>
         </div>
         {
