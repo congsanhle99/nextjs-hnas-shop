@@ -4,6 +4,12 @@ $pink-color: rgb(252, 70, 100);
 $success-color: rgb(75, 181, 67);
 $error-color: rgb(255, 0, 0);
 
+.container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
 .btn_primary {
   display: flex;
   align-items: center;
