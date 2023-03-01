@@ -68,4 +68,184 @@ export const menuArray = [
     brands: [],
     images: [],
   },
+  {
+    name: "Electronics",
+    link: "",
+    subMenu: [
+      {
+        name: "",
+        link: "",
+      },
+    ],
+    brands: [],
+    images: [],
+  },
+  {
+    name: "Jewlery & Watches",
+    link: "",
+    subMenu: [
+      {
+        name: "",
+        link: "",
+      },
+    ],
+    brands: [],
+    images: [],
+  },
+  {
+    name: "Home, Pet & Appliances",
+    link: "",
+    subMenu: [
+      {
+        name: "",
+        link: "",
+      },
+    ],
+    brands: [],
+    images: [],
+  },
+  {
+    name: "Beauty, Health & Hair",
+    link: "",
+    subMenu: [
+      {
+        name: "",
+        link: "",
+      },
+    ],
+    brands: [],
+    images: [],
+  },
+  {
+    name: "Shoes, Sneakers, Heels",
+    link: "",
+    subMenu: [
+      {
+        name: "",
+        link: "",
+      },
+    ],
+    brands: [],
+    images: [],
+  },
+  {
+    name: "Accessories",
+    link: "",
+    subMenu: [
+      {
+        name: "",
+        link: "",
+      },
+    ],
+    brands: [],
+    images: [],
+  },
+  {
+    name: "Sport & Entertainment",
+    link: "",
+    subMenu: [
+      {
+        name: "",
+        link: "",
+      },
+    ],
+    brands: [],
+    images: [],
+  },
+  {
+    name: "Kids & Babies",
+    link: "",
+    subMenu: [
+      {
+        name: "",
+        link: "",
+      },
+    ],
+    brands: [],
+    images: [],
+  },
+  {
+    name: "Movies & Television",
+    link: "",
+    subMenu: [
+      {
+        name: "",
+        link: "",
+      },
+    ],
+    brands: [],
+    images: [],
+  },
+  {
+    name: "Gaming, Video Games",
+    link: "",
+    subMenu: [
+      {
+        name: "",
+        link: "",
+      },
+    ],
+    brands: [],
+    images: [],
+  },
+  {
+    name: "Phone & Telecommunications",
+    link: "",
+    subMenu: [
+      {
+        name: "",
+        link: "",
+      },
+    ],
+    brands: [],
+    images: [],
+  },
+  {
+    name: "Toys & Hobbies",
+    link: "",
+    subMenu: [
+      {
+        name: "",
+        link: "",
+      },
+    ],
+    brands: [],
+    images: [],
+  },
+  {
+    name: "Gifts & Crafts",
+    link: "",
+    subMenu: [
+      {
+        name: "",
+        link: "",
+      },
+    ],
+    brands: [],
+    images: [],
+  },
+  {
+    name: "Machinery",
+    link: "",
+    subMenu: [
+      {
+        name: "",
+        link: "",
+      },
+    ],
+    brands: [],
+    images: [],
+  },
+  {
+    name: "Security, Safety",
+    link: "",
+    subMenu: [
+      {
+        name: "",
+        link: "",
+      },
+    ],
+    brands: [],
+    images: [],
+  },
 ];
