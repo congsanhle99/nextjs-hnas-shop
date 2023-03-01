@@ -1,0 +1,38 @@
+/* eslint-disable @next/next/no-img-element */
+import styles from "./styles.module.scss";
+import React, { useRef, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+// import required modules
+import { Autoplay, Pagination, Navigation } from "swiper";
+
+export default function MainSwiper() {
+  return (
+    <>
+      <Swiper
+        slidesPerView={1}
+        spaceBetween={30}
+        loop={true}
+        pagination={{
+          clickable: true,
+        }}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        navigation={true}
+        modules={[Autoplay, Pagination, Navigation]}
+        className="mainSwiper"
+      >
+        {[...Array(8).keys()].map((i, idx) => (
+          <SwiperSlide key={idx}>
+            <img src={`../../../images/swiper/${i + 1}.jpg`} alt="banner" />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </>
+  );
+}

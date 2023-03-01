@@ -1,4 +1,5 @@
 import React from "react";
+import MainSwiper from "./Swiper";
 import styles from "./styles.module.scss";
 
 const Main = () => {
@@ -6,7 +7,7 @@ const Main = () => {
     <div className={styles.main}>
       <div className={styles.header}>header</div>
       <div className={styles.menu}>menu</div>
-      <div className={styles.swiper}>swiper</div>
+      <MainSwiper />
       <div className={styles.offers}>offers</div>
       <div className={styles.user}>user</div>
     </div>
