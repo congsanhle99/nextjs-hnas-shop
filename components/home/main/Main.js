@@ -1,14 +1,16 @@
 import React from "react";
-import MainSwiper from "./Swiper";
+import Menu from "./Menu";
+import Offers from "./Offers";
 import styles from "./styles.module.scss";
+import MainSwiper from "./Swiper";
 
 const Main = () => {
   return (
     <div className={styles.main}>
       <div className={styles.header}>header</div>
-      <div className={styles.menu}>menu</div>
+      <Menu />
       <MainSwiper />
-      <div className={styles.offers}>offers</div>
+      <Offers />
       <div className={styles.user}>user</div>
     </div>
   );

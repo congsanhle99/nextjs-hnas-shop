@@ -1,5 +1,6 @@
 $shadow-1: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 $blue-color: rgb(47, 130, 255);
+$yellow-color: #fac80f;
 $pink-color: rgb(252, 70, 100);
 $success-color: rgb(75, 181, 67);
 $error-color: rgb(255, 0, 0);
@@ -81,7 +82,8 @@ $error-color: rgb(255, 0, 0);
   }
 }
 
-.mainSwiper {
+.mainSwiper,
+.offers_swiper {
   .swiper {
     border-radius: 8px !important;
     overflow: hidden !important;
@@ -122,6 +124,79 @@ $error-color: rgb(255, 0, 0);
 
   .swiper-button-next {
     right: -24px;
+  }
+}
+
+.offers_swiper {
+  max-width: 550px;
+  transform: translateX(33%);
+
+  .swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 160px !important;
+    border-radius: 8px !important;
+    height: 90% !important;
+    margin-top: 0.6rem !important;
+    box-shadow: $shadow-1;
+
+    &:hover {
+      transform: scale(1.03);
+      transition: 0.2s;
+    }
+
+    span {
+      position: absolute;
+      color: #fff;
+
+      &:first-of-type {
+        bottom: 10px;
+        width: 90px;
+        height: 25px;
+        border-radius: 50px;
+        font-size: 16px;
+        font-weight: 600;
+        background-color: $yellow-color;
+      }
+
+      &:last-of-type {
+        font-style: italic;
+        top: -5px;
+        right: -5px;
+        background: $pink-color;
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-size: 16px;
+        font-weight: 600;
+        box-shadow: $shadow-1;
+      }
+    }
+  }
+
+  .swiper-slide img {
+    position: absolute;
+    top: 0;
+    display: block;
+    width: 100%;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .swiper-pagination {
+    display: none;
   }
 }
 // ----------Swiper----------
