@@ -3,6 +3,7 @@ import Menu from "./Menu";
 import Offers from "./Offers";
 import styles from "./styles.module.scss";
 import MainSwiper from "./Swiper";
+import User from "./User";
 
 const Main = () => {
   return (
@@ -11,7 +12,7 @@ const Main = () => {
       <Menu />
       <MainSwiper />
       <Offers />
-      <div className={styles.user}>user</div>
+      <User />
     </div>
   );
 };

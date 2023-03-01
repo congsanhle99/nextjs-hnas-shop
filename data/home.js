@@ -249,3 +249,41 @@ export const menuArray = [
     images: [],
   },
 ];
+
+export const userSwiperArray = [
+  {
+    id: "1",
+    image: "https://www.revzilla.com/product_images/0893/4992/revit_prometheus_jacket_300x300.jpg",
+    link: "",
+  },
+  {
+    id: "2",
+    image:
+      "https://ae01.alicdn.com/kf/S3898c2c37d434762b69a20be051cf7fdC/Square-polygon-Frame-Plain-glasses-blue-membrane-Glasses-all-can-match-Men-Women-Fashion-glasses-lenses.jpg_Q90.jpg_.webp",
+    link: "",
+  },
+  {
+    id: "3",
+    image:
+      "https://ae01.alicdn.com/kf/Sc7ef277f9ec84c74a2efdc631fcb71b6V/P9-Wireless-Bluetooth-Headphones-With-Mic-Noise-Cancelling-Headsets-Stereo-Sound-Earphones-Sports-Gaming-Headphones-Supports.jpg_Q90.jpg_.webp",
+    link: "",
+  },
+  {
+    id: "4",
+    image:
+      "https://ae01.alicdn.com/kf/S9873adcbad714d05b7ca8aeb4bd1fbdbo/Luxucy-Plating-Square-Transparent-Case-For-iPhone-14-13-11-12-Pro-Max-Mini-XR-X.jpg_Q90.jpg_.webp",
+    link: "",
+  },
+  {
+    id: "5",
+    image:
+      "https://ae01.alicdn.com/kf/Sdaf60cb34ffd4758811581eb05b1d7d5F/Note-Board-Creative-Led-Night-Light-USB-Message-Board-Holiday-Light-With-Pen-Gift-For-Children.jpg_Q90.jpg_.webp",
+    link: "",
+  },
+  {
+    id: "6",
+    image:
+      "https://ae01.alicdn.com/kf/Sfaa187e39ef8430489041450f6c329efU/1-Pair-Elastic-Shoe-Laces-Semicircle-No-Tie-Shoelaces-for-Kids-and-Adult-Sneakers-Shoelace-Quick.jpg_Q90.jpg_.webp",
+    link: "",
+  },
+];
