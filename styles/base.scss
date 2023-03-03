@@ -133,6 +133,12 @@ $error-color: rgb(255, 0, 0);
   max-width: 550px;
   transform: translateX(33%);
 
+  // response offer
+  @media (max-width: 980px) {
+    max-width: 750px;
+    transform: translateX(2%);
+  }
+  //
   .swiper {
     width: 100%;
     height: 100%;

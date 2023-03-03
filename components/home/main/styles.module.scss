@@ -7,6 +7,33 @@
     "menu swiper user"
     "menu offers user";
 
+  // response
+  @media (max-width: 1232px) {
+    grid-template-columns: 1fr 3fr;
+  }
+
+  @media (max-width: 990px) {
+    display: block;
+  }
+
+  @media (max-width: 730px) {
+    grid-template-areas:
+      "menu"
+      "swiper"
+      "offers";
+    grid-template-columns: 1fr;
+
+    .menu {
+      width: 100% !important;
+      height: fit-content !important;
+
+      &__list {
+        display: flex;
+      }
+    }
+  }
+  //
+
   .header {
     display: flex;
     align-items: center;
@@ -15,6 +42,7 @@
     // background: #fff;
     // border-radius: 8px;
     // box-shadow: $shadow-1;
+
     ul {
       display: flex;
       align-items: center;
@@ -43,12 +71,31 @@
     border-radius: 8px;
     box-shadow: $shadow-1;
 
+    // response menu
+    @media (max-width: 990px) {
+      display: none;
+    }
+
+    // @media (max-width: 730px) {
+    //   display: block;
+    // }
+    //
+
     &__header {
       width: 100%;
       height: 35px;
       background: #f8f8f8;
       border-bottom: 1px solid $pink-color;
       box-shadow: $shadow-2;
+
+      // response menu
+      // @media (max-width: 990px) {
+      //   svg,
+      //   b {
+      //     display: none;
+      //   }
+      // }
+      //
 
       svg {
         height: 24px;
@@ -107,6 +154,10 @@
     // background-repeat: no-repeat;
     // object-fit: cover;
     overflow: hidden;
+
+    @media (max-width: 990px) {
+      margin-top: 1rem;
+    }
   }
 
   .user {
@@ -117,6 +168,12 @@
     border-radius: 8px;
     box-shadow: $shadow-1;
 
+    // response
+    @media (max-width: 1232px) {
+      display: none;
+    }
+
+    //
     &__container {
       padding: 1rem;
     }
