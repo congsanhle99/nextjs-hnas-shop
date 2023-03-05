@@ -1,0 +1,52 @@
+.category {
+  max-width: 500px;
+  padding: 1rem;
+  border-radius: 8px;
+
+  h1 {
+    color: #fff;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      fill: #fff;
+      transition: all 0.2s;
+
+      &:hover {
+        transform: scale(1.1);
+        fill: $pink-color;
+      }
+    }
+  }
+
+  &__products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 8px;
+
+    .product {
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.2s;
+        object-fit: contain;
+
+        &:hover {
+          transform: scale(1.08);
+        }
+      }
+    }
+  }
+}

@@ -6,6 +6,8 @@ import Footer from "../components/footer/Footer";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Main from "../components/home/main/Main";
 import FlashDeals from "../components/home/flashDeals";
+import Category from "../components/home/category";
+import { women_accessories, women_dresses, women_shoes } from "../data/home";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -17,6 +19,11 @@ export default function Home() {
         <div className={styles.container}>
           <Main />
           <FlashDeals />
+          <div className={styles.home__category}>
+            <Category header="Dresses" products={women_dresses} background="#5a31f4" />
+            <Category header="Shoes" products={women_shoes} background="#000" />
+            <Category header="Accessories" products={women_accessories} background="#3c811f" />
+          </div>
         </div>
       </div>
       <Footer></Footer>

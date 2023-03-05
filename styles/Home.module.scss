@@ -1,4 +1,10 @@
 .home {
   min-height: 100vh;
   background: #f8f8f8;
+
+  &__category {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
 }
