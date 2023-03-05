@@ -8,9 +8,13 @@ import Main from "../components/home/main/Main";
 import FlashDeals from "../components/home/flashDeals";
 import Category from "../components/home/category";
 import { women_accessories, women_dresses, women_shoes } from "../data/home";
+import { useMediaQuery } from "react-responsive";
 
 export default function Home() {
   const { data: session } = useSession();
+  const isMedium = useMediaQuery({ query: "(max-width:850px)" });
+  const isMobile = useMediaQuery({ query: "(max-width:550px)" });
+
   // console.log("session", session);
   return (
     <>
@@ -21,7 +25,8 @@ export default function Home() {
           <FlashDeals />
           <div className={styles.home__category}>
             <Category header="Dresses" products={women_dresses} background="#5a31f4" />
-            <Category header="Shoes" products={women_shoes} background="#000" />
+            {!isMedium && <Category header="Shoes" products={women_shoes} background="#000" />}
+            {isMobile && <Category header="Shoes" products={women_shoes} background="#000" />}
             <Category header="Accessories" products={women_accessories} background="#3c811f" />
           </div>
         </div>
