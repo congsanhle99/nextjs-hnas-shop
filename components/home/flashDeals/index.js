@@ -5,10 +5,8 @@ import Countdown from "../../countdown";
 import { flashDealsArray } from "../../../data/home";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
-// import required modules
 import { Navigation } from "swiper";
 import FlashCard from "./FlashCard";
 
@@ -41,7 +39,7 @@ const FlashDeals = () => {
           1232: {
             slidesPerView: 5,
           },
-          1250: {
+          1520: {
             slidesPerView: 6,
           },
         }}

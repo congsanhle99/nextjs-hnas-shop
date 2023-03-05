@@ -505,3 +505,63 @@ export const women_accessories = [
     price: "",
   },
 ];
+
+// under category
+export const women_swiper = [
+  {
+    id: "1",
+    name: "DAZY Letter Patched Detail Drop Shoulder Polo Neck Dress",
+    image:
+      "https://img.ltwebstatic.com/images3_pi/2021/11/17/163713900851b9032e5985f388663ebe51e8f4e654_thumbnail_405x552.webp",
+    price: "354",
+  },
+  {
+    id: "2",
+    name: "DAZY Solid V Neck Sleeveless Dress",
+    image:
+      "https://img.ltwebstatic.com/images3_pi/2021/11/22/16375640429c6ecf2f88b011a70c9bd7271bf16210_thumbnail_405x552.webp",
+    price: "426",
+  },
+  {
+    id: "3",
+    name: "Honeyspot Ditsy Floral Surplice Neckline Dress",
+    image:
+      "https://img.ltwebstatic.com/images3_pi/2022/02/22/16455161110206e710d120179320f93b02fd3ddbf0_thumbnail_405x552.webp",
+    price: "218",
+  },
+  {
+    id: "4",
+    name: "DAZY 1pc Fold Pleated Detail Zip Back Overall Dress Without Blouse",
+    image:
+      "https://img.ltwebstatic.com/images3_pi/2022/12/21/167159134438ac22bfd750735a2263f21ea87e9bb3_thumbnail_405x552.webp",
+    price: "312",
+  },
+  {
+    id: "5",
+    name: "Honeyspot Contrast 2 In 1 Puff Sleeve Dress",
+    image:
+      "https://img.ltwebstatic.com/images3_pi/2021/08/20/16294401953beb5bc7332f56e51287fe054586318b_thumbnail_405x552.webp",
+    price: "218",
+  },
+  {
+    id: "6",
+    name: "Honeyspot Contrast 2 In 1 Tie Back Dress",
+    image:
+      "https://img.ltwebstatic.com/images3_pi/2022/07/05/1656998965057dc3e3d2b5a9a8471a458ddcabfc01_thumbnail_405x552.webp",
+    price: "282",
+  },
+  {
+    id: "7",
+    name: "DAZY Ditsy Floral Print Puff Sleeve Tie Back Dress",
+    image:
+      "https://img.ltwebstatic.com/images3_pi/2022/01/17/1642413873607bee7d249a83e0dae8c67cbb2447ce_thumbnail_405x552.webp",
+    price: "236",
+  },
+  {
+    id: "8",
+    name: "DAZY Two Tone Puff Sleeve Belted Dress",
+    image:
+      "https://img.ltwebstatic.com/images3_pi/2022/08/05/1659663604e33d044cacac4cd989b39e0440560f56_thumbnail_405x552.webp",
+    price: "358",
+  },
+];

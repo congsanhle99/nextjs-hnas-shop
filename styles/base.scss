@@ -6,7 +6,7 @@ $pink-color: rgb(252, 70, 100);
 $success-color: rgb(75, 181, 67);
 $error-color: rgb(255, 0, 0);
 $violet-color: #5a31f4;
-
+$reddish-color: #e44d2e;
 .container {
   max-width: 1360px;
   margin: 0 auto;
@@ -115,7 +115,7 @@ $violet-color: #5a31f4;
     width: 80px !important;
     height: 80px !important;
     transition: 0.2s;
-    background-color: rgba(255, 255, 255, 0.4) !important;
+    background-color: rgba(255, 255, 255, 0.8) !important;
     border-radius: 50%;
     border: 1px solid $pink-color;
     display: none;
@@ -250,6 +250,25 @@ $violet-color: #5a31f4;
     .swiper-button-next,
     .swiper-button-prev {
       display: grid !important;
+    }
+  }
+}
+
+//women product under category
+.products_swiper {
+  .swiper-button-next,
+  .swiper-button-prev {
+    background: rgba(255, 255, 255, 0.8);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: $pink-color;
+    box-shadow: $shadow-1;
+
+    &::after {
+      transform: scale(0.5);
     }
   }
 }
