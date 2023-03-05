@@ -238,12 +238,12 @@ export default signin;
 
 export async function getServerSideProps(context) {
   const { req, query } = context;
-  console.log("context".context);
+  // console.log("context".context);
 
   const session = await getSession({ req });
-  console.log("session".session);
+  // console.log("session".session);
   const { callbackUrl } = query;
-  console.log("callbackUrl".callbackUrl);
+  // console.log("callbackUrl".callbackUrl);
 
   if (session) {
     return {

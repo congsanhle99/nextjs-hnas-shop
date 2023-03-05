@@ -18,7 +18,7 @@ import { EffectCards, Navigation, Autoplay } from "swiper";
 
 const User = () => {
   const { data: session } = useSession();
-  console.log(session);
+  // console.log(session);
   return (
     <div className={styles.user}>
       {/* img header user */}

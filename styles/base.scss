@@ -85,6 +85,7 @@ $error-color: rgb(255, 0, 0);
 
 .mainSwiper,
 .userMenu__swiper,
+.flashDeals__swiper,
 .offers_swiper {
   .swiper {
     border-radius: 8px !important;
@@ -221,3 +222,34 @@ $error-color: rgb(255, 0, 0);
 }
 
 // ----------Swiper----------
+// flashDeals__swiper
+.flashDeals__swiper {
+  .swiper-slide {
+    img {
+      border-radius: 0 !important;
+      height: 320px !important;
+    }
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    top: 35% !important;
+  }
+
+  // disable button when first or last element
+
+  .swiper-button-next.swiper-button-disabled,
+  .swiper-button-prev.swiper-button-disabled {
+    opacity: 0.35;
+    cursor: auto;
+    pointer-events: none;
+  }
+
+  @media (max-width: 450px) {
+    .swiper-button-next,
+    .swiper-button-prev {
+      display: grid !important;
+    }
+  }
+}
+//

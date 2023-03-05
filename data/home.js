@@ -287,3 +287,78 @@ export const userSwiperArray = [
     link: "",
   },
 ];
+
+export const flashDealsArray = [
+  {
+    id: "1",
+    link: "",
+    image:
+      "https://ae01.alicdn.com/kf/H790be2c58c90446a8b2e3deb82b52d11E/Valentines-Day-Gift-for-Girlfriend-Eternal-Rose-LED-Light-Foil-Flower-In-Glass-Cover-Mothers-Day.jpg_640x640.jpg",
+    price: "278",
+    discount: "12",
+    sold: "68",
+  },
+  {
+    id: "2",
+    link: "",
+    image:
+      "https://ae01.alicdn.com/kf/S140a3a89edd548d09bf10091ad8fc0bdW/Pokemon-Pikachu-Night-Light-Glowing-Children-Toy-Pokemon-Pikachu-Cute-Bedside-Lamp-Children-s-Birthday-Christmas.jpg_Q90.jpg_.webp",
+    price: "118",
+    discount: "8",
+    sold: "92",
+  },
+  {
+    id: "3",
+    link: "",
+    image:
+      "https://ae01.alicdn.com/kf/S73ae8b3bbc6c466db80770f4245162aaj/Hot-Cute-Shark-Cat-Fried-Shrimp-Cat-Plush-Doll-Pendant-Doll-Beautiful-Room-Car-Bag-Decoration.jpg_Q90.jpg_.webp",
+    price: "98",
+    discount: "4",
+    sold: "72",
+  },
+  {
+    id: "4",
+    link: "",
+    image:
+      "https://ae01.alicdn.com/kf/S9dbe4b6b531a456f9ce5a8673be2d37c4/Romantic-Love-3D-Acrylic-Led-Lamp-for-Home-Children-s-Night-Light-Table-Lamp-Birthday-Party.jpg_640x640.jpg",
+    price: "145",
+    discount: "22",
+    sold: "24",
+  },
+  {
+    id: "5",
+    link: "",
+    image:
+      "https://ae01.alicdn.com/kf/S906b3d311cc94679aacc8fda41c2f4063/Artificial-Plants-Bonsai-Small-Tree-Pot-Fake-Plant-Flowers-Potted-Ornaments-For-Home-Room-Table-Decoration.jpg_Q90.jpg_.webp",
+    price: "286",
+    discount: "16",
+    sold: "88",
+  },
+  {
+    id: "6",
+    link: "",
+    image:
+      "https://ae01.alicdn.com/kf/S5968b4f080e54783bd733ce386ed668fJ/Valentine-s-Day-Mother-s-Day-Gift-24K-Foil-Plated-Roses-Artifical-Flowers-Wedding-Decor-Lover.jpg_Q90.jpg_.webp",
+    price: "65",
+    discount: "9",
+    sold: "89",
+  },
+  {
+    id: "7",
+    link: "",
+    image:
+      "https://ae01.alicdn.com/kf/Sd8d8e47e1ef74f6b9e98aa9151fdf9d7J/Foldable-Bluetooth-Headsets-Wireless-Headphones-Bass-Stereo-Earphone-With-Mic-Mp3-Player-Support-TF-Card-AUX.jpg_640x640.jpg",
+    price: "365",
+    discount: "24",
+    sold: "98",
+  },
+  {
+    id: "8",
+    link: "",
+    image:
+      "https://ae01.alicdn.com/kf/Sd2025d82eb8740ecb7dbd5d1156c45ddN/Original-Pro6-TWS-Touch-Control-Wireless-Headphone-Bluetooth-5-0-Earphones-Sport-Earbuds-Music-Headset-For.jpg_Q90.jpg_.webp",
+    price: "242",
+    discount: "18",
+    sold: "42",
+  },
+];
