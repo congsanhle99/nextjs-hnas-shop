@@ -1,6 +1,18 @@
 .wrapper {
   margin-top: 1rem;
 
+  .header {
+    height: 40px;
+    background: $pink-color;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 1rem 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+
   .product {
     &__img {
       height: 350px;

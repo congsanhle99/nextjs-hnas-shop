@@ -7,7 +7,14 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import Main from "../components/home/main/Main";
 import FlashDeals from "../components/home/flashDeals";
 import Category from "../components/home/category";
-import { women_accessories, women_dresses, women_shoes, women_swiper } from "../data/home";
+import {
+  women_accessories,
+  women_dresses,
+  women_shoes,
+  women_swiper,
+  gaming_swiper,
+  home_ImproveSwiper,
+} from "../data/home";
 import { useMediaQuery } from "react-responsive";
 import ProductsSwiper from "../components/productsSwiper";
 
@@ -31,6 +38,8 @@ export default function Home() {
             <Category header="Accessories" products={women_accessories} background="#3c811f" />
           </div>
           <ProductsSwiper products={women_swiper} />
+          <ProductsSwiper products={gaming_swiper} header="For Game" />
+          <ProductsSwiper products={home_ImproveSwiper} header="For Home" />
         </div>
       </div>
       <Footer></Footer>

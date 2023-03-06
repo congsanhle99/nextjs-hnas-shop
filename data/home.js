@@ -565,3 +565,128 @@ export const women_swiper = [
     price: "358",
   },
 ];
+
+// product extra
+export const gaming_swiper = [
+  {
+    id: "1",
+    name: "",
+    image:
+      "https://img.ltwebstatic.com/images3_pi/2023/01/17/16739367517fa21b145cce7de7e43d85ffae5074fb_thumbnail_405x552.webp",
+    price: "",
+  },
+  {
+    id: "2",
+    name: "",
+    image:
+      "https://img.ltwebstatic.com/images3_pi/2023/01/17/16739353726b91a0cec47e1632e562dd626bb2c44c_thumbnail_405x552.webp",
+    price: "",
+  },
+  {
+    id: "3",
+    name: "",
+    image:
+      "https://img.ltwebstatic.com/images3_pi/2023/02/14/16763712739385ae6c9627d1cbfae2047603b81a6b_thumbnail_405x552.webp",
+    price: "",
+  },
+  {
+    id: "4",
+    name: "",
+    image:
+      "https://img.ltwebstatic.com/images3_pi/2023/02/13/1676282422e3f0a917f875b49f8bb56802dfbad074_thumbnail_405x552.webp",
+    price: "",
+  },
+  {
+    id: "5",
+    name: "",
+    image:
+      "https://img.ltwebstatic.com/images3_pi/2023/02/09/1675925393425fa92813ae331edc0362e8dea11f2c_thumbnail_405x552.webp",
+    price: "",
+  },
+  {
+    id: "6",
+    name: "",
+    image:
+      "https://img.ltwebstatic.com/images3_pi/2022/09/23/16639107621455fa7241b204364f22600f9b292ce7_thumbnail_405x552.webp",
+    price: "",
+  },
+  {
+    id: "7",
+    name: "",
+    image:
+      "https://img.ltwebstatic.com/images3_pi/2022/10/21/1666330228309660e6a950ca2c54f1c99c80573c06_thumbnail_405x552.webp",
+    price: "",
+  },
+  {
+    id: "8",
+    name: "",
+    image:
+      "https://img.ltwebstatic.com/images3_pi/2022/09/27/16642780997613e9bd73e8dfba37a9c014f983a4a9_thumbnail_405x552.webp",
+    price: "",
+  },
+  {
+    id: "9",
+    name: "",
+    image:
+      "https://img.ltwebstatic.com/images3_pi/2022/12/07/167037888046ae46541fc183d6db7791c82a9325c5_thumbnail_405x552.webp",
+    price: "",
+  },
+];
+export const home_ImproveSwiper = [
+  {
+    id: "1",
+    name: "",
+    image:
+      "https://img.ltwebstatic.com/images3_pi/2022/12/16/16711707461992f00f856f129e68c549ef030f9e78_thumbnail_405x552.webp",
+    price: "",
+  },
+  {
+    id: "2",
+    name: "",
+    image:
+      "https://img.ltwebstatic.com/images3_pi/2022/04/15/1650003632df0f0534cc786322277cc6f041a14147_thumbnail_405x552.webp",
+    price: "",
+  },
+  {
+    id: "3",
+    name: "",
+    image:
+      "https://img.ltwebstatic.com/images3_pi/2022/07/11/165752547025a27caf48ca3ce7ff3668e746e9a1d4_thumbnail_405x552.webp",
+    price: "",
+  },
+  {
+    id: "4",
+    name: "",
+    image:
+      "https://img.ltwebstatic.com/images3_pi/2022/11/04/166756075437cbcf6dd8f2d39666dbbfb5244c77c6_thumbnail_405x552.webp",
+    price: "",
+  },
+  {
+    id: "5",
+    name: "",
+    image:
+      "https://img.ltwebstatic.com/images3_pi/2022/01/10/16418143695cd9a003579ef95040c4f7ac74f34867_thumbnail_405x552.webp",
+    price: "",
+  },
+  {
+    id: "6",
+    name: "",
+    image:
+      "https://img.ltwebstatic.com/images3_pi/2022/05/17/16527666510da95aeb8d23fd842f164a9b63823ea7_thumbnail_405x552.webp",
+    price: "",
+  },
+  {
+    id: "7",
+    name: "",
+    image:
+      "https://img.ltwebstatic.com/images3_pi/2021/11/30/1638261050e79ce26976a3476a95eb6e0c2e757673_thumbnail_405x552.webp",
+    price: "",
+  },
+  {
+    id: "8",
+    name: "",
+    image:
+      "https://img.ltwebstatic.com/images3_pi/2022/09/29/1664428638eeb34564e5120dcbb0b1e5fe693fb4de_thumbnail_405x552.webp",
+    price: "",
+  },
+];
