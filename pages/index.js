@@ -7,6 +7,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import Main from "../components/home/main/Main";
 import FlashDeals from "../components/home/flashDeals";
 import Category from "../components/home/category";
+import { connectDb, disconnectDb } from "../utils/db";
 import {
   women_accessories,
   women_dresses,
@@ -17,8 +18,10 @@ import {
 } from "../data/home";
 import { useMediaQuery } from "react-responsive";
 import ProductsSwiper from "../components/productsSwiper";
+import Product from "../models/Product";
 
-export default function Home() {
+export default function Home({ products }) {
+  console.log("products:", products);
   const { data: session } = useSession();
   const isMedium = useMediaQuery({ query: "(max-width:850px)" });
   const isMobile = useMediaQuery({ query: "(max-width:550px)" });
@@ -45,4 +48,15 @@ export default function Home() {
       <Footer></Footer>
     </>
   );
+}
+
+export async function getServerSideProps() {
+  connectDb();
+  let products = await Product.find().sort({ createAt: -1 }).lean();
+
+  return {
+    props: {
+      products: JSON.parse(JSON.stringify(products)),
+    },
+  };
 }
