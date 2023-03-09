@@ -15,4 +15,12 @@
       grid-template-columns: 1fr;
     }
   }
+
+  .products {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
 }

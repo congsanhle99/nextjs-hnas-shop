@@ -1,0 +1,691 @@
+[
+  {
+    "_id": {
+      "$oid": "62c4711c062128444ad591a1"
+    },
+    "name": "Allover Plants Print Square Neck Knot Front Dress",
+    "description": "Allover Plants Print Square Neck Knot Front Dress",
+    "brand": "Boho",
+    "slug": "Allover-Plants-Print-Square-Neck-Knot-Front-Dress",
+    "category": {
+      "$oid": "62c46ff0062128444ad59193"
+    },
+    "subCategories": [
+      {
+        "$oid": "62c46ffd062128444ad59199"
+      }
+    ],
+    "details": [
+      {
+        "name": "Style",
+        "value": "Boho",
+        "_id": {
+          "$oid": "62c4711c062128444ad591a2"
+        }
+      },
+      {
+        "name": "Pattern Type",
+        "value": "Plants",
+        "_id": {
+          "$oid": "62c4711c062128444ad591a3"
+        }
+      },
+      {
+        "name": "Details",
+        "value": "Knot",
+        "_id": {
+          "$oid": "62c4711c062128444ad591a4"
+        }
+      },
+      {
+        "name": "Type",
+        "value": "A Line",
+        "_id": {
+          "$oid": "62c4711c062128444ad591a5"
+        }
+      },
+      {
+        "name": "Neckline",
+        "value": "Square Neck",
+        "_id": {
+          "$oid": "62c4711c062128444ad591a6"
+        }
+      },
+      {
+        "name": "Sleeve Length",
+        "value": "Short Sleeve",
+        "_id": {
+          "$oid": "62c4711c062128444ad591a7"
+        }
+      },
+      {
+        "name": "Sleeve Type",
+        "value": "Puff Sleeve",
+        "_id": {
+          "$oid": "62c4711c062128444ad591a8"
+        }
+      },
+      {
+        "name": "Waist Line",
+        "value": "High Waist",
+        "_id": {
+          "$oid": "62c4711c062128444ad591a9"
+        }
+      },
+      {
+        "name": "Hem Shaped",
+        "value": "Flared",
+        "_id": {
+          "$oid": "62c4711c062128444ad591aa"
+        }
+      },
+      {
+        "name": "Length",
+        "value": "Long",
+        "_id": {
+          "$oid": "62c4711c062128444ad591ab"
+        }
+      },
+      {
+        "name": "Fit Type",
+        "value": "Regular Fit",
+        "_id": {
+          "$oid": "62c4711c062128444ad591ac"
+        }
+      },
+      {
+        "name": "Fabric",
+        "value": "Non-Stretch",
+        "_id": {
+          "$oid": "62c4711c062128444ad591ad"
+        }
+      },
+      {
+        "name": "Material",
+        "value": "Polyester",
+        "_id": {
+          "$oid": "62c4711c062128444ad591ae"
+        }
+      }
+    ],
+    "questions": [],
+    "subProduct": [
+      {
+        "sku": "sw2206138988536738",
+        "discount": 0,
+        "images": [
+          {
+            "url": "https://img.ltwebstatic.com/images3_pi/2022/09/01/1662021702dfd08040c46a70bf851cf43d353f62e7_thumbnail_900x.webp",
+            "public_url": "products/j"
+          },
+          {
+            "url": "https://img.ltwebstatic.com/images3_pi/2022/09/01/1662021697174074ab907c653c2136aef4b5f76996_thumbnail_900x.webp",
+            "public_url": "products/t"
+          },
+          {
+            "url": "https://img.ltwebstatic.com/images3_pi/2022/08/31/1661935038eba8591af40f1e0c6bf036b76560c5fc_thumbnail_900x.webp",
+            "public_url": "products/l"
+          },
+          {
+            "url": "https://img.ltwebstatic.com/images3_pi/2022/01/14/16421383273eeb380d6092eed45c78c40f75cfba30_thumbnail_405x552.webp",
+            "public_url": "products/m"
+          }
+        ],
+        "description_image": [],
+        "color": {
+          "color": "#ecd297",
+          "image": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657041171/products/a"
+        },
+        "sizes": [
+          {
+            "size": "S",
+            "qty": 15,
+            "price": 18,
+            "_id": {
+              "$oid": "62c4711c062128444ad591b0"
+            }
+          },
+          {
+            "size": "M",
+            "qty": 1414,
+            "price": 24,
+            "_id": {
+              "$oid": "62c4711c062128444ad591b1"
+            }
+          },
+          {
+            "size": "L",
+            "qty": 0,
+            "price": 28,
+            "_id": {
+              "$oid": "62c4711c062128444ad591b2"
+            }
+          },
+          {
+            "size": "XL",
+            "qty": 1424,
+            "price": 32,
+            "_id": {
+              "$oid": "62c4711c062128444ad591b3"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "62c4711c062128444ad591af"
+        }
+      },
+      {
+        "sku": "vc22142578988545614",
+        "discount": 10,
+        "images": [
+          {
+            "url": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657041171/products/q",
+            "public_url": "products/q"
+          },
+          {
+            "url": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657041171/products/f",
+            "public_url": "products/f"
+          },
+          {
+            "url": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657041171/products/a",
+            "public_url": "products/a"
+          },
+          {
+            "url": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657041171/products/s",
+            "public_url": "products/s"
+          }
+        ],
+        "description_image": [],
+        "color": {
+          "color": "#ecd297",
+          "image": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657041171/products/a"
+        },
+        "sizes": [
+          {
+            "size": "M",
+            "qty": 1556,
+            "price": 16,
+            "_id": {
+              "$oid": "62c481967d2df7b52aa1f9e3"
+            }
+          },
+          {
+            "size": "L",
+            "qty": 1700,
+            "price": 20,
+            "_id": {
+              "$oid": "62c481967d2df7b52aa1f9e4"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "62c481967d2df7b52aa1f9e2"
+        }
+      }
+    ],
+    "createAt": {
+      "$date": "2022-07-05T17:08:00.067+00:00"
+    },
+    "updateAt": {
+      "$date": "2022-07-05T17:08:00.067+00:00"
+    },
+    "numberReview": 0,
+    "rating": 0,
+    "refundPolicy": "30 days",
+    "shipping": 0
+  },
+  {
+    "_id": {
+      "$oid": "6408a73339c79894c38d76ef"
+    },
+    "name": "Allover Plants Print Square Neck Knot Front Dress",
+    "description": "Allover Plants Print Square Neck Knot Front Dress",
+    "brand": "Boho",
+    "slug": "Clone-Allover-Plants-Print-Square-Neck-Knot-Front-Dress",
+    "category": {
+      "$oid": "62c46ff0062128444ad59193"
+    },
+    "subCategories": [
+      {
+        "$oid": "62c46ffd062128444ad59199"
+      }
+    ],
+    "details": [
+      {
+        "name": "Style",
+        "value": "Boho",
+        "_id": {
+          "$oid": "62c4711c062128444ad591a2"
+        }
+      },
+      {
+        "name": "Pattern Type",
+        "value": "Plants",
+        "_id": {
+          "$oid": "62c4711c062128444ad591a3"
+        }
+      },
+      {
+        "name": "Details",
+        "value": "Knot",
+        "_id": {
+          "$oid": "62c4711c062128444ad591a4"
+        }
+      },
+      {
+        "name": "Type",
+        "value": "A Line",
+        "_id": {
+          "$oid": "62c4711c062128444ad591a5"
+        }
+      },
+      {
+        "name": "Neckline",
+        "value": "Square Neck",
+        "_id": {
+          "$oid": "62c4711c062128444ad591a6"
+        }
+      },
+      {
+        "name": "Sleeve Length",
+        "value": "Short Sleeve",
+        "_id": {
+          "$oid": "62c4711c062128444ad591a7"
+        }
+      },
+      {
+        "name": "Sleeve Type",
+        "value": "Puff Sleeve",
+        "_id": {
+          "$oid": "62c4711c062128444ad591a8"
+        }
+      },
+      {
+        "name": "Waist Line",
+        "value": "High Waist",
+        "_id": {
+          "$oid": "62c4711c062128444ad591a9"
+        }
+      },
+      {
+        "name": "Hem Shaped",
+        "value": "Flared",
+        "_id": {
+          "$oid": "62c4711c062128444ad591aa"
+        }
+      },
+      {
+        "name": "Length",
+        "value": "Long",
+        "_id": {
+          "$oid": "62c4711c062128444ad591ab"
+        }
+      },
+      {
+        "name": "Fit Type",
+        "value": "Regular Fit",
+        "_id": {
+          "$oid": "62c4711c062128444ad591ac"
+        }
+      },
+      {
+        "name": "Fabric",
+        "value": "Non-Stretch",
+        "_id": {
+          "$oid": "62c4711c062128444ad591ad"
+        }
+      },
+      {
+        "name": "Material",
+        "value": "Polyester",
+        "_id": {
+          "$oid": "62c4711c062128444ad591ae"
+        }
+      }
+    ],
+    "questions": [],
+    "subProduct": [
+      {
+        "sku": "sw2206138988536738",
+        "discount": 0,
+        "images": [
+          {
+            "url": "https://img.ltwebstatic.com/images3_pi/2022/06/22/165586840842bff07a369c83a31b122c143f6437fc_thumbnail_405x552.webp",
+            "public_url": "products/j"
+          },
+          {
+            "url": "https://img.ltwebstatic.com/images3_pi/2022/06/22/1655868410f8052966e5bc8a3f82bf8962426f0ca4_thumbnail_405x552.webp",
+            "public_url": "products/t"
+          }
+        ],
+        "description_image": [],
+        "color": {
+          "color": "#ecd297",
+          "image": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657041171/products/a"
+        },
+        "sizes": [
+          {
+            "size": "S",
+            "qty": 15,
+            "price": 18,
+            "_id": {
+              "$oid": "62c4711c062128444ad591b0"
+            }
+          },
+          {
+            "size": "M",
+            "qty": 1414,
+            "price": 24,
+            "_id": {
+              "$oid": "62c4711c062128444ad591b1"
+            }
+          },
+          {
+            "size": "L",
+            "qty": 0,
+            "price": 28,
+            "_id": {
+              "$oid": "62c4711c062128444ad591b2"
+            }
+          },
+          {
+            "size": "XL",
+            "qty": 1424,
+            "price": 32,
+            "_id": {
+              "$oid": "62c4711c062128444ad591b3"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "62c4711c062128444ad591af"
+        }
+      },
+      {
+        "sku": "vc22142578988545614",
+        "discount": 10,
+        "images": [
+          {
+            "url": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657041171/products/q",
+            "public_url": "products/q"
+          },
+          {
+            "url": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657041171/products/f",
+            "public_url": "products/f"
+          },
+          {
+            "url": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657041171/products/a",
+            "public_url": "products/a"
+          },
+          {
+            "url": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657041171/products/s",
+            "public_url": "products/s"
+          }
+        ],
+        "description_image": [],
+        "color": {
+          "color": "#ecd297",
+          "image": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657041171/products/a"
+        },
+        "sizes": [
+          {
+            "size": "M",
+            "qty": 1556,
+            "price": 16,
+            "_id": {
+              "$oid": "62c481967d2df7b52aa1f9e3"
+            }
+          },
+          {
+            "size": "L",
+            "qty": 1700,
+            "price": 20,
+            "_id": {
+              "$oid": "62c481967d2df7b52aa1f9e4"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "62c481967d2df7b52aa1f9e2"
+        }
+      }
+    ],
+    "createAt": {
+      "$date": "2022-07-05T17:08:00.067+00:00"
+    },
+    "updateAt": {
+      "$date": "2022-07-05T17:08:00.067+00:00"
+    },
+    "numberReview": 0,
+    "rating": 0,
+    "refundPolicy": "30 days",
+    "shipping": 0
+  },
+  {
+    "_id": {
+      "$oid": "6408b51e39c79894c38d76f0"
+    },
+    "name": "Allover Plants Print Square Neck Knot Front Dress",
+    "description": "Allover Plants Print Square Neck Knot Front Dress",
+    "brand": "Boho",
+    "slug": "Clone-2-Allover-Plants-Print-Square-Neck-Knot-Front-Dress",
+    "category": {
+      "$oid": "62c46ff0062128444ad59193"
+    },
+    "subCategories": [
+      {
+        "$oid": "62c46ffd062128444ad59199"
+      }
+    ],
+    "details": [
+      {
+        "name": "Style",
+        "value": "Boho",
+        "_id": {
+          "$oid": "62c4711c062128444ad591a2"
+        }
+      },
+      {
+        "name": "Pattern Type",
+        "value": "Plants",
+        "_id": {
+          "$oid": "62c4711c062128444ad591a3"
+        }
+      },
+      {
+        "name": "Details",
+        "value": "Knot",
+        "_id": {
+          "$oid": "62c4711c062128444ad591a4"
+        }
+      },
+      {
+        "name": "Type",
+        "value": "A Line",
+        "_id": {
+          "$oid": "62c4711c062128444ad591a5"
+        }
+      },
+      {
+        "name": "Neckline",
+        "value": "Square Neck",
+        "_id": {
+          "$oid": "62c4711c062128444ad591a6"
+        }
+      },
+      {
+        "name": "Sleeve Length",
+        "value": "Short Sleeve",
+        "_id": {
+          "$oid": "62c4711c062128444ad591a7"
+        }
+      },
+      {
+        "name": "Sleeve Type",
+        "value": "Puff Sleeve",
+        "_id": {
+          "$oid": "62c4711c062128444ad591a8"
+        }
+      },
+      {
+        "name": "Waist Line",
+        "value": "High Waist",
+        "_id": {
+          "$oid": "62c4711c062128444ad591a9"
+        }
+      },
+      {
+        "name": "Hem Shaped",
+        "value": "Flared",
+        "_id": {
+          "$oid": "62c4711c062128444ad591aa"
+        }
+      },
+      {
+        "name": "Length",
+        "value": "Long",
+        "_id": {
+          "$oid": "62c4711c062128444ad591ab"
+        }
+      },
+      {
+        "name": "Fit Type",
+        "value": "Regular Fit",
+        "_id": {
+          "$oid": "62c4711c062128444ad591ac"
+        }
+      },
+      {
+        "name": "Fabric",
+        "value": "Non-Stretch",
+        "_id": {
+          "$oid": "62c4711c062128444ad591ad"
+        }
+      },
+      {
+        "name": "Material",
+        "value": "Polyester",
+        "_id": {
+          "$oid": "62c4711c062128444ad591ae"
+        }
+      }
+    ],
+    "questions": [],
+    "subProduct": [
+      {
+        "sku": "sw2206138988536738",
+        "discount": 0,
+        "images": [
+          {
+            "url": "https://img.ltwebstatic.com/images3_pi/2022/01/25/16430880486c014d2f9044eb9d1562c6af2dffd01e_thumbnail_405x552.webp",
+            "public_url": "products/j"
+          },
+          {
+            "url": "https://img.ltwebstatic.com/images3_pi/2022/01/25/1643088051b612df7eaf7d64434856a2a7cc75df7a_thumbnail_405x552.webp",
+            "public_url": "products/t"
+          }
+        ],
+        "description_image": [],
+        "color": {
+          "color": "#ecd297",
+          "image": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657041171/products/a"
+        },
+        "sizes": [
+          {
+            "size": "S",
+            "qty": 15,
+            "price": 18,
+            "_id": {
+              "$oid": "62c4711c062128444ad591b0"
+            }
+          },
+          {
+            "size": "M",
+            "qty": 1414,
+            "price": 24,
+            "_id": {
+              "$oid": "62c4711c062128444ad591b1"
+            }
+          },
+          {
+            "size": "L",
+            "qty": 0,
+            "price": 28,
+            "_id": {
+              "$oid": "62c4711c062128444ad591b2"
+            }
+          },
+          {
+            "size": "XL",
+            "qty": 1424,
+            "price": 32,
+            "_id": {
+              "$oid": "62c4711c062128444ad591b3"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "62c4711c062128444ad591af"
+        }
+      },
+      {
+        "sku": "vc22142578988545614",
+        "discount": 10,
+        "images": [
+          {
+            "url": "https://img.ltwebstatic.com/images3_pi/2023/01/06/167296703908161fa251919bca28e45a2bcd6433e7_thumbnail_405x552.webp",
+            "public_url": "products/q"
+          },
+          {
+            "url": "https://img.ltwebstatic.com/images3_pi/2023/01/06/1672967042324e40d1013b258cf9f0ec40d6f138d6_thumbnail_405x552.webp",
+            "public_url": "products/f"
+          },
+          {
+            "url": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657041171/products/a",
+            "public_url": "products/a"
+          },
+          {
+            "url": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657041171/products/s",
+            "public_url": "products/s"
+          }
+        ],
+        "description_image": [],
+        "color": {
+          "color": "#ecd297",
+          "image": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657041171/products/a"
+        },
+        "sizes": [
+          {
+            "size": "M",
+            "qty": 1556,
+            "price": 16,
+            "_id": {
+              "$oid": "62c481967d2df7b52aa1f9e3"
+            }
+          },
+          {
+            "size": "L",
+            "qty": 1700,
+            "price": 20,
+            "_id": {
+              "$oid": "62c481967d2df7b52aa1f9e4"
+            }
+          }
+        ],
+        "_id": {
+          "$oid": "62c481967d2df7b52aa1f9e2"
+        }
+      }
+    ],
+    "createAt": {
+      "$date": "2022-07-05T17:08:00.067+00:00"
+    },
+    "updateAt": {
+      "$date": "2022-07-05T17:08:00.067+00:00"
+    },
+    "numberReview": 0,
+    "rating": 0,
+    "refundPolicy": "30 days",
+    "shipping": 0
+  }
+]
