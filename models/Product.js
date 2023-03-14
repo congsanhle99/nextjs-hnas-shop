@@ -46,6 +46,7 @@ const productSchema = mongoose.Schema(
       lowercase: true,
     },
     category: {
+      // type: mongoose.Schema.Types.ObjectId,
       type: ObjectId,
       require: true,
       ref: "Category",
@@ -53,7 +54,7 @@ const productSchema = mongoose.Schema(
     subCategories: [
       {
         type: ObjectId,
-        ref: "subCategory",
+        ref: "SubCategory",
       },
     ],
     details: [
@@ -90,6 +91,7 @@ const productSchema = mongoose.Schema(
     },
     subProduct: [
       {
+        sku: String,
         images: [],
         description_image: [],
         color: {
