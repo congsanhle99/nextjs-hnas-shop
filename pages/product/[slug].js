@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react-hooks/rules-of-hooks */
+import React, { useState } from "react";
 import styles from "../../styles/product.module.scss";
 import db from "../../utils/db";
 import Product from "../../models/Product";
@@ -7,8 +8,12 @@ import SubCategory from "../../models/SubCategory";
 import Head from "next/head";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
+import MainSwiper from "../../components/productPage/mainSwiper";
+import Infos from "../../components/productPage/infos";
 
 export default function product({ product }) {
+  const [activeImg, setActiveImg] = useState("");
+
   return (
     <div>
       <Head>
@@ -22,6 +27,10 @@ export default function product({ product }) {
             {product.subCategories.map((sub, idx) => (
               <span key={idx}>{sub.name}</span>
             ))}
+          </div>
+          <div className={styles.product__main}>
+            <MainSwiper images={product.images} activeImg={activeImg} />
+            <Infos product={product} setActiveImg={setActiveImg} />
           </div>
         </div>
       </div>
@@ -62,7 +71,12 @@ export async function getServerSideProps(context) {
     colors: product.subProduct.map((p) => {
       return p.color;
     }),
-    priceRange: prices?.length > 1 ? `From ${prices[0]} to ${prices[prices?.length - 1]}` : "",
+    priceRange: subProduct.discount
+      ? `From ${(prices[0] - prices[0] / subProduct.discount).toFixed(2)} to ${(
+          prices[prices?.length - 1] -
+          prices[prices?.length - 1] / subProduct.discount
+        ).toFixed(2)}$`
+      : `From ${prices[0]} to ${prices[prices?.length - 1]}$`,
     price:
       subProduct.discount > 0
         ? (subProduct.sizes[size].price - subProduct.sizes[size].price / subProduct.discount).toFixed(2)
