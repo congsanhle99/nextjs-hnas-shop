@@ -1,12 +1,12 @@
 import bcrypt from "bcrypt";
 import nc from "next-connect";
 import User from "../../../models/User";
-import { connectDb, disconnectDb } from "../../../utils/db";
+import db from "../../../utils/db";
 const handler = nc();
 
 handler.put(async (req, res) => {
   try {
-    await connectDb();
+    await db.connectDb();
     const { user_id, password } = req.body;
     const user = await User.findById(user_id);
     if (!user) {
@@ -17,7 +17,7 @@ handler.put(async (req, res) => {
       password: cryptPassword,
     });
     res.json({ email: user.email });
-    await disconnectDb();
+    await db.disconnectDb();
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

@@ -7,7 +7,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import Main from "../components/home/main/Main";
 import FlashDeals from "../components/home/flashDeals";
 import Category from "../components/home/category";
-import { connectDb, disconnectDb } from "../utils/db";
+import db from "../utils/db";
 import {
   women_accessories,
   women_dresses,
@@ -57,7 +57,7 @@ export default function Home({ products }) {
 }
 
 export async function getServerSideProps() {
-  connectDb();
+  db.connectDb();
   let products = await Product.find().sort({ createAt: -1 }).lean();
 
   return {

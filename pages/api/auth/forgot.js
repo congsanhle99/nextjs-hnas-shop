@@ -1,7 +1,7 @@
 import nc from "next-connect";
 import { resetEmailTemplate } from "../../../emails/resetEmailTemplate";
 import User from "../../../models/User";
-import { connectDb, disconnectDb } from "../../../utils/db";
+import db from "../../../utils/db";
 import { sendMail } from "../../../utils/sendEmails";
 import { createResetToken } from "../../../utils/token";
 
@@ -9,7 +9,7 @@ const handler = nc();
 
 handler.post(async (req, res) => {
   try {
-    await connectDb();
+    await db.connectDb();
     const { email } = req.body;
     const user = await User.findOne({ email });
     if (!user) {
@@ -20,7 +20,7 @@ handler.post(async (req, res) => {
     });
     const url = `${process.env.BASE_URL}/auth/reset/${user_id}`;
     sendMail(email, url, "", "Reset your password", resetEmailTemplate);
-    await disconnectDb();
+    await db.disconnectDb();
     res.json({
       message: "An email has been sent to you, use it to reset password.",
     });
