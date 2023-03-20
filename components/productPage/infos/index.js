@@ -5,8 +5,8 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { BsHandbagFill, BsHeart } from "react-icons/bs";
 import { TbMinus, TbPlus } from "react-icons/tb";
-import Share from "../share";
 import Accordian from "./Accordian";
+import Share from "./share";
 import styles from "./styles.module.scss";
 
 const Infos = ({ product, setActiveImg }) => {

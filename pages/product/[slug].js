@@ -1,19 +1,20 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import Head from "next/head";
 import React, { useState } from "react";
+import Footer from "../../components/footer/Footer";
+import Header from "../../components/header/Header";
+import Infos from "../../components/productPage/infos";
+import MainSwiper from "../../components/productPage/mainSwiper";
+import Review from "../../components/productPage/reviews";
+import Category from "../../models/Category";
+import Product from "../../models/Product";
+import User from "../../models/User";
+import SubCategory from "../../models/SubCategory";
 import styles from "../../styles/product.module.scss";
 import db from "../../utils/db";
-import Product from "../../models/Product";
-import Category from "../../models/Category";
-import SubCategory from "../../models/SubCategory";
-import Head from "next/head";
-import Header from "../../components/header/Header";
-import Footer from "../../components/footer/Footer";
-import MainSwiper from "../../components/productPage/mainSwiper";
-import Infos from "../../components/productPage/infos";
 
 export default function product({ product }) {
   const [activeImg, setActiveImg] = useState("");
-
   return (
     <div>
       <Head>
@@ -21,7 +22,7 @@ export default function product({ product }) {
       </Head>
       <Header />
       <div className={styles.product}>
-        <div className={styles.product__container}>
+        <div className={styles.container}>
           <div className={styles.path}>
             Home / {product.category.name}
             {product.subCategories.map((sub, idx) => (
@@ -32,6 +33,7 @@ export default function product({ product }) {
             <MainSwiper images={product.images} activeImg={activeImg} />
             <Infos product={product} setActiveImg={setActiveImg} />
           </div>
+          <Review product={product} />
         </div>
       </div>
       <Footer />
@@ -49,6 +51,7 @@ export async function getServerSideProps(context) {
   let product = await Product.findOne({ _slug: query.slug })
     .populate({ path: "category", model: Category })
     .populate({ path: "subCategories", model: SubCategory })
+    .populate({ path: "reviews.reviewBy", model: User })
     .lean();
   // .populate({ path: "subCategories._id", model: SubCategory })
 
@@ -83,6 +86,32 @@ export async function getServerSideProps(context) {
         : subProduct.sizes[size].price,
     priceBefore: subProduct.sizes[size].price,
     quantity: subProduct.sizes[size].qty,
+    ratings: [
+      {
+        percentage: 68,
+      },
+      {
+        percentage: 18,
+      },
+      {
+        percentage: 6,
+      },
+      {
+        percentage: 2,
+      },
+      {
+        percentage: 0,
+      },
+    ],
+    allSizes: product.subProduct
+      .map((p) => {
+        return p.sizes;
+      })
+      .flat()
+      .sort((a, b) => {
+        return a.sizes - b.sizes;
+      })
+      .filter((element, index, array) => array.findIndex((el2) => el2?.size === element?.size) === index),
   };
   db.disconnectDb();
 
