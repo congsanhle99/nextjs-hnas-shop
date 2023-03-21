@@ -27,6 +27,10 @@ const Infos = ({ product, setActiveImg }) => {
     }
   }, [router.query.size]);
   //
+
+  // add product to cart
+  const addToCartHandler = async () => {};
+  //
   return (
     <div className={styles.infos}>
       <div className={styles.infos__container}>
@@ -99,7 +103,11 @@ const Infos = ({ product, setActiveImg }) => {
           </button>
         </div>
         <div className={styles.infos__actions}>
-          <button disabled={product.quantity < 1} style={{ cursor: `${product.quantity < 1 ? "not-allowed" : ""}` }}>
+          <button
+            disabled={product.quantity < 1}
+            style={{ cursor: `${product.quantity < 1 ? "not-allowed" : ""}` }}
+            onClick={() => addToCartHandler()}
+          >
             <BsHandbagFill />
             <b>ADD TO CARD</b>
           </button>

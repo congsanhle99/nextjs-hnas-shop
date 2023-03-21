@@ -1,0 +1,38 @@
+.empty {
+  position: relative;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #222;
+
+  img {
+    width: 100px;
+    object-fit: cover;
+  }
+
+  h1 {
+    margin-top: 1rem;
+  }
+
+  &__btn {
+    margin-top: 1rem;
+    height: 50px;
+    width: 300px;
+    background: $pink-color;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+
+    &_v2 {
+      border: 1px solid $pink-color;
+      background: #fff;
+      color: $pink-color;
+    }
+
+    // &:hover {
+    //   background: rgba(252, 72, 100, 0.9);
+    // }
+  }
+}
