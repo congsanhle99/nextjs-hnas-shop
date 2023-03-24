@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React from "react";
 import { useSelector } from "react-redux";
+import CartHeader from "../components/cart/cartHeader";
 import EmptyCart from "../components/cart/empty";
 import Header from "../components/cart/header";
 import Product from "../components/cart/product";
@@ -15,6 +16,7 @@ const cart = () => {
       <div className={styles.cart}>
         {cart.cartItems.length > 0 ? (
           <div className={styles.cart__container}>
+            <CartHeader cartItems={cart.cartItems} />
             <div className={styles.cart__products}>
               {cart.cartItems.map((product) => (
                 <Product key={product._uid} product={product} />
