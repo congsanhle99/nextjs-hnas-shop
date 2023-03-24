@@ -5,6 +5,8 @@ import { persistReducer } from "redux-persist";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 import cart from "./cartSlice";
 
+//#region setup redux-persist
+
 const createNoopStorage = () => {
   return {
     getItem(_key) {
@@ -19,6 +21,8 @@ const createNoopStorage = () => {
   };
 };
 const storage = typeof window !== "undefined" ? createWebStorage("local") : createNoopStorage();
+
+//#endregion
 
 const reducers = combineReducers({ cart });
 

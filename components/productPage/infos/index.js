@@ -1,18 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
 import { Rating } from "@mui/material";
+import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { BsHandbagFill, BsHeart } from "react-icons/bs";
 import { TbMinus, TbPlus } from "react-icons/tb";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, updateCart } from "../../../store/cartSlice";
 import Accordian from "./Accordian";
 import Share from "./share";
 import styles from "./styles.module.scss";
 
 const Infos = ({ product, setActiveImg }) => {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const { cart } = useSelector((state) => ({ ...state }));
   const [size, setSize] = useState(router.query.size);
   const [qty, setQty] = useState(1);
+  const [error, setError] = useState("");
+
+  console.log("cart: ", cart);
 
   // when style change
   useEffect(() => {
@@ -29,7 +37,45 @@ const Infos = ({ product, setActiveImg }) => {
   //
 
   // add product to cart
-  const addToCartHandler = async () => {};
+  const addToCartHandler = async () => {
+    if (!router.query.size) {
+      setError("Please select a size!");
+      return;
+    }
+    const { data } = await axios.get(`/api/product/${product._id}?style=${product.style}&size=${router.query.size}`);
+    if (qty > data.quantity) {
+      setError("The quantity you have choosed is more than in stock. Try and lower the quantity!");
+    } else if (data.quantity < 1) {
+      setError("This product is out of stock!");
+      return;
+    } else {
+      let _uid = `${data._id}_${product.style}_${router.query.size}`;
+      let exist = cart.cartItems.find((p) => p._uid === _uid);
+
+      if (exist) {
+        // update
+        let newCart = cart.cartItems.map((p) => {
+          if (p._uid == exist._uid) {
+            return {
+              ...p,
+              qty: qty,
+            };
+          }
+          return p;
+        });
+        dispatch(updateCart(newCart));
+      } else {
+        dispatch(
+          addToCart({
+            ...data,
+            qty,
+            size: data.sizes,
+            _uid,
+          })
+        );
+      }
+    }
+  };
   //
   return (
     <div className={styles.infos}>
@@ -116,6 +162,7 @@ const Infos = ({ product, setActiveImg }) => {
             <b>WISHLIST</b>
           </button>
         </div>
+        {error && <span className={styles.error}>{error}</span>}
         <Share />
         <Accordian details={[product.description, ...product.details]} />
       </div>

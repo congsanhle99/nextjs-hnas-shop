@@ -4,7 +4,7 @@ import Header from "../components/cart/header";
 import styles from "../styles/cart.module.scss";
 
 const cart = () => {
-  cart = [];
+  const cart = [];
 
   return (
     <>
