@@ -20,8 +20,6 @@ const Infos = ({ product, setActiveImg }) => {
   const [qty, setQty] = useState(1);
   const [error, setError] = useState("");
 
-  console.log("cart: ", cart);
-
   // when style change
   useEffect(() => {
     setSize("");
@@ -43,6 +41,7 @@ const Infos = ({ product, setActiveImg }) => {
       return;
     }
     const { data } = await axios.get(`/api/product/${product._id}?style=${product.style}&size=${router.query.size}`);
+    console.log("datadata: ", data);
     if (qty > data.quantity) {
       setError("The quantity you have choosed is more than in stock. Try and lower the quantity!");
     } else if (data.quantity < 1) {
@@ -69,7 +68,7 @@ const Infos = ({ product, setActiveImg }) => {
           addToCart({
             ...data,
             qty,
-            size: data.sizes,
+            size: data.size,
             _uid,
           })
         );
