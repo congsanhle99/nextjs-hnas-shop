@@ -31,7 +31,7 @@ const Product = ({ product }) => {
   };
 
   return (
-    <div className={`${styles.card} ${styles.product}`}>
+    <div className={`${styles.cart} ${styles.product}`}>
       {product.quantity < 1 && <div className={styles.blur}></div>}
       <div className={styles.product__header}>
         <img src="../../../images/store.png" alt="" />
@@ -55,7 +55,7 @@ const Product = ({ product }) => {
           <div className={styles.product__style}>
             <img src={product.color.image} alt="" />
             {product.size && <span>{product.size}</span>}
-            {product.price && <span>{product.price.toFixed(2)}</span>}
+            {product.price && <span>{product.price.toFixed(2)}$</span>}
             <MdOutlineKeyboardArrowRight />
           </div>
 
