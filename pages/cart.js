@@ -2,6 +2,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import CartHeader from "../components/cart/cartHeader";
+import Checkout from "../components/cart/checkout";
 import EmptyCart from "../components/cart/empty";
 import Header from "../components/cart/header";
 import Product from "../components/cart/product";
@@ -22,6 +23,7 @@ const cart = () => {
                 <Product key={product._uid} product={product} />
               ))}
             </div>
+            <Checkout subtotal="5458" shippingFee="" total="5458" selected={[]} />
           </div>
         ) : (
           <EmptyCart />
