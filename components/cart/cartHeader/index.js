@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
+import { compareArrays } from "../../../utils/arrays";
 
-const CartHeader = ({ cartItems }) => {
+const CartHeader = ({ cartItems, selected, setSelected }) => {
+  const [active, setActive] = useState();
+
+  useEffect(() => {
+    // check cart is selected ?
+    const check = compareArrays(cartItems, selected);
+    setActive(check);
+  }, [selected]);
+
+  const handleSelect = () => {
+    if (selected.length !== cartItems.length) {
+      setSelected(cartItems);
+    } else {
+      setSelected([]);
+    }
+  };
+
   return (
     <div className={`${styles.cart__header} ${styles.cart}`}>
       <h1>Item Summary ({cartItems.length})</h1>
-      <div className={styles.flex}>
-        <div className={styles.checkbox}></div>
+      <div className={styles.flex} onClick={() => handleSelect()}>
+        <div className={`${styles.checkbox} ${active ? styles.active : ""}`}></div>
         <span>Select all items</span>
       </div>
     </div>
