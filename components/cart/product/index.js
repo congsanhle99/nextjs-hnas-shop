@@ -98,7 +98,7 @@ const Product = ({ product, selected, setSelected }) => {
           </div>
 
           <div className={styles.product__shipping}>
-            {product.shipping ? `+${product.shipping}$ Shipping Fee` : "Free Shipping"}
+            {product.shipping === "0" ? "Free Shipping" : `+${product.shipping}$ Shipping Fee`}
           </div>
           {product.quantity < 1 && (
             <div className={styles.notAvailable}>

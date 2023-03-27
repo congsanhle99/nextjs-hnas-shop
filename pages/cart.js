@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CartHeader from "../components/cart/cartHeader";
 import Checkout from "../components/cart/checkout";
@@ -12,6 +13,16 @@ const cart = () => {
   const { cart } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
   const [selected, setSelected] = useState([]);
+
+  const [shippingFee, setShippingFee] = useState(0);
+  const [subtotal, setSubtotal] = useState(0);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    setShippingFee(selected.reduce((a, c) => a + Number(c.shipping), 0).toFixed(2));
+    setSubtotal(selected.reduce((a, c) => a + c.price * c.qty, 0).toFixed(2));
+    setTotal((selected.reduce((a, c) => a + c.price * c.qty, 0) + Number(shippingFee)).toFixed(2));
+  }, [selected]);
 
   console.log("selected: ", selected);
 
@@ -27,7 +38,7 @@ const cart = () => {
                 <Product key={product._uid} product={product} selected={selected} setSelected={setSelected} />
               ))}
             </div>
-            <Checkout subtotal="5458" shippingFee="" total="5458" selected={[]} />
+            <Checkout subtotal={subtotal} shippingFee={shippingFee} total={total} selected={selected} />
           </div>
         ) : (
           <EmptyCart />

@@ -104,7 +104,7 @@ const Infos = ({ product, setActiveImg }) => {
           )}
         </div>
         <span className={styles.infos__shipping}>
-          {product.shipping ? `+${product.shipping}$ Shipping fee` : "Free Shipping"}
+          {product.shipping !== 0 ? `+${product.shipping}$ Shipping fee` : "Free Shipping"}
         </span>
         <span>
           {size ? product.quantity : product.sizes.reduce((start, next) => start + next.qty, 0)} pieces available.
