@@ -1,12 +1,14 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CartHeader from "../components/cart/cartHeader";
 import Checkout from "../components/cart/checkout";
 import EmptyCart from "../components/cart/empty";
 import Header from "../components/cart/header";
+import PaymentMethods from "../components/cart/paymentMethods";
 import Product from "../components/cart/product";
+// import ProductsSwiper from "../components/productsSwiper";
+// import { women_swiper } from "../data/home";
 import styles from "../styles/cart.module.scss";
 
 const cart = () => {
@@ -39,10 +41,12 @@ const cart = () => {
               ))}
             </div>
             <Checkout subtotal={subtotal} shippingFee={shippingFee} total={total} selected={selected} />
+            <PaymentMethods />
           </div>
         ) : (
           <EmptyCart />
         )}
+        {/* <ProductsSwiper products={women_swiper} /> */}
       </div>
     </>
   );
