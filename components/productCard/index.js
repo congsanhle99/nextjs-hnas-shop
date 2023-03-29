@@ -6,9 +6,9 @@ import styles from "./styles.module.scss";
 
 const ProductCard = ({ product }) => {
   const [active, setActive] = useState(0);
-  const [images, setImages] = useState(product.subProduct[active]?.images);
+  const [images, setImages] = useState(product.subProducts[active]?.images);
   const [prices, setPrices] = useState(
-    product.subProduct[active]?.sizes
+    product.subProducts[active]?.sizes
       .map((s) => {
         return s.price;
       })
@@ -18,14 +18,14 @@ const ProductCard = ({ product }) => {
   );
 
   const [styless, setStyless] = useState(
-    product.subProduct.map((p) => {
+    product.subProducts.map((p) => {
       return p.color;
     })
   );
   useEffect(() => {
-    setImages(product.subProduct[active]?.images);
+    setImages(product.subProducts[active].images);
     setPrices(
-      product.subProduct[active]?.sizes
+      product.subProducts[active]?.sizes
         .map((s) => {
           return s.price;
         })
@@ -34,18 +34,17 @@ const ProductCard = ({ product }) => {
         })
     );
   }, [active]);
-  // console.log({ images, prices, styless });
 
   return (
     <div className={styles.product}>
       <div className={styles.product__container}>
         <Link href={`/product/${product.slug}?style=${active}`}>
-          <div className="">
+          <div>
             <ProductSwiper images={images} />
           </div>
         </Link>
-        {product.subProduct[active]?.discount ? (
-          <div className={styles.product__discount}>-{product.subProduct[active]?.discount}%</div>
+        {product.subProducts[active].discount ? (
+          <div className={styles.product__discount}>-{product.subProducts[active]?.discount}%</div>
         ) : (
           ""
         )}
@@ -60,20 +59,20 @@ const ProductCard = ({ product }) => {
                     src={style.image}
                     className={i == active && styles.active}
                     onMouseOver={() => {
-                      setImages(product.subProduct[i].images);
+                      setImages(product.subProducts[i].images);
                       setActive(i);
                     }}
                     key={i}
                     alt=""
                   />
                 ) : (
-                  // eslint-disable-next-line react/jsx-key
                   <span
                     style={{ backgroundColor: `${style.color}` }}
                     onMouseOver={() => {
-                      setImages(product.subProduct[i].images);
+                      setImages(product.subProducts[i].images);
                       setActive(i);
                     }}
+                    key={i}
                   ></span>
                 )
               )}
