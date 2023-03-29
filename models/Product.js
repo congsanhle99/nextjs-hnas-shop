@@ -1,16 +1,21 @@
 import mongoose from "mongoose";
 
 const { ObjectId } = mongoose.Schema;
+
 const reviewSchema = new mongoose.Schema({
   reviewBy: {
     type: ObjectId,
     ref: "User",
-    require: true,
+    required: true,
   },
   rating: {
     type: Number,
-    require: true,
+    required: true,
     default: 0,
+  },
+  review: {
+    type: String,
+    required: true,
   },
   size: {
     type: String,
@@ -25,36 +30,37 @@ const reviewSchema = new mongoose.Schema({
   images: [],
   likes: [],
 });
+
 const productSchema = mongoose.Schema(
   {
     name: {
       type: String,
-      require: true,
+      required: true,
     },
     description: {
       type: String,
-      require: true,
+      required: true,
     },
     brand: {
       type: String,
-      require: true,
+      // required: true,
     },
     slug: {
       type: String,
-      require: true,
+      required: true,
       unique: true,
       lowercase: true,
     },
     category: {
       // type: mongoose.Schema.Types.ObjectId,
       type: ObjectId,
-      require: true,
+      required: true,
       ref: "Category",
     },
     subCategories: [
       {
         type: ObjectId,
-        ref: "SubCategory",
+        ref: "subCategory",
       },
     ],
     details: [
@@ -76,24 +82,24 @@ const productSchema = mongoose.Schema(
     },
     rating: {
       type: Number,
-      require: true,
+      required: true,
       default: 0,
     },
     numReviews: {
       type: Number,
-      require: true,
+      required: true,
       default: 0,
     },
     shipping: {
       type: Number,
-      require: true,
+      required: true,
       default: 0,
     },
     subProduct: [
       {
-        sku: String,
+        // sku: String,
         images: [],
-        description_image: [],
+        description_images: [],
         color: {
           color: {
             type: String,
@@ -105,7 +111,7 @@ const productSchema = mongoose.Schema(
         sizes: [
           {
             size: String,
-            qty: String,
+            qty: Number,
             price: Number,
           },
         ],

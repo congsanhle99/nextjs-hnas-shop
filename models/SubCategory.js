@@ -5,7 +5,7 @@ const { ObjectId } = mongoose.Schema;
 const subSchema = new mongoose.Schema({
   name: {
     type: String,
-    require: true,
+    required: true,
     minLength: [2, "Must be at least 2 characters"],
     maxLength: [32, "Max length is 32 characters"],
   },
@@ -17,8 +17,8 @@ const subSchema = new mongoose.Schema({
   },
   parent: {
     type: ObjectId,
-    require: true,
     ref: "Category",
+    required: true,
   },
 });
 
