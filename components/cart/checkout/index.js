@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./styles.module.scss";
 
-const Checkout = ({ subtotal, shippingFee, total, selected }) => {
+const Checkout = ({ subtotal, shippingFee, total, selected, saveCartToDBHandler }) => {
   return (
     <div className={`${styles.cart__checkout} ${styles.cart}`}>
       <h2>Order Summary</h2>
@@ -24,6 +24,7 @@ const Checkout = ({ subtotal, shippingFee, total, selected }) => {
             background: `${selected.length == 0 ? "#eee" : ""}`,
             cursor: `${selected.length == 0 ? "not-allow" : ""}`,
           }}
+          onClick={() => saveCartToDBHandler()}
         >
           Continue
         </button>
