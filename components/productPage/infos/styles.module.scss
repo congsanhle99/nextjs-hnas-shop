@@ -188,6 +188,10 @@
           color: #fff;
         }
       }
+
+      &:active {
+        transform: scale(0.95);
+      }
     }
   }
 
@@ -242,4 +246,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.error {
+  display: block;
+  margin-top: 10px;
+  color: $reddish-color;
+  font-size: 18px;
+  font-style: italic;
 }

@@ -4,7 +4,7 @@ import styles from "./styles.module.scss";
 
 const PaymentMethods = () => {
   return (
-    <div className={`${styles.cart} ${styles.cart__method}`}>
+    <div className={`${styles.card} ${styles.cart__method}`}>
       <h2 className={styles.header}>Payment Methods</h2>
       <div className={styles.images}>
         <img src="../../../images/payment/mastercard.png" alt="mastercard" />

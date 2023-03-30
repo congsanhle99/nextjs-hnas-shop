@@ -41,7 +41,6 @@ const Infos = ({ product, setActiveImg }) => {
       return;
     }
     const { data } = await axios.get(`/api/product/${product._id}?style=${product.style}&size=${router.query.size}`);
-    console.log("datadata: ", data);
     if (qty > data.quantity) {
       setError("The quantity you have choosed is more than in stock. Try and lower the quantity!");
     } else if (data.quantity < 1) {
@@ -162,7 +161,7 @@ const Infos = ({ product, setActiveImg }) => {
             <b>WISHLIST</b>
           </button>
         </div>
-        {error && <span className={styles.error}>{error}</span>}
+        {error && !size && <span className={styles.error}>{error}</span>}
         <Share />
         <Accordian details={[product.description, ...product.details]} />
       </div>

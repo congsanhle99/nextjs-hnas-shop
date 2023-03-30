@@ -13,8 +13,8 @@ handler.get(async (req, res) => {
     const size = req.query.size;
 
     const product = await Product.findById(id).lean();
-    let discount = product.subProduct[style].discount;
-    let priceBefore = product.subProduct[style].sizes[size].price;
+    let discount = product.subProducts[style].discount;
+    let priceBefore = product.subProducts[style].sizes[size].price;
     let price = discount ? priceBefore - priceBefore / discount : priceBefore;
 
     db.disconnectDb();
@@ -25,15 +25,15 @@ handler.get(async (req, res) => {
       name: product.name,
       description: product.description,
       slug: product.slug,
-      sku: product.subProduct[style].sku,
+      sku: product.subProducts[style].sku,
       brand: product.brand,
       shipping: product.shipping,
-      images: product.subProduct[style].images,
-      color: product.subProduct[style].color,
-      size: product.subProduct[style].sizes[size].size,
+      images: product.subProducts[style].images,
+      color: product.subProducts[style].color,
+      size: product.subProducts[style].sizes[size].size,
       price,
       priceBefore,
-      quantity: product.subProduct[style].sizes[size].qty,
+      quantity: product.subProducts[style].sizes[size].qty,
     });
   } catch (error) {
     return res.status(500).json({ message: error.message });

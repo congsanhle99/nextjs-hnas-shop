@@ -3,7 +3,7 @@ import styles from "./styles.module.scss";
 
 const Checkout = ({ subtotal, shippingFee, total, selected, saveCartToDBHandler }) => {
   return (
-    <div className={`${styles.cart__checkout} ${styles.cart}`}>
+    <div className={`${styles.cart__checkout} ${styles.card}`}>
       <h2>Order Summary</h2>
       <div className={styles.cart__checkout_line}>
         <span>Subtotal</span>

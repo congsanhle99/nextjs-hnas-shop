@@ -40,6 +40,10 @@
 
   &__products {
     grid-area: products;
-    transform: translateY(-140px);
+    transform: translateY(-146px);
+
+    @media (max-width: 900px) {
+      transform: translateY(0);
+    }
   }
 }

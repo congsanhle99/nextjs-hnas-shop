@@ -40,17 +40,14 @@ const Product = ({ product, selected, setSelected }) => {
 
   const handleSelect = () => {
     if (active) {
-      const a = selected.filter((p) => p._uid !== product._uid);
-      console.log("if__selected.filter_: ", a);
       setSelected(selected.filter((p) => p._uid !== product._uid));
     } else {
-      console.log("else___");
       setSelected([...selected, product]);
     }
   };
 
   return (
-    <div className={`${styles.cart} ${styles.product}`}>
+    <div className={`${styles.card} ${styles.product}`}>
       {product.quantity < 1 && <div className={styles.blur}></div>}
       <div className={styles.product__header}>
         <img src="../../../images/store.png" alt="" />
@@ -80,9 +77,9 @@ const Product = ({ product, selected, setSelected }) => {
 
           <div className={styles.product__priceQty}>
             <div className={styles.product__priceQty_price}>
-              <span className={styles.price}>USD{(product.price * product.qty).toFixed(2)}$</span>
+              <span className={styles.price}>USD {(product.price * product.qty).toFixed(2)}$</span>
               {product.price !== product.priceBefore && (
-                <span className={styles.priceBefore}>USD{product.priceBefore}$</span>
+                <span className={styles.priceBefore}>USD {product.priceBefore}$</span>
               )}
               {product.discount > 0 && <span className={styles.discount}>-{product.discount}%</span>}
             </div>
@@ -98,7 +95,7 @@ const Product = ({ product, selected, setSelected }) => {
           </div>
 
           <div className={styles.product__shipping}>
-            {product.shipping === "0" ? "Free Shipping" : `+${product.shipping}$ Shipping Fee`}
+            {product.shipping > 0 ? `+${product.shipping}$ Shipping Fee` : "Free Shipping"}
           </div>
           {product.quantity < 1 && (
             <div className={styles.notAvailable}>

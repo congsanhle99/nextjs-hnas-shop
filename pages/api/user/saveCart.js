@@ -1,6 +1,6 @@
 import nc from "next-connect";
 import db from "../../../utils/db";
-import Product from "../../../models/User";
+import Product from "../../../models/Product";
 import User from "../../../models/User";
 import Cart from "../../../models/Cart";
 const handler = nc();
@@ -17,7 +17,7 @@ handler.post(async (req, res) => {
     }
     for (let i = 0; i < cart.length; i++) {
       let dbProduct = await Product.findById(cart[i]._id).lean();
-      let subProduct = dbProduct.subProduct[cart[i].style];
+      let subProduct = dbProduct.subProducts[cart[i].style];
       let tempProduct = {};
       tempProduct.name = dbProduct.name;
       tempProduct.product = dbProduct._id;
