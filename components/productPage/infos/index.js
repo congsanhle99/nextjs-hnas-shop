@@ -93,7 +93,7 @@ const Infos = ({ product, setActiveImg }) => {
           {product.numberReview === 1 ? " review" : " reviews"}
         </div>
         <div className={styles.infos__price}>
-          {!size ? <h2>{product.priceRange}</h2> : <h2>{product.price}</h2>}
+          {!size ? <h2>{product.priceRange}</h2> : <h1>{product.price}$</h1>}
           {product.discount > 0 ? (
             <h3>
               {size && <span>{product.priceBefore}$</span>}
@@ -104,7 +104,7 @@ const Infos = ({ product, setActiveImg }) => {
           )}
         </div>
         <span className={styles.infos__shipping}>
-          {product.shipping !== 0 ? `+${product.shipping}$ Shipping fee` : "Free Shipping"}
+          {product.shipping > 0 ? `+${product.shipping}$ Shipping Fee` : "Free Shipping"}
         </span>
         <span>
           {size ? product.quantity : product.sizes.reduce((start, next) => start + next.qty, 0)} pieces available.
@@ -125,24 +125,25 @@ const Infos = ({ product, setActiveImg }) => {
           </div>
         </div>
         <div className={styles.infos__colors}>
-          {product.colors.map((color, i) => (
-            <span
-              key={i}
-              className={`${i == router.query.style ? styles.active_color : ""}`}
-              onMouseOver={() => setActiveImg(product.subProduct[i].images[0].url)}
-              onMouseLeave={() => setActiveImg("")}
-            >
-              <Link href={`/product/${product.slug}?style=${i}`}>
-                <img src={color.image} alt="color img" />
-              </Link>
-            </span>
-          ))}
+          {product.colors &&
+            product.colors.map((color, i) => (
+              <span
+                key={i}
+                className={`${i == router.query.style ? styles.active_color : ""}`}
+                onMouseOver={() => setActiveImg(product.subProducts[i].images[0].url)}
+                onMouseLeave={() => setActiveImg("")}
+              >
+                <Link href={`/product/${product.slug}?style=${i}`}>
+                  <img src={color.image} alt="color img" />
+                </Link>
+              </span>
+            ))}
         </div>
         <div className={styles.infos__qty}>
           <button onClick={() => qty > 1 && setQty((prev) => prev - 1)}>
             <TbMinus />
           </button>
-          <span>{qty}</span>
+          <span className={styles.qty}>{qty}</span>
           <button onClick={() => qty < product.quantity && setQty((prev) => prev + 1)}>
             <TbPlus />
           </button>

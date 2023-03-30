@@ -26,7 +26,7 @@ export default function product({ product }) {
           <div className={styles.path}>
             Home / {product.category.name}
             {product.subCategories.map((sub, idx) => (
-              <span key={idx}>{sub.name}</span>
+              <span key={idx}>/{sub.name}</span>
             ))}
           </div>
           <div className={styles.product__main}>
@@ -43,19 +43,20 @@ export default function product({ product }) {
 
 export async function getServerSideProps(context) {
   const { query } = context;
-  // const slug = query.slug;
+  const slug = query.slug;
   const style = query.style;
   const size = query.size || 0;
 
   db.connectDb();
-  let product = await Product.findOne({ _slug: query.slug })
+
+  let product = await Product.findOne({ slug: slug })
     .populate({ path: "category", model: Category })
     .populate({ path: "subCategories", model: SubCategory })
     .populate({ path: "reviews.reviewBy", model: User })
     .lean();
   // .populate({ path: "subCategories._id", model: SubCategory })
 
-  let subProduct = product.subProduct[style];
+  let subProduct = product.subProducts[style];
 
   let prices = subProduct.sizes
     .map((s) => {
@@ -72,7 +73,7 @@ export async function getServerSideProps(context) {
     sizes: subProduct.sizes,
     discount: subProduct.discount,
     sku: subProduct.sku,
-    colors: product.subProduct.map((p) => {
+    colors: product.subProducts.map((p) => {
       return p.color;
     }),
     priceRange: subProduct.discount
@@ -104,7 +105,7 @@ export async function getServerSideProps(context) {
         percentage: 0,
       },
     ],
-    allSizes: product.subProduct
+    allSizes: product.subProducts
       .map((p) => {
         return p.sizes;
       })
@@ -114,6 +115,7 @@ export async function getServerSideProps(context) {
       })
       .filter((element, index, array) => array.findIndex((el2) => el2?.size === element?.size) === index),
   };
+
   db.disconnectDb();
 
   return {

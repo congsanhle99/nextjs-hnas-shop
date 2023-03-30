@@ -236,3 +236,10 @@
   outline: 1px solid $pink-color;
   outline-offset: 2px;
 }
+
+.qty {
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

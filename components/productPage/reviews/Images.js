@@ -39,6 +39,9 @@ const Images = ({ images, setImages }) => {
 
   const removeImage = (image) => {
     setImages(images.filter((x) => x !== image));
+    if (images.length <= 3) {
+      setError("");
+    }
   };
   return (
     <div>

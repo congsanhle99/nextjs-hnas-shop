@@ -10,7 +10,7 @@ const Review = ({ product }) => {
   return (
     <div className={styles.reviews}>
       <div className={styles.reviews__container}>
-        <h1>Customer Reviews ({product.reviews?.length})</h1>
+        <h2>Customer Reviews ({product.reviews?.length})</h2>
         <div className={styles.reviews__stats}>
           <div className={styles.reviews__stats_overview}>
             <span>Average Rating</span>
