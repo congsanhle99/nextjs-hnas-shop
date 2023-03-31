@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import * as Yup from "yup";
 import "yup-phone";
 import { countries } from "../../../data/countries";
+import { saveAddress } from "../../../requests/user";
 import ShippingInput from "../../inputs/shippingInput";
 import SingularSelect from "../../selects/SingularSelect";
 import styles from "./styles.module.scss";
@@ -44,9 +45,16 @@ const Shipping = ({ user, selectedAddress, setSelectedAddress }) => {
     country: Yup.string().required("Country name is required."),
   });
 
+  // func  insert input data in checkOut page
   const handleChange = (e) => {
     const { name, value } = e.target;
     setShipping({ ...shipping, [name]: value });
+  };
+
+  const saveShippingHandler = async () => {
+    const res = await saveAddress(shipping, user._id);
+    setAddresses([...addresses, res]);
+    setSelectedAddress(res);
   };
 
   return (
@@ -55,6 +63,7 @@ const Shipping = ({ user, selectedAddress, setSelectedAddress }) => {
         enableReinitialize
         initialValues={{ firstName, lastName, phoneNumber, state, city, zipCode, address1, address2, country }}
         validationSchema={validate}
+        onSubmit={() => saveShippingHandler()}
       >
         {(formik) => (
           <Form>
