@@ -1,0 +1,48 @@
+.input {
+  width: 100%;
+  margin-bottom: 1.2rem;
+
+  &__wrapper {
+    position: relative;
+
+    input {
+      border: 1px solid #d6d6d6;
+      width: 100%;
+      height: 50px;
+      padding-left: 1rem;
+      padding-top: 10px;
+      color: #222;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    span {
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      font-size: 14px;
+      color: rgba(102, 102, 102, 0.887);
+    }
+  }
+}
+
+.move {
+  transition: all 0.2s ease;
+  font-size: 12px !important;
+  transform: translateY(-10px);
+}
+
+.error {
+  input {
+    background: rgba(255, 0, 0, 0.031) !important;
+    border: 1px solid #cc674f;
+  }
+
+  p {
+    color: $reddish-color;
+    font-size: 13px;
+  }
+  // font-style: italic;
+}
