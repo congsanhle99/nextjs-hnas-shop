@@ -11,8 +11,8 @@ import Product from "../components/cart/product";
 // import { women_swiper } from "../data/home";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import styles from "../styles/cart.module.scss";
 import { saveCart } from "../requests/user";
+import styles from "../styles/cart.module.scss";
 
 const cart = () => {
   const { cart } = useSelector((state) => ({ ...state }));
@@ -32,7 +32,7 @@ const cart = () => {
 
   const saveCartToDBHandler = async () => {
     if (session) {
-      const res = saveCart(selected, session.user.id);
+      const res = saveCart(selected);
       router.push("/checkout");
     } else {
       signIn();

@@ -9,14 +9,14 @@ import styles from "../styles/checkout.module.scss";
 import db from "../utils/db";
 
 const checkout = ({ cart, user }) => {
-  const [selectedAddress, setSelectedAddress] = useState();
+  const [addresses, setAddresses] = useState(user?.address || []);
 
   return (
     <>
       <Header />
       <div className={`${styles.container} ${styles.checkout}`}>
         <div className={styles.checkout__side}>
-          <Shipping user={user} selectedAddress={selectedAddress} setSelectedAddress={setSelectedAddress} />
+          <Shipping user={user} addresses={addresses} setAddresses={setAddresses} />
         </div>
         <div className={styles.checkout__side}></div>
       </div>
