@@ -9,15 +9,12 @@ handler.put(async (req, res) => {
     db.connectDb();
     const { id } = req.body;
     const user = await User.findById(req.user);
-    console.log("user___: ", user);
     let user_addresses = user.address;
-    console.log("user_addresses: ", user_addresses);
     let addresses = [];
     for (let i = 0; i < user_addresses.length; i++) {
       let temp_address = {};
       if (user_addresses[i]._id == id) {
         temp_address = { ...user_addresses[i].toObject(), active: true };
-        console.log("if_user_addresses[i]: ", user_addresses[i]);
         addresses.push(temp_address);
       } else {
         temp_address = { ...user_addresses[i].toObject(), active: false };
@@ -32,6 +29,24 @@ handler.put(async (req, res) => {
     );
     db.disconnectDb();
     return res.json({ addresses });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+});
+
+handler.delete(async (req, res) => {
+  try {
+    db.connectDb();
+    const { id } = req.body;
+    const user = await User.findById(req.user);
+    await user.updateOne(
+      {
+        $pull: { address: { _id: id } },
+      },
+      { new: true }
+    );
+    db.disconnectDb();
+    res.json({ addresses: user.address.filter((a) => a._id != id) });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

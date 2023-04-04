@@ -2,13 +2,14 @@
 import { Form, Formik } from "formik";
 import React, { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
+import { CiCircleRemove } from "react-icons/ci";
 import { FaIdCard, FaMapMarkerAlt } from "react-icons/fa";
 import { GiPhone } from "react-icons/gi";
 import { IoMdArrowDropupCircle } from "react-icons/io";
 import * as Yup from "yup";
 import "yup-phone";
 import { countries } from "../../../data/countries";
-import { changeActiveAddress, saveAddress } from "../../../requests/user";
+import { changeActiveAddress, deleteAddress, saveAddress } from "../../../requests/user";
 import ShippingInput from "../../inputs/shippingInput";
 import SingularSelect from "../../selects/SingularSelect";
 import styles from "./styles.module.scss";
@@ -63,49 +64,60 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user, addresses, setAdd
     setAddresses(res.addresses);
   };
 
+  const deleteHandler = async (id) => {
+    const res = await deleteAddress(id);
+    setAddresses(res.addresses);
+  };
+
   return (
     <div className={styles.shipping}>
+      <div className={styles.header}>
+        <h2>Shipping Information</h2>
+      </div>
       <div className={styles.addresses}>
         {addresses.map((address) => (
-          <div
-            className={`${styles.address} ${address.active && styles.active}`}
-            key={address._id}
-            onClick={() => changeActiveHandler(address._id)}
-          >
-            <h1>{address._id}</h1>
-            <div className={styles.address__side}>
-              <img src={user.image} alt="" />
+          <div style={{ position: "relative" }} key={address._id}>
+            <div className={styles.address__delete} onClick={() => deleteHandler(address._id)}>
+              <CiCircleRemove />
             </div>
-            <div className={styles.address__col}>
-              <span>
-                <FaIdCard />
-                {address.firstName.toUpperCase()} {address.lastName.toUpperCase()}
-              </span>
-              <span>
-                <GiPhone />
-                {address.phoneNumber}
-              </span>
-            </div>
-
-            <div className={styles.address__col}>
-              <span>
-                <FaMapMarkerAlt />
-                {address.address1}
-              </span>
-              <span>{address.address2}</span>
-              <span>
-                {address.city}, {address.state}, {address.country}
-              </span>
-              <span>{address.zipCode}</span>
-            </div>
-            <span
-              className={styles.active__text}
-              style={{
-                display: `${!address.active && "none"}`,
-              }}
+            <div
+              className={`${styles.address} ${address.active && styles.active}`}
+              onClick={() => changeActiveHandler(address._id)}
             >
-              Active
-            </span>
+              <div className={styles.address__side}>
+                <img src={user.image} alt="" />
+              </div>
+              <div className={styles.address__col}>
+                <span>
+                  <FaIdCard />
+                  {address.firstName.toUpperCase()} {address.lastName.toUpperCase()}
+                </span>
+                <span>
+                  <GiPhone />
+                  {address.phoneNumber}
+                </span>
+              </div>
+
+              <div className={styles.address__col}>
+                <span>
+                  <FaMapMarkerAlt />
+                  {address.address1}
+                </span>
+                <span>{address.address2}</span>
+                <span>
+                  {address.city}, {address.state}, {address.country}
+                </span>
+                <span>{address.zipCode}</span>
+              </div>
+              <span
+                className={styles.active__text}
+                style={{
+                  display: `${!address.active && "none"}`,
+                }}
+              >
+                Active
+              </span>
+            </div>
           </div>
         ))}
       </div>
