@@ -2,6 +2,7 @@
 import { getSession } from "next-auth/react";
 import React, { useState } from "react";
 import Header from "../components/cart/header";
+import Products from "../components/checkout/products";
 import Shipping from "../components/checkout/shipping";
 import Cart from "../models/Cart";
 import User from "../models/User";
@@ -17,6 +18,7 @@ const checkout = ({ cart, user }) => {
       <div className={`${styles.container} ${styles.checkout}`}>
         <div className={styles.checkout__side}>
           <Shipping user={user} addresses={addresses} setAddresses={setAddresses} />
+          <Products cart={cart} />
         </div>
         <div className={styles.checkout__side}></div>
       </div>
