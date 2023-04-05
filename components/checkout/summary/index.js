@@ -1,6 +1,7 @@
 import { Form, Formik } from "formik";
 import React, { useState } from "react";
 import * as Yup from "yup";
+import { applyCoupon } from "../../../requests/user";
 import ShippingInput from "../../inputs/shippingInput";
 import styles from "./styles.module.scss";
 
@@ -12,7 +13,16 @@ const Summary = ({ totalAfterDiscount, setTotalAfterDiscount, user, cart, paymen
     coupon: Yup.string().required("Please enter a coupon first!"),
   });
 
-  const applyCouponHandler = async () => {};
+  const applyCouponHandler = async () => {
+    const res = await applyCoupon(coupon);
+    if (res.message) {
+      setError(res.message);
+    } else {
+      setTotalAfterDiscount(res.totalAfterDiscount);
+      setDiscount(res.discount);
+      setError("");
+    }
+  };
 
   const placeOrderHandler = async () => {};
 
@@ -31,6 +41,7 @@ const Summary = ({ totalAfterDiscount, setTotalAfterDiscount, user, cart, paymen
           {(formik) => (
             <Form>
               <ShippingInput name="coupon" placeholder="Enter Coupon" onChange={(e) => setCoupon(e.target.value)} />
+              {error && <span className={styles.error}>{error}</span>}
               <button type="submit">Apply</button>
 
               <div className={styles.infos}>
@@ -38,7 +49,7 @@ const Summary = ({ totalAfterDiscount, setTotalAfterDiscount, user, cart, paymen
                   Total: <b>{cart.cartTotal}$</b>
                 </span>
                 {discount > 0 && (
-                  <span className={styles.discount}>
+                  <span className={styles.coupon_span}>
                     Coupon applied: <b>-{discount}%</b>
                   </span>
                 )}
