@@ -18,6 +18,7 @@
 
   form {
     width: 100%;
+    transition: all 0.2s ease;
 
     button {
       width: 150px;
@@ -26,7 +27,6 @@
       font-weight: 600;
       background: $pink-color;
       cursor: pointer;
-      transition: all 0.2s;
 
       &:active {
         transform: scale(0.95);
@@ -47,6 +47,11 @@
   cursor: pointer;
   color: #000;
   border: 1px solid #000;
+  transition: all 0.2s ease;
+
+  &:active {
+    transform: scale(0.95);
+  }
 
   span {
     display: flex;

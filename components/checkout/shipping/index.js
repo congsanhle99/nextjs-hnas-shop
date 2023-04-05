@@ -72,7 +72,7 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user, addresses, setAdd
   return (
     <div className={styles.shipping}>
       <div className={styles.header}>
-        <h2>Shipping Information</h2>
+        <h3>Shipping Information</h3>
       </div>
       <div className={styles.addresses}>
         {addresses.map((address) => (
