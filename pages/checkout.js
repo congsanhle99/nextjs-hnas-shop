@@ -1,18 +1,30 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { getSession } from "next-auth/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/cart/header";
+import Payment from "../components/checkout/payment";
 import Products from "../components/checkout/products";
 import Shipping from "../components/checkout/shipping";
+import Summary from "../components/checkout/summary";
 import Cart from "../models/Cart";
 import User from "../models/User";
 import styles from "../styles/checkout.module.scss";
 import db from "../utils/db";
-import Payment from "../components/checkout/payment";
 
 const checkout = ({ cart, user }) => {
   const [addresses, setAddresses] = useState(user?.address || []);
   const [paymentMethod, setPaymentMethod] = useState("");
+  const [totalAfterDiscount, setTotalAfterDiscount] = useState("");
+  const [selectedAddress, setSelectedAddress] = useState("");
+
+  useEffect(() => {
+    let check = addresses.find((ad) => ad.active == true);
+    if (check) {
+      setSelectedAddress(check);
+    } else {
+      setSelectedAddress("");
+    }
+  }, [addresses]);
 
   return (
     <>
@@ -24,6 +36,14 @@ const checkout = ({ cart, user }) => {
         </div>
         <div className={styles.checkout__side}>
           <Payment paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod} />
+          <Summary
+            totalAfterDiscount={totalAfterDiscount}
+            setTotalAfterDiscount={setTotalAfterDiscount}
+            user={user}
+            cart={cart}
+            paymentMethod={paymentMethod}
+            selectedAddress={selectedAddress}
+          />
         </div>
       </div>
     </>
