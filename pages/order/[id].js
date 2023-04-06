@@ -67,6 +67,41 @@ const order = ({ order }) => {
                   </div>
                 </div>
               ))}
+              <div className={styles.order__products_total}>
+                {order.couponApplied ? (
+                  <>
+                    <div className={styles.order__products_total_sub}>
+                      <span>Subtotal </span>
+                      <span>{order.totalBeforeDiscount}$</span>
+                    </div>
+                    <div className={styles.order__products_total_sub}>
+                      <span>
+                        Coupon Applied <em>({order.couponApplied})</em>
+                      </span>
+                      <span> -{(order.totalBeforeDiscount - order.total).toFixed(2)}$</span>
+                    </div>
+                    <div className={styles.order__products_total_sub}>
+                      <span>Tax Price </span>
+                      <span>+{order.taxPrice}</span>
+                    </div>
+                    <div className={`${styles.order__products_total_sub} ${styles.borderTop}`}>
+                      <span>TOTAL TO PAY </span>
+                      <b>{order.total}$</b>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className={styles.order_products_total_sub}>
+                      <span>Tax Price </span>
+                      <span>+{order.taxPrice}</span>
+                    </div>
+                    <div className={`${styles.order__products_total_sub} ${styles.borderTop}`}>
+                      <span>TOTAL TO PAY </span>
+                      <b>{order.total}$</b>
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
           </div>
           <div className={styles.order__actions}></div>
