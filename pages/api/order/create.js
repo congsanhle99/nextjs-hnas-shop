@@ -9,7 +9,7 @@ handler.post(async (req, res) => {
   try {
     db.connectDb();
 
-    const { products, shippingAddress, paymentMethod, total } = req.body;
+    const { products, shippingAddress, paymentMethod, total, totalBeforeDiscount, couponApplied } = req.body;
     const user = await User.findById(req.user);
     const newOrder = await new Order({
       user: user._id,
@@ -17,6 +17,8 @@ handler.post(async (req, res) => {
       shippingAddress,
       paymentMethod,
       total,
+      totalBeforeDiscount,
+      couponApplied,
     }).save();
 
     db.disconnectDb();

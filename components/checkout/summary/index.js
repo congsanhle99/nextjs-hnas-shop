@@ -42,6 +42,8 @@ const Summary = ({ totalAfterDiscount, setTotalAfterDiscount, user, cart, paymen
         shippingAddress: selectedAddress,
         paymentMethod,
         total: totalAfterDiscount !== "" ? totalAfterDiscount : cart.cartTotal,
+        totalBeforeDiscount: cart.cartTotal,
+        couponApplied: coupon,
       });
       Router.push(`/order/${data.order_id}`);
     } catch (error) {
