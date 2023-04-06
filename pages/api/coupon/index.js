@@ -1,6 +1,4 @@
 import nc from "next-connect";
-import auth from "../../../middleware/auth";
-import User from "../../../models/User";
 import Coupon from "../../../models/Coupon";
 import db from "../../../utils/db";
 const handler = nc();

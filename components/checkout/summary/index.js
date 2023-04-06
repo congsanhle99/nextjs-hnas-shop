@@ -1,4 +1,6 @@
+import axios from "axios";
 import { Form, Formik } from "formik";
+import Router from "next/router";
 import React, { useState } from "react";
 import * as Yup from "yup";
 import { applyCoupon } from "../../../requests/user";
@@ -9,6 +11,8 @@ const Summary = ({ totalAfterDiscount, setTotalAfterDiscount, user, cart, paymen
   const [coupon, setCoupon] = useState("");
   const [discount, setDiscount] = useState("");
   const [error, setError] = useState("");
+  const [orderError, setOrderError] = useState("");
+
   const validateCoupon = Yup.object({
     coupon: Yup.string().required("Please enter a coupon first!"),
   });
@@ -24,7 +28,26 @@ const Summary = ({ totalAfterDiscount, setTotalAfterDiscount, user, cart, paymen
     }
   };
 
-  const placeOrderHandler = async () => {};
+  const placeOrderHandler = async () => {
+    try {
+      if (paymentMethod == "") {
+        setOrderError("Please choose a payment method!");
+        return;
+      } else if (!selectedAddress) {
+        setOrderError("Please choose a shipping address!");
+        return;
+      }
+      const { data } = await axios.post("/api/order/create", {
+        products: cart.products,
+        shippingAddress: selectedAddress,
+        paymentMethod,
+        total: totalAfterDiscount !== "" ? totalAfterDiscount : cart.cartTotal,
+      });
+      Router.push(`/order/${data.order_id}`);
+    } catch (error) {
+      setOrderError(error.response.data.message);
+    }
+  };
 
   return (
     <div className={styles.summary}>
@@ -66,6 +89,7 @@ const Summary = ({ totalAfterDiscount, setTotalAfterDiscount, user, cart, paymen
       <button className={styles.submit_btn} onClick={() => placeOrderHandler()}>
         Place Order
       </button>
+      {orderError && <span className={styles.orderError}>{orderError}</span>}
     </div>
   );
 };
