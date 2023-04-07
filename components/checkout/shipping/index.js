@@ -7,7 +7,6 @@ import { FaIdCard, FaMapMarkerAlt } from "react-icons/fa";
 import { GiPhone } from "react-icons/gi";
 import { IoMdArrowDropupCircle } from "react-icons/io";
 import * as Yup from "yup";
-import "yup-phone";
 import { countries } from "../../../data/countries";
 import { changeActiveAddress, deleteAddress, saveAddress } from "../../../requests/user";
 import ShippingInput from "../../inputs/shippingInput";
@@ -30,12 +29,16 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user, addresses, setAdd
   const [shipping, setShipping] = useState(initialValues);
   const [visible, setVisible] = useState(user?.address.length ? false : true);
   const { firstName, lastName, phoneNumber, state, city, zipCode, address1, address2, country } = shipping;
+  const phoneRegExp = /^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/gm;
   const validate = Yup.object({
     firstName: Yup.string()
       .required("First name is required.")
       .min(3, "First name must be at least 3 characters long."),
     lastName: Yup.string().required("Last name is required.").min(3, "Last name must be at least 3 characters long."),
-    phoneNumber: Yup.string().required("Phone number is required.").phone().min(10, "Phone number is not correct."),
+    phoneNumber: Yup.string()
+      .matches(phoneRegExp, "Phone number is not valid!")
+      .required("Phone number is required.")
+      .min(10, "Phone number is not correct."),
     state: Yup.string().required("State is required.").min(2, "State must be at least 2 characters long."),
     city: Yup.string().required("City name is required.").min(3, "City name must be at least 3 characters long."),
     zipCode: Yup.string()

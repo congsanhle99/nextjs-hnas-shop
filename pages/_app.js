@@ -5,8 +5,16 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import Head from "next/head";
 import { SessionProvider } from "next-auth/react";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 let persistor = persistStore(store);
+
+const initialOptions = {
+  "client-id": process.env.PAYPAL_CLIENT_ID,
+  currency: "USD",
+  intent: "capture",
+  // "data-client-token": "abc123xyz==",
+};
 
 export default function App({ Component, pageProps: { session, ...pageProps } }) {
   return (
@@ -20,7 +28,9 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
       <SessionProvider session={session}>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            <Component {...pageProps} />
+            <PayPalScriptProvider options={initialOptions}>
+              <Component {...pageProps} />
+            </PayPalScriptProvider>
           </PersistGate>
         </Provider>
       </SessionProvider>
