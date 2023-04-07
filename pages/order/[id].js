@@ -104,7 +104,49 @@ const order = ({ order }) => {
               </div>
             </div>
           </div>
-          <div className={styles.order__actions}></div>
+
+          <div className={styles.order__actions}>
+            <div className={styles.order__address}>
+              <h1>Customer&apos;s Order</h1>
+              <div className={styles.order__address_user}>
+                <div className={styles.order__address_user_infos}>
+                  <img src={order.user.image} alt="" />
+                  <div>
+                    <span>{order.user.name}</span>
+                    <span>{order.user.email}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.order__address_shipping}>
+                <h2>Shipping Address</h2>
+                <span>
+                  {order.shippingAddress.firstName} {order.shippingAddress.lastName}
+                </span>
+                <span>{order.shippingAddress.address1}</span>
+                <span>{order.shippingAddress.address2}</span>
+                <span>
+                  {order.shippingAddress.state}, {order.shippingAddress.city}
+                </span>
+                <span>{order.shippingAddress.zipCode}</span>
+                <span>{order.shippingAddress.Country}</span>
+              </div>
+
+              <div className={styles.order__address_shipping}>
+                <h2>Billing Address</h2>
+                <span>
+                  {order.shippingAddress.firstName} {order.shippingAddress.lastName}
+                </span>
+                <span>{order.shippingAddress.address1}</span>
+                <span>{order.shippingAddress.address2}</span>
+                <span>
+                  {order.shippingAddress.state}, {order.shippingAddress.city}
+                </span>
+                <span>{order.shippingAddress.zipCode}</span>
+                <span>{order.shippingAddress.Country}</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>
