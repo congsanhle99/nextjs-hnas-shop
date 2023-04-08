@@ -4,6 +4,7 @@ import thunk from "redux-thunk";
 import { persistReducer } from "redux-persist";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 import cart from "./cartSlice";
+import expandSidebar from "./ExpandSlice";
 
 //#region setup redux-persist
 
@@ -24,7 +25,7 @@ const storage = typeof window !== "undefined" ? createWebStorage("local") : crea
 
 //#endregion
 
-const reducers = combineReducers({ cart });
+const reducers = combineReducers({ cart, expandSidebar });
 
 const config = {
   key: "root",
