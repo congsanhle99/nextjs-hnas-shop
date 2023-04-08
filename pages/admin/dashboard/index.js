@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../../../styles/dashboard.module.scss";
 import Layout from "../../../components/admin/layout";
 
-const dashboard = ({ children }) => {
+const dashboard = () => {
   return (
     <div>
       <Layout>This Layout</Layout>
