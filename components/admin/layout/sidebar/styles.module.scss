@@ -138,7 +138,11 @@
       margin-top: 6px;
 
       li {
-        margin-bottom: 0;
+        margin-bottom: 6px;
+
+        &:last-of-type {
+          margin-bottom: 0;
+        }
       }
     }
   }
