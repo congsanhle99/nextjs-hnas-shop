@@ -1,0 +1,43 @@
+.btn {
+  min-width: 120px;
+  padding: 10px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &__primary {
+    background: $pink-color;
+    color: #fff;
+  }
+}
+
+.header {
+  font-weight: 700;
+  font-size: 20px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+
+  .flex {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  span {
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+  }
+
+  img {
+    width: 30px;
+  }
+}
