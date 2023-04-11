@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import * as Yup from "yup";
 import AdminInput from "../../inputs/adminInput";
 import styles from "./styles.module.scss";
+import { toast } from "react-toastify";
+import axios from "axios";
 
-const Create = () => {
+const Create = ({ setCategories }) => {
   const [name, setName] = useState("");
   const validate = Yup.object({
     name: Yup.string()
@@ -14,7 +16,16 @@ const Create = () => {
       .matches(/^[A-Za-z\s]*$/, "Number and special characters are not allowed!"),
   });
 
-  const submitHandler = async () => {};
+  const submitHandler = async () => {
+    try {
+      const { data } = await axios.post("/api/admin/category", { name });
+      setCategories(data.categories);
+      setName("");
+      toast.success(data.message);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
 
   return (
     <>
