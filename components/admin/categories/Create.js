@@ -20,6 +20,7 @@ const Create = ({ setCategories }) => {
     try {
       const { data } = await axios.post("/api/admin/category", { name });
       setCategories(data.categories);
+      setName("");
       toast.success(data.message);
     } catch (error) {
       toast.error(error.response.data.message);
