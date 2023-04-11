@@ -7,7 +7,11 @@ import styles from "./styles.module.scss";
 const Create = () => {
   const [name, setName] = useState("");
   const validate = Yup.object({
-    name: Yup.string(),
+    name: Yup.string()
+      .required("Category name is required!")
+      .min(2, "Category name must be between 2 and 100 characters.")
+      .max(100, "Category name must be between 2 and 100 characters.")
+      .matches(/^[A-Za-z\s]*$/, "Number and special characters are not allowed!"),
   });
 
   const submitHandler = async () => {};
@@ -32,9 +36,12 @@ const Create = () => {
               placeholder="Category name"
               onChange={(e) => setName(e.target.value)}
             />
-            <button type="submit" className={`${styles.btn} ${styles.btn__primary}`}>
-              <span>Add Category</span>
-            </button>
+            {/* ${styles.btn__primary} */}
+            <div className={styles.btnWrap}>
+              <button type="submit" className={`${styles.btn} `}>
+                <span>Add Category</span>
+              </button>
+            </div>
           </Form>
         )}
       </Formik>
