@@ -27,4 +27,20 @@ handler.post(async (req, res) => {
   }
 });
 
+handler.delete(async (req, res) => {
+  try {
+    const { id } = req.body;
+    db.connectDb();
+    await Category.findByIdAndRemove(id);
+    db.disconnectDb();
+
+    return res.json({
+      message: `Category has been deleted successfully!`,
+      categories: await Category.find({}).sort({ updateAt: -1 }),
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 export default handler;
