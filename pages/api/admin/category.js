@@ -47,7 +47,7 @@ handler.put(async (req, res) => {
   try {
     const { id, name } = req.body;
     db.connectDb();
-    await Category.findByIdAndUpdate(id, { name });
+    await Category.findByIdAndUpdate(id, { name, slug: slugify(name) });
     db.disconnectDb();
 
     return res.json({

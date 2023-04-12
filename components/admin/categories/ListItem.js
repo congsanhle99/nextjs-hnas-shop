@@ -25,7 +25,7 @@ const ListItem = ({ category, setCategories }) => {
     try {
       const { data } = await axios.put("/api/admin/category", {
         id,
-        name,
+        name: name || category.name,
       });
       setCategories(data.categories);
       setOpen(false);

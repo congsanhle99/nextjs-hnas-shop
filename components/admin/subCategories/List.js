@@ -1,13 +1,14 @@
 import React from "react";
-import styles from "./styles.module.scss";
 import ListItem from "./ListItem";
+import styles from "./styles.module.scss";
 
-const List = ({ subCategories, setSubCategories }) => {
+const List = ({ categories, subCategories, setSubCategories }) => {
   return (
     <ul className={styles.list}>
-      {subCategories.map((category) => (
-        <ListItem category={category} setCategories={setCategories} key={category._id} />
-      ))}
+      {subCategories &&
+        subCategories.map((sub) => (
+          <ListItem categories={categories} subCategory={sub} setSubCategories={setSubCategories} key={sub._id} />
+        ))}
     </ul>
   );
 };

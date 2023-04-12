@@ -1,7 +1,6 @@
 import nc from "next-connect";
 import slugify from "slugify";
 import auth from "../../../middleware/auth";
-import Category from "../../../models/Category";
 import SubCategory from "../../../models/SubCategory";
 import db from "../../../utils/db";
 
@@ -20,7 +19,7 @@ handler.post(async (req, res) => {
     db.disconnectDb();
     res.json({
       message: `Sub-Category ${name} has been created successfully!`,
-      subCategory: await SubCategory.find({}).sort({ updateAt: -1 }),
+      subCategories: await SubCategory.find({}).sort({ updateAt: -1 }),
     });
   } catch (error) {
     db.disconnectDb();
@@ -32,12 +31,12 @@ handler.delete(async (req, res) => {
   try {
     const { id } = req.body;
     db.connectDb();
-    await Category.findByIdAndRemove(id);
+    await SubCategory.findByIdAndRemove(id);
     db.disconnectDb();
 
     return res.json({
-      message: `Category has been deleted successfully!`,
-      categories: await Category.find({}).sort({ updateAt: -1 }),
+      message: `Sub-Category has been deleted successfully!`,
+      subCategories: await SubCategory.find({}).sort({ updateAt: -1 }),
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -46,14 +45,14 @@ handler.delete(async (req, res) => {
 
 handler.put(async (req, res) => {
   try {
-    const { id, name } = req.body;
+    const { id, name, parent } = req.body;
     db.connectDb();
-    await Category.findByIdAndUpdate(id, { name });
+    await SubCategory.findByIdAndUpdate(id, { name, parent, slug: slugify(name) });
     db.disconnectDb();
 
     return res.json({
-      message: `Category has been updated successfully!`,
-      categories: await Category.find({}).sort({ createdAt: -1 }),
+      message: `Sub-Category has been updated successfully!`,
+      subCategories: await SubCategory.find({}).sort({ createdAt: -1 }),
     });
   } catch (error) {
     res.status(500).json({ message: error.message });

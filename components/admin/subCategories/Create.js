@@ -22,7 +22,7 @@ const Create = ({ categories, setSubCategories }) => {
   const submitHandler = async () => {
     try {
       const { data } = await axios.post("/api/admin/subCategory", { name, parent });
-      setSubCategories(data.subCategory);
+      setSubCategories(data.subCategories);
       setName("");
       setParent("");
       toast.success(data.message);
@@ -48,7 +48,7 @@ const Create = ({ categories, setSubCategories }) => {
               type="text"
               label="Name"
               name="name"
-              placeholder="subCategory name"
+              placeholder="Sub-Category name"
               onChange={(e) => setName(e.target.value)}
             />
             <SingularSelect
