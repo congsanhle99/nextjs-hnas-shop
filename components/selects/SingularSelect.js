@@ -21,7 +21,7 @@ const SingularSelect = ({ data, handleChange, placeholder, ...rest }) => {
           No Selected / Or Empty
         </MenuItem>
         {data.map((option) => (
-          <MenuItem key={option._id} value={option.name}>
+          <MenuItem key={option._id} value={option._id || option.name}>
             {option.name}
           </MenuItem>
         ))}
