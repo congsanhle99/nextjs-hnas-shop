@@ -1,5 +1,6 @@
 import React from "react";
 import Layout from "../../../../components/admin/layout";
+import ProductCard from "../../../../components/admin/products/productCard";
 import Category from "../../../../models/Category";
 import Product from "../../../../models/Product";
 import styles from "../../../../styles/adminProduct.module.scss";
@@ -10,6 +11,9 @@ const all = ({ products }) => {
   return (
     <Layout>
       <div className={styles.header}>All Products</div>
+      {products.map((product) => (
+        <ProductCard product={product} key={product._id} />
+      ))}
     </Layout>
   );
 };
