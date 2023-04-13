@@ -26,10 +26,27 @@
     }
 
     input {
-      padding: 1rem;
+      padding: 6px 1rem;
       border: none;
       outline: none;
       background: transparent;
+      color: #fff;
+    }
+
+    &_expand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      button {
+        margin-top: 0 !important;
+        padding: 6px 12px !important;
+      }
+
+      button:hover {
+        box-shadow: $shadow-2;
+        background: $blue-color;
+      }
     }
   }
 }
