@@ -1,14 +1,22 @@
+import { TextField } from "@mui/material";
+import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+// import { LocalizationProvider, DesktopDatePicker } from "@material-ui/pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import axios from "axios";
 import { Form, Formik } from "formik";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 import AdminInput from "../../inputs/adminInput";
 import styles from "./styles.module.scss";
-import { toast } from "react-toastify";
-import axios from "axios";
 
 const Create = ({ setCoupons }) => {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
   const [name, setName] = useState("");
   const [discount, setDiscount] = useState(0);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(tomorrow);
   const validate = Yup.object({
     name: Yup.string()
       .required("Coupon name is required!")
@@ -24,13 +32,29 @@ const Create = ({ setCoupons }) => {
 
   const submitHandler = async () => {
     try {
-      const { data } = await axios.post("/api/admin/coupon", { name });
+      if (startDate.toString() == endDate.toString()) {
+        return toast.error("You can't pick the same date!");
+      } else if (endDate.getTime() - startDate.getTime() < 0) {
+        return toast.error("Start Date cannot be more than the End Date!");
+      }
+      const { data } = await axios.post("/api/admin/coupon", { coupon: name, discount, startDate, endDate });
       setCoupons(data.coupons);
       setName("");
+      setDiscount(0);
+      setStartDate(new Date());
+      setEndDate(tomorrow);
       toast.success(data.message);
     } catch (error) {
       toast.error(error.response.data.message);
     }
+  };
+
+  const handleStartDate = (newValue) => {
+    setStartDate(newValue);
+  };
+
+  const handleEndDate = (newValue) => {
+    setEndDate(newValue);
   };
 
   return (
@@ -60,6 +84,26 @@ const Create = ({ setCoupons }) => {
               placeholder="Discount"
               onChange={(e) => setDiscount(e.target.value)}
             />
+            <div className={styles.date_picker}>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DesktopDatePicker
+                  label="Start Date"
+                  inputFormat="MM/dd/yyyy"
+                  value={startDate}
+                  onChange={handleStartDate}
+                  renderInput={(params) => <TextField {...params} />}
+                  minDate={new Date()}
+                />
+                <DesktopDatePicker
+                  label="End Date"
+                  inputFormat="MM/dd/yyyy"
+                  value={endDate}
+                  onChange={handleEndDate}
+                  renderInput={(params) => <TextField {...params} />}
+                  minDate={tomorrow}
+                />
+              </LocalizationProvider>
+            </div>
             {/* ${styles.btn__primary} */}
             <div className={styles.btnWrap}>
               <button type="submit" className={`${styles.btn} `}>

@@ -36,7 +36,7 @@
     &_expand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 3px;
 
       button {
         margin-top: 0 !important;
@@ -54,4 +54,11 @@
 .open {
   background: #fff !important;
   color: #111 !important;
+}
+
+.date_picker {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 }
