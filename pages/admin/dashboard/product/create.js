@@ -60,19 +60,21 @@ const create = ({ parents, categories }) => {
 
   useEffect(() => {
     const getParentData = async () => {
-      const { data } = await axios.get(`/api/product/${product.parent || "62c4711c062128444ad591a1"}`);
-      console.log("data::::::", data);
-      if (data) {
-        setProduct({
-          ...product,
-          name: data.name,
-          description: data.description,
-          brand: data.brand,
-          category: data.category,
-          subCategories: data.subCategories,
-          questions: [],
-          details: [],
-        });
+      if (product.parent) {
+        const { data } = await axios.get(`/api/product/${product.parent}`);
+        console.log("data::::::", data);
+        if (data) {
+          setProduct({
+            ...product,
+            name: data.name,
+            description: data.description,
+            brand: data.brand,
+            category: data.category,
+            subCategories: data.subCategories,
+            questions: [],
+            details: [],
+          });
+        }
       }
     };
     getParentData();
@@ -90,7 +92,18 @@ const create = ({ parents, categories }) => {
     getSubs();
   }, [product.category]);
 
-  const validate = Yup.object({});
+  const validate = Yup.object({
+    name: Yup.string()
+      .required("Please add a name!")
+      .min(10, "Product name must between 10 and 300 characters.")
+      .max(300, "Product name must between 10 and 300 characters."),
+    brand: Yup.string().required("Please add a brand!"),
+    category: Yup.string().required("Please select a category!"),
+    subCategories: Yup.array().min(1, "Please select at least one sub Category!"),
+    sku: Yup.string().required("Please add a sku/number!"),
+    color: Yup.string().required("Please add a color!"),
+    description: Yup.string().required("Please add a description!"),
+  });
 
   const createProduct = async () => {};
 
@@ -145,7 +158,7 @@ const create = ({ parents, categories }) => {
             <SingularSelect
               name="parent"
               value={product.parent}
-              label="parent"
+              placeholder="Parent product"
               data={parents}
               header="Add to an existing product"
               handleChange={handleChange}
@@ -153,7 +166,7 @@ const create = ({ parents, categories }) => {
             <SingularSelect
               name="category"
               value={product.category}
-              label="Category"
+              placeholder="Category"
               data={categories}
               header="Select a Category"
               disabled={product.parent}
@@ -171,7 +184,6 @@ const create = ({ parents, categories }) => {
             )}
             <div className={styles.header}>Basic Infos</div>
             <AdminInput type="text" label="Name" name="name" placeholder="Product name" onChange={handleChange} />
-            <input type="text" label="Name" name="name" placeholder="Product name2" onChange={handleChange} />
             <AdminInput
               type="text"
               label="Description"
