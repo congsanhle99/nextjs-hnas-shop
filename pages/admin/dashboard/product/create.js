@@ -4,6 +4,7 @@ import axios from "axios";
 import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
+import Images from "../../../../components/admin/createProduct/images";
 import Layout from "../../../../components/admin/layout";
 import AdminInput from "../../../../components/inputs/adminInput";
 import MultipleSelect from "../../../../components/selects/MultipleSelect";
@@ -54,7 +55,7 @@ const create = ({ parents, categories }) => {
   const [product, setProduct] = useState(initialState);
   const [subs, setSubs] = useState([]);
   const [colorImage, setColorImage] = useState("");
-  const [images, setImages] = useState("");
+  const [images, setImages] = useState([]);
   const [description_images, setDescription_images] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -139,20 +140,20 @@ const create = ({ parents, categories }) => {
       >
         {(formik) => (
           <Form>
-            {/* <Images
+            <Images
               name="imageInputFile"
               header="Product Carousel Images"
               text="Add images"
               images={images}
               setImages={setImages}
               setColorImage={setColorImage}
-            /> */}
-            {/* <div className={styles.flex}>
+            />
+            <div className={styles.flex}>
               {product.color.image && <img src={product.color.image} className={styles.image_span} alt="" />}
               {product.color.color && (
                 <span className={styles.color_span} style={{ background: `${product.color.color}` }}></span>
               )}
-            </div> */}
+            </div>
             {/* <Colors name="color" product={product} setProduct={setProduct} colorImage={colorImage} /> */}
             {/* <Style name="styleInput" product={product} setProduct={setProduct} colorImage={colorImage} /> */}
             <SingularSelect
