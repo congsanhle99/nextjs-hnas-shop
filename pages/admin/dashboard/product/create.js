@@ -4,6 +4,7 @@ import axios from "axios";
 import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
+import Sizes from "../../../../components/admin/createProduct/clickToAdd/Sizes";
 import Colors from "../../../../components/admin/createProduct/colors";
 import Images from "../../../../components/admin/createProduct/images";
 import Style from "../../../../components/admin/createProduct/style";
@@ -202,6 +203,7 @@ const create = ({ parents, categories }) => {
               placeholder="Product discount"
               onChange={handleChange}
             />
+            <Sizes sizes={product.sizes} product={product} setProduct={setProduct} />
             {/* 
               <Images
               name="imageDescInputFile"
@@ -210,11 +212,6 @@ const create = ({ parents, categories }) => {
               images={description_images}
               setImages={setDescription_images}
               setColorImage={setColorImage}
-            /> 
-              <Sizes
-              sizes = {product.sizes}
-              product={product}
-              setProduct={setProduct}
             /> 
               <Details
               sizes = {product.details}
