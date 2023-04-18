@@ -1,0 +1,80 @@
+@import "../../../base";
+
+.clickToAdd {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+
+  select,
+  option {
+    border: none;
+    outline: none;
+    border: 1px solid #ccc;
+    padding-left: 1rem;
+    width: 150px;
+    height: 40px;
+    border-radius: 6px;
+  }
+
+  svg {
+    width: 30px;
+    height: 30px;
+    fill: rgba(252, 70, 100, 0.8);
+    cursor: pointer;
+    margin-top: 6px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      fill: $pink-color;
+      transform: scale(1.1);
+    }
+
+    &:active {
+      transform: scale(0.96);
+    }
+  }
+}
+
+.click_btn {
+  background: $pink-color;
+  width: 250px;
+  font-weight: 600;
+  color: #fff;
+  height: 50px;
+  cursor: pointer;
+  margin: 5px 0;
+  transition: all 0.2s ease;
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+.svg {
+  width: 30px;
+  height: 30px;
+  fill: rgba(252, 70, 100, 0.8);
+  cursor: pointer;
+  margin-top: 6px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    fill: $pink-color;
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+.questions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  svg {
+    transform: translateY(-3px);
+  }
+}

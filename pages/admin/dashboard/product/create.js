@@ -5,6 +5,8 @@ import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import Sizes from "../../../../components/admin/createProduct/clickToAdd/Sizes";
+import Details from "../../../../components/admin/createProduct/clickToAdd/details";
+import Questions from "../../../../components/admin/createProduct/clickToAdd/questions";
 import Colors from "../../../../components/admin/createProduct/colors";
 import Images from "../../../../components/admin/createProduct/images";
 import Style from "../../../../components/admin/createProduct/style";
@@ -47,8 +49,8 @@ const initialState = {
   ],
   questions: [
     {
-      name: "",
-      value: "",
+      question: "",
+      answer: "",
     },
   ],
   shippingFee: "",
@@ -204,6 +206,8 @@ const create = ({ parents, categories }) => {
               onChange={handleChange}
             />
             <Sizes sizes={product.sizes} product={product} setProduct={setProduct} />
+            <Details details={product.details} product={product} setProduct={setProduct} />
+            <Questions questions={product.questions} product={product} setProduct={setProduct} />
             {/* 
               <Images
               name="imageDescInputFile"
@@ -213,16 +217,8 @@ const create = ({ parents, categories }) => {
               setImages={setDescription_images}
               setColorImage={setColorImage}
             /> 
-              <Details
-              sizes = {product.details}
-              product={product}
-              setProduct={setProduct}
-            /> 
-              <Questions
-              sizes = {product.questions}
-              product={product}
-              setProduct={setProduct}
-            /> 
+              
+             
             */}
             <div className={styles.btnWrap}>
               <button type="submit" className={styles.btn}>
