@@ -14,7 +14,7 @@ const Images = ({ name, header, text, images, setImages, setColorImage, ...props
   const handleImages = (e) => {
     let files = Array.from(e.target.files);
     files.forEach((img, idx) => {
-      if (idx == 6 || images.length == 7) {
+      if (images.length == 6) {
         dispatch(
           showDialog({
             header: "Maximum 6 images are allowed",
