@@ -1,0 +1,40 @@
+.table {
+  thead {
+    background: $pink-color;
+
+    th {
+      color: #fff !important;
+    }
+  }
+
+  td {
+    b {
+      font-size: 16px;
+    }
+  }
+}
+
+.verify {
+  width: 32px;
+  height: 32px;
+}
+
+.not_processed {
+  color: #e3503e;
+}
+
+.processing {
+  color: #54b7d3;
+}
+
+.dispatched {
+  color: #1e91cf;
+}
+
+.cancel {
+  color: #e3d4d4;
+}
+
+.completed {
+  color: #4cb64c;
+}
