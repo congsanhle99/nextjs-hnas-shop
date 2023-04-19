@@ -74,25 +74,33 @@ function Row(props) {
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
-                History
+                Order for
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Customer</TableCell>
-                    <TableCell align="right">Amount</TableCell>
-                    <TableCell align="right">Total price ($)</TableCell>
+                    <TableCell></TableCell>
+                    <TableCell>Full Name</TableCell>
+                    <TableCell>Email</TableCell>
+                    <TableCell align="right">Shipping Infos</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  <TableRow key={row.date}>
+                  <TableRow key={row.user.id}>
                     <TableCell component="th" scope="row">
-                      {row.date}
+                      <img src={row.user.image} alt="" className={styles.table__img} />
                     </TableCell>
-                    <TableCell>{row.customerId}</TableCell>
-                    <TableCell align="right">{row.amount}</TableCell>
-                    <TableCell align="right">{Math.round(row.amount * row.price * 100) / 100}</TableCell>
+                    <TableCell>{row.user.name}</TableCell>
+                    <TableCell>{row.user.email}</TableCell>
+                    <TableCell align="right">
+                      {row.shippingAddress.lastName} {row.shippingAddress.firstName} <br />
+                      {row.shippingAddress.address1} <br />
+                      {row.shippingAddress.address2} <br />
+                      {row.shippingAddress.state} {row.shippingAddress.city} <br />
+                      {row.shippingAddress.country} <br />
+                      {row.shippingAddress.zipCode} <br />
+                      {row.shippingAddress.phoneNumber} <br />
+                    </TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
