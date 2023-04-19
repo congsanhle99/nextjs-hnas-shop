@@ -20,6 +20,21 @@
     object-fit: cover;
     box-shadow: $shadow-1;
   }
+
+  &__productImg {
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    box-shadow: $shadow-1;
+  }
+
+  &__productTotal {
+    display: block;
+    font-weight: 600;
+    font-size: 18px;
+    font-style: italic;
+    padding: 16px 0 16px 0;
+  }
 }
 
 .verify {
