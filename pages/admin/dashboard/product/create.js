@@ -4,6 +4,7 @@ import axios from "axios";
 import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 import Sizes from "../../../../components/admin/createProduct/clickToAdd/Sizes";
 import Details from "../../../../components/admin/createProduct/clickToAdd/details";
@@ -17,8 +18,10 @@ import MultipleSelect from "../../../../components/selects/MultipleSelect";
 import SingularSelect from "../../../../components/selects/SingularSelect";
 import Category from "../../../../models/Category";
 import Product from "../../../../models/Product";
+import { uploadImages } from "../../../../requests/upload";
 import { showDialog } from "../../../../store/DialogSlice";
 import styles from "../../../../styles/adminProduct.module.scss";
+import dataURItoBlob from "../../../../utils/dataURItoBlob";
 import db from "../../../../utils/db";
 import { validateCreateProduct } from "../../../../utils/validation";
 
@@ -128,7 +131,52 @@ const create = ({ parents, categories }) => {
     }
   };
 
-  const createProductHandler = async () => {};
+  const uploaded_images = [];
+  const style_img = "";
+  const createProductHandler = async () => {
+    setLoading(true);
+    if (images) {
+      let temp = images.map((img) => {
+        return dataURItoBlob(img);
+      });
+      console.log("images::", images);
+      console.log("temp::", temp);
+      const path = "product images";
+      let formData = new FormData();
+      formData.append("path", path);
+      temp.forEach((image) => {
+        formData.append("file", image);
+      });
+      uploaded_images = await uploadImages(formData);
+      console.log("uploaded_images: ", uploaded_images);
+    }
+    if (product.color.image) {
+      let temp = dataURItoBlob(product.color.image);
+      let path = "product style image";
+      let formData = new FormData();
+      formData.append("path", path);
+      formData.append("file", temp);
+      let cloudinary_style_img = await uploadImages(formData);
+      style_img = cloudinary_style_img[0].url;
+    }
+
+    try {
+      const { data } = await axios.post("/api/admin/product", {
+        ...product,
+        images: uploaded_images,
+        color: {
+          image: style_img,
+          color: product.color.color,
+        },
+      });
+      setLoading(false);
+      toast.success(data.message);
+    } catch (error) {
+      setLoading(false);
+      toast.error(error.response.data.message);
+      console.log(error.response.data.message);
+    }
+  };
 
   const handleChange = (e) => {
     const { value, name } = e.target;
