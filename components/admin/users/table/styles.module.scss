@@ -1,0 +1,41 @@
+.table {
+  thead {
+    background: $pink-color;
+
+    th {
+      color: #fff !important;
+    }
+  }
+
+  tbody {
+    td {
+      svg {
+        width: 26px;
+        height: 26px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          fill: $error-color;
+        }
+
+        &:active {
+          transform: scale(0.92);
+        }
+      }
+    }
+  }
+
+  &__img {
+    padding-top: 6px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: $shadow-1;
+  }
+
+  .verify {
+    width: 30px;
+  }
+}
