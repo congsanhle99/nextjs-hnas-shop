@@ -7,6 +7,7 @@ $success-color: rgb(75, 181, 67);
 $error-color: rgb(255, 0, 0);
 $violet-color: #5a31f4;
 $reddish-color: #e44d2e;
+$cubic-bezier: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 .container {
   max-width: 1360px;
   margin: 0 auto;
@@ -49,6 +50,23 @@ $reddish-color: #e44d2e;
 
 .wrap {
   flex-wrap: wrap;
+}
+
+.error {
+  display: block;
+  margin-top: 10px;
+  color: $reddish-color;
+  font-size: 18px;
+  font-style: italic;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #aeaeafa1;
+  border-radius: 5px;
 }
 
 // ----------Swiper----------
