@@ -1,5 +1,6 @@
 .dropdown {
   position: relative;
+  z-index: 99;
 
   &__svg {
     margin-top: 6px;

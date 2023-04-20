@@ -1,10 +1,12 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useSession } from "next-auth/react";
 import Head from "next/head";
+import Link from "next/link";
 import React from "react";
 import { GiTakeMyMoney } from "react-icons/gi";
 import { SiProducthunt } from "react-icons/si";
-import { SlHandbag } from "react-icons/sl";
+import { SlEye, SlHandbag } from "react-icons/sl";
 import { TbUsers } from "react-icons/tb";
 import Dropdown from "../../../components/admin/dashboard/dropdown";
 import Notifications from "../../../components/admin/dashboard/notifications";
@@ -77,6 +79,89 @@ const dashboard = ({ users, orders, products }) => {
             </div>
           </div>
         </div>
+        <div className={styles.data}>
+          <div className={styles.orders}>
+            <div className={styles.heading}>
+              <h2>Recent Orders</h2>
+              <Link href="/admin/dashboard/orders">View All</Link>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <td>Name</td>
+                  <td>Total</td>
+                  <td>Payment</td>
+                  <td>Status</td>
+                  <td>View</td>
+                </tr>
+              </thead>
+              <tbody>
+                {orders.map((order) => (
+                  <tr key={order}>
+                    <td>{order.user.name}</td>
+                    <td>{order.total}</td>
+                    <td>
+                      {order.isPaid ? (
+                        <img src="../../../images/users/verified.png" alt="" className={styles.verify} />
+                      ) : (
+                        <img src="../../../images/users/unverified.png" alt="" className={styles.verify} />
+                      )}
+                    </td>
+                    <td>
+                      <div
+                        className={`${styles.status} ${
+                          order.status == "Not Processed"
+                            ? styles.not_processed
+                            : order.status == "Processing"
+                            ? styles.processing
+                            : order.status == "Dispatched"
+                            ? styles.dispatched
+                            : order.status == "Cancel"
+                            ? styles.cancel
+                            : order.status == "Completed"
+                            ? styles.completed
+                            : ""
+                        }
+                      }`}
+                      >
+                        {order.status}
+                      </div>
+                    </td>
+                    <td>
+                      <Link href={`/order/${order._id}`}>
+                        <SlEye />
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className={styles.users}>
+            <div className={styles.heading}>
+              <h2>Recent Users</h2>
+              <Link href="/admin/dashboard/users">View All</Link>
+            </div>
+            <table>
+              <tbody>
+                {users.map((user) => (
+                  <tr key={user}>
+                    <td className={styles.user}>
+                      <div className={styles.user__img}>
+                        <img src={user.image} alt="" />
+                      </div>
+                      <td>
+                        <h4>{user.name}</h4>
+                        <span>{user.email}</span>
+                      </td>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </Layout>
     </>
   );
@@ -85,11 +170,10 @@ const dashboard = ({ users, orders, products }) => {
 export default dashboard;
 
 export async function getServerSideProps(context) {
+  await db.connectDb();
   const users = await User.find().lean();
   const orders = await Order.find().populate({ path: "user", model: "User" }).lean();
   const products = await Product.find().lean();
-
-  await db.connectDb();
 
   return {
     props: {
