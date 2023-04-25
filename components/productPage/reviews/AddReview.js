@@ -90,7 +90,7 @@ const AddReview = ({ product, setReviews }) => {
         fit,
         rating,
         review,
-        images: uploadImages,
+        images: uploaded_image,
       });
 
       setReviews(data.reviews);
