@@ -1,12 +1,15 @@
 import { Rating } from "@mui/material";
 import { signIn, useSession } from "next-auth/react";
-import React from "react";
+import React, { useState } from "react";
 import AddReview from "./AddReview";
-import styles from "./styles.module.scss";
 import Table from "./Table";
+import styles from "./styles.module.scss";
 
 const Review = ({ product }) => {
   const { data: session } = useSession();
+  const [rating, setRating] = useState("");
+  const [reviews, setReviews] = useState(product.reviews);
+
   return (
     <div className={styles.reviews}>
       <div className={styles.reviews__container}>
@@ -38,13 +41,13 @@ const Review = ({ product }) => {
           </div>
         </div>
         {session ? (
-          <AddReview product={product} />
+          <AddReview product={product} setReviews={setReviews} />
         ) : (
           <button className={styles.login_btn} onClick={() => signIn()}>
             Login to add review
           </button>
         )}
-        <Table reviews={product.reviews} allSizes={product.allSizes} colors={product.colors} />
+        <Table reviews={reviews} allSizes={product.allSizes} colors={product.colors} />
       </div>
     </div>
   );
