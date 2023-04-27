@@ -92,3 +92,29 @@
   font-weight: 600;
   border-bottom: 1px solid #222;
 }
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.button {
+  width: 150px;
+  height: 50px;
+  color: #fff;
+  font-weight: 600;
+  background: $pink-color;
+  cursor: pointer;
+  margin-top: 2rem;
+  transition: all 0.2s ease;
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.disabled {
+  cursor: not-allowed;
+  background: #eee;
+}
