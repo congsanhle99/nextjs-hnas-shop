@@ -1,6 +1,10 @@
 .header {
   width: 100%;
   text-align: center;
+
+  &__address {
+    margin-bottom: 10px;
+  }
 }
 
 .orders {
