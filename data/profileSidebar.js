@@ -16,7 +16,7 @@ export const sidebarData = [
       },
       {
         name: "Account Security",
-        link: "",
+        link: "/profile/security",
       },
     ],
   },
