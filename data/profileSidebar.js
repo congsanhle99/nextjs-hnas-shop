@@ -26,35 +26,44 @@ export const sidebarData = [
     links: [
       {
         name: "All Orders",
-        link: "/profile/orders?tab=2",
+        link: "/profile/orders",
+        filter: "",
       },
       {
         name: "Paid Orders",
-        link: "/profile/orders?filter=paid&tab=2",
+        link: "/profile/orders",
+        filter: "Paid",
       },
       {
         name: "Unpaid Orders",
-        link: "/profile/orders?filter=unpaid&tab=2",
+        link: "/profile/orders",
+        filter: "Unpaid",
       },
       {
         name: "Processing Orders",
-        link: "/profile/orders?filter=processing&tab=2",
+        link: "/profile/orders",
+        filter: "Processing",
       },
       {
         name: "Unprocessed Orders",
-        link: "/profile/orders?filter=not_processed&tab=2",
+        link: "/profile/orders",
+        filter: "Not Processed",
       },
       {
         name: "Dispatched Orders",
-        link: "/profile/orders?filter=dispatched&tab=2",
+        link: "/profile/orders",
+        filter: "Dispatched",
       },
       {
         name: "Delivered Orders",
-        link: "/profile/orders?filter=completed&tab=2",
+        link: "/profile/orders",
+        filter: "Completed",
       },
       {
         name: "Cancelled Orders",
-        link: "/profile/orders?filter=cancelled&tab=2",
+        link: "/profile/orders",
+        filter: "Cancel",
+        // filter: "Cancelled",
       },
     ],
   },
@@ -91,12 +100,12 @@ export const sidebarData = [
     heading: "Other Service",
     links: [
       {
-        name: "Other Service 1",
-        link: "/profile/otherservices1",
+        name: "Survey Center",
+        link: "",
       },
       {
-        name: "Other Service 22",
-        link: "/profile/otherservices22",
+        name: "Contact Preferences",
+        link: "",
       },
     ],
   },
@@ -105,13 +114,53 @@ export const sidebarData = [
     heading: "Policy",
     links: [
       {
-        name: "Policy 1",
-        link: "/profile/policy1",
+        name: "Shipping Info",
+        link: "",
       },
       {
-        name: "Policy 22",
-        link: "/profile/policy2",
+        name: "Privacy & Cookie Policy",
+        link: "",
       },
     ],
+  },
+
+  {
+    heading: "Sign out",
+    links: [],
+  },
+];
+
+export const ordersLinks = [
+  {
+    name: "All Orders",
+    filter: "",
+  },
+  {
+    name: "Paid Orders",
+    filter: "paid",
+  },
+  {
+    name: "Unpaid Orders",
+    filter: "unpaid",
+  },
+  {
+    name: "Processing Orders",
+    filter: "Processing",
+  },
+  {
+    name: "Unprocessed Orders",
+    filter: "Unprocessed",
+  },
+  {
+    name: "Dispatched Orders",
+    filter: "Dispatched",
+  },
+  {
+    name: "Delivered Orders",
+    filter: "Delivered",
+  },
+  {
+    name: "Cancelled Orders",
+    filter: "Cancelled",
   },
 ];

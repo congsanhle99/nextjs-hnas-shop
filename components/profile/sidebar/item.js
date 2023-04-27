@@ -22,14 +22,29 @@ const Item = ({ item, visible, index }) => {
       {show && (
         <ul>
           {item.links.map((link, idx) => (
-            <li
-              className={(router.query.q || "") == slugify(link.name, { lower: true }) ? styles.active : ""}
-              key={link.name}
-            >
-              <Link href={`${link.link}?tab=${index}&q=${slugify(link.name, { lower: true })}`}>
-                <a>{link.name}</a>
-              </Link>
-            </li>
+            <>
+              {link.link.startsWith("/profile/orders") ? (
+                <li
+                  className={
+                    (router.query.q?.split("__")[0] || "") == slugify(link.name, { lower: true }) ? styles.active : ""
+                  }
+                  key={link.name}
+                >
+                  <Link href={`${link.link}?tab=${index}&q=${slugify(link.name, { lower: true })}__${link.filter}`}>
+                    <a>{link.name}</a>
+                  </Link>
+                </li>
+              ) : (
+                <li
+                  className={(router.query.q || "") == slugify(link.name, { lower: true }) ? styles.active : ""}
+                  key={link.name}
+                >
+                  <Link href={`${link.link}?tab=${index}&q=${slugify(link.name, { lower: true })}`}>
+                    <a>{link.name}</a>
+                  </Link>
+                </li>
+              )}
+            </>
           ))}
         </ul>
       )}
