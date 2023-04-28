@@ -1,6 +1,7 @@
 .filter {
   padding: 1rem;
 
+  // Category filter comp scss
   h3 {
     font-size: 18px;
     font-weight: 600;
@@ -31,6 +32,15 @@
       font-size: 14px;
       cursor: pointer;
 
+      input {
+        width: 16px;
+        height: 16px;
+      }
+
+      label {
+        font-size: 16px;
+      }
+
       span {
         position: absolute;
         right: 0;
@@ -44,4 +54,56 @@
       }
     }
   }
+  //
+
+  // Size filter comp scss
+  &__sizes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 10px;
+
+    &_size {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    label {
+      font-size: 16px;
+    }
+
+    input {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  //
+
+  // Color filter comp scss
+  &__colors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+
+    button {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: all 0.2s ease-in;
+
+      &:hover {
+        outline: 1px solid #000;
+        outline-offset: 2px;
+      }
+
+      &:focus {
+        outline: 1px solid #000;
+        outline-offset: 2px;
+      }
+    }
+  }
+  //
 }
