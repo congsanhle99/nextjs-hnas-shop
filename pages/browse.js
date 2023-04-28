@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import CategoryFilter from "../components/browse/categoryFilter";
 import Header from "../components/header/Header";
 import ProductCard from "../components/productCard";
 import Category from "../models/Category";
@@ -9,7 +10,7 @@ import styles from "../styles/browse.module.scss";
 import { filterArray, randomize, removeDuplicates } from "../utils/arrays";
 import db from "../utils/db";
 
-const browse = ({ categories, products }) => {
+const browse = ({ categories, subCategories, products }) => {
   console.log("categories: ", categories);
   console.log("products: ", products);
   return (
@@ -28,6 +29,7 @@ const browse = ({ categories, products }) => {
         <div className={styles.browse__store}>
           <div className={`${styles.browse__store_filters} ${styles.scrollbar}`}>
             <button className={styles.browse__clearBtn}>Clear All (3)</button>
+            <CategoryFilter categories={categories} subCategories={subCategories} />
           </div>
           <div className={styles.browse__store_products_wrap}>
             <div className={styles.browse__store_products}>
@@ -73,6 +75,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       categories: JSON.parse(JSON.stringify(categories)),
+      subCategories: JSON.parse(JSON.stringify(subCategories)),
       products: JSON.parse(JSON.stringify(products)),
     },
   };
