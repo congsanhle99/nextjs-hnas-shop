@@ -4,6 +4,7 @@ import BrandsFilter from "../components/browse/brandsFilter";
 import CategoryFilter from "../components/browse/categoryFilter";
 import ColorsFilter from "../components/browse/colorsFilter";
 import GenderFilter from "../components/browse/genderFilter";
+import HeadingFilter from "../components/browse/headingFilter";
 import MaterialsFilter from "../components/browse/materialsFilter";
 import PatternsFilter from "../components/browse/patternsFilter";
 import SizesFilter from "../components/browse/sizesFilter";
@@ -44,6 +45,7 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
             <GenderFilter />
           </div>
           <div className={styles.browse__store_products_wrap}>
+            <HeadingFilter />
             <div className={styles.browse__store_products}>
               {products.map((product) => (
                 <ProductCard product={product} key={product._id} />
