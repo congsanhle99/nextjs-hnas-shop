@@ -106,4 +106,132 @@
     }
   }
   //
+
+  // Brands filter comp scss
+  &__brands {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 10px;
+
+    &_brand {
+      background: transparent;
+      width: 122px;
+      height: 36px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      margin-bottom: 10px;
+      font-weight: 600;
+      font-size: 16px;
+      color: #222;
+
+      &:hover {
+        border: 1px solid #000;
+      }
+
+      img {
+        height: 30px;
+        object-fit: contain;
+      }
+
+      &:focus {
+        border: 1px solid #000;
+      }
+    }
+  }
+  //
+
+  // Styles filter comp scss
+  &__styles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 10px;
+
+    &_style {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    label {
+      font-size: 16px;
+    }
+
+    input {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  //
+
+  // Styles filter comp scss
+  &__patterns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 10px;
+
+    &_pattern {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    label {
+      font-size: 16px;
+    }
+
+    input {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  //
+
+  // Materials filter comp scss
+  &__materials {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 10px;
+
+    &_material {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    label {
+      font-size: 16px;
+    }
+
+    input {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  //
+
+  // Gender filter comp scss
+  &__genders {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 10px;
+
+    &_gender {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    label {
+      font-size: 16px;
+    }
+
+    input {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  //
 }
