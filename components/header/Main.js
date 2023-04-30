@@ -1,13 +1,27 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import React from "react";
-import styles from "./styles.module.scss";
-import { RiSearch2Line } from "react-icons/ri";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
 import { FaOpencart } from "react-icons/fa";
+import { RiSearch2Line } from "react-icons/ri";
+import styles from "./styles.module.scss";
 // import { useSelector } from "react-redux";
 
-const Main = () => {
+const Main = ({ searchHandler }) => {
   // const cart = useSelector((state) => ({ ...state }));
+  const router = useRouter();
+  const [query, setQuery] = useState(router.query.search || "");
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (router.pathname !== "/browse") {
+      if (query.length > 1) {
+        router.push(`/browse?search=${query}`);
+      }
+    } else {
+      searchHandler(query);
+    }
+  };
 
   return (
     <div className={styles.main}>
@@ -17,12 +31,12 @@ const Main = () => {
             <img src="../../../images/logo.png" alt="" />
           </a>
         </Link>
-        <div className={styles.search}>
-          <input type="text" placeholder="Search..." />
-          <div className={styles.search__icon}>
+        <form onSubmit={(e) => handleSearch(e)} className={styles.search}>
+          <input type="text" placeholder="Search..." value={query} onChange={(e) => setQuery(e.target.value)} />
+          <button type="submit" className={styles.search__icon}>
             <RiSearch2Line />
-          </div>
-        </div>
+          </button>
+        </form>
         <Link href="/cart">
           <a className={styles.cart}>
             <FaOpencart />

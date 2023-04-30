@@ -1,4 +1,6 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import BrandsFilter from "../components/browse/brandsFilter";
 import CategoryFilter from "../components/browse/categoryFilter";
@@ -19,9 +21,44 @@ import { filterArray, randomize, removeDuplicates } from "../utils/arrays";
 import db from "../utils/db";
 
 const browse = ({ categories, subCategories, products, sizes, colors, brands, dataStyles, patterns, materials }) => {
+  const router = useRouter();
+  const path = router.pathname;
+  const { query } = router;
+
+  const filter = ({ search, category, brand, style }) => {
+    const path = router.pathname;
+    const { query } = router;
+
+    if (search) {
+      query.search = search;
+    }
+    if (category) {
+      query.category = category;
+    }
+    if (brand) {
+      query.brand = brand;
+    }
+    if (style) {
+      query.style = style;
+    }
+
+    router.push({
+      pathname: path,
+      query: query,
+    });
+  };
+
+  const searchHandler = (search) => {
+    if (search == "") {
+      filter({ search: {} });
+    } else {
+      filter({ search });
+    }
+  };
+
   return (
     <div className={styles.browse}>
-      <Header />
+      <Header searchHandler={searchHandler} />
       <div className={styles.browse__container}>
         <div className={styles.browse__path}>Home / Browse</div>
         <div className={styles.browse__tags}>
@@ -61,8 +98,27 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
 export default browse;
 
 export async function getServerSideProps(context) {
+  // search feature
+  const { query } = context;
+  const searchQuery = query.search || "";
+  const search =
+    searchQuery && searchQuery !== ""
+      ? {
+          name: {
+            // regex operator is used to search for strings in collection
+            $regex: searchQuery,
+            // provide some additional options in regex operator
+            // "i" searching a result without considering case sensitivity
+            $options: "i",
+          },
+        }
+      : {};
+  //
+
   await db.connectDb();
-  let productsDb = await Product.find().sort({ createAt: -1 }).lean();
+  let productsDb = await Product.find({ ...search })
+    .sort({ createAt: -1 })
+    .lean();
   let products = randomize(productsDb);
   let categories = await Category.find().lean();
   let subCategories = await SubCategory.find()

@@ -4,12 +4,12 @@ import Ad from "./Ad";
 import Top from "./Top";
 import Main from "./Main";
 
-const Header = () => {
+const Header = ({ searchHandler }) => {
   return (
     <header className={styles.header}>
       <Ad />
       <Top />
-      <Main />
+      <Main searchHandler={searchHandler} />
     </header>
   );
 };
