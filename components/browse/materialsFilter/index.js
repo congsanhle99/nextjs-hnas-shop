@@ -1,10 +1,13 @@
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 import { FaMinus } from "react-icons/fa";
 import styles from "../styles.module.scss";
 
-const MaterialsFilter = ({ materials }) => {
+const MaterialsFilter = ({ materials, materialHandler }) => {
   const [show, setShow] = useState(true);
+  const router = useRouter();
+  const existedMaterial = router.query.material || "";
 
   return (
     <div className={styles.filter}>
@@ -14,7 +17,11 @@ const MaterialsFilter = ({ materials }) => {
       {show && (
         <div className={styles.filter__materials}>
           {materials.map((material, idx) => (
-            <div className={styles.filter__materials_material} key={idx}>
+            <div
+              className={styles.filter__materials_material}
+              key={idx}
+              onClick={() => materialHandler(existedMaterial ? `${existedMaterial}_${material}` : material)}
+            >
               <input type="checkbox" name="material" id={material} />
               <label htmlFor={material}>{material.length > 10 ? `${material.substring(0, 10)}...` : material}</label>
             </div>
