@@ -4,7 +4,7 @@ import { FaMinus } from "react-icons/fa";
 import styles from "../styles.module.scss";
 import Card from "./Card";
 
-const CategoryFilter = ({ categories, subCategories }) => {
+const CategoryFilter = ({ categories, subCategories, categoryHandler }) => {
   const [show, setShow] = useState(true);
 
   return (
@@ -12,7 +12,10 @@ const CategoryFilter = ({ categories, subCategories }) => {
       <h3>
         Category <span>{show ? <FaMinus /> : <BsPlusLg />}</span>
       </h3>
-      {show && categories.map((category, idx) => <Card category={category} subCategories={subCategories} key={idx} />)}
+      {show &&
+        categories.map((category, idx) => (
+          <Card category={category} subCategories={subCategories} categoryHandler={categoryHandler} key={idx} />
+        ))}
     </div>
   );
 };

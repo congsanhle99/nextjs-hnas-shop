@@ -56,6 +56,18 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
     }
   };
 
+  const categoryHandler = (category) => {
+    filter({ category });
+  };
+
+  const brandHandler = (brand) => {
+    filter({ brand });
+  };
+
+  const styleHandler = (style) => {
+    filter({ style });
+  };
+
   return (
     <div className={styles.browse}>
       <Header searchHandler={searchHandler} />
@@ -72,11 +84,11 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
         <div className={styles.browse__store}>
           <div className={`${styles.browse__store_filters} ${styles.scrollbar}`}>
             <button className={styles.browse__clearBtn}>Clear All (3)</button>
-            <CategoryFilter categories={categories} subCategories={subCategories} />
+            <CategoryFilter categories={categories} subCategories={subCategories} categoryHandler={categoryHandler} />
             <SizesFilter sizes={sizes} />
             <ColorsFilter colors={colors} />
-            <BrandsFilter brands={brands} />
-            <StylesFilter dataStyles={dataStyles} />
+            <BrandsFilter brands={brands} brandHandler={brandHandler} />
+            <StylesFilter dataStyles={dataStyles} styleHandler={styleHandler} />
             <PatternsFilter patterns={patterns} />
             <MaterialsFilter materials={materials} />
             <GenderFilter />
@@ -101,6 +113,12 @@ export async function getServerSideProps(context) {
   // search feature
   const { query } = context;
   const searchQuery = query.search || "";
+  const categoryQuery = query.category || "";
+  const brandQuery = query.brand || "";
+  const styleQuery = query.style?.split("_") || "";
+  const styleRegex = `^${styleQuery[0]}`;
+  const styleSearchRegex = createRegex(styleQuery, styleRegex);
+
   const search =
     searchQuery && searchQuery !== ""
       ? {
@@ -113,10 +131,36 @@ export async function getServerSideProps(context) {
           },
         }
       : {};
+
+  const category = categoryQuery && categoryQuery !== "" ? { category: categoryQuery } : {};
+
+  const brand = brandQuery && brandQuery !== "" ? { brand: brandQuery } : {};
+
+  const style =
+    styleQuery && styleQuery !== ""
+      ? {
+          "details.value": {
+            // regex operator is used to search for strings in collection
+            $regex: styleSearchRegex,
+            // provide some additional options in regex operator
+            // "i" searching a result without considering case sensitivity
+            $options: "i",
+          },
+        }
+      : {};
+
+  function createRegex(data, styleRegex) {
+    if (data.length > 1) {
+      for (let i = 1; i < data.length; i++) {
+        styleRegex += `|^${data[i]}`;
+      }
+    }
+    return styleRegex;
+  }
   //
 
   await db.connectDb();
-  let productsDb = await Product.find({ ...search })
+  let productsDb = await Product.find({ ...search, ...category, ...brand, ...style })
     .sort({ createAt: -1 })
     .lean();
   let products = randomize(productsDb);
@@ -127,10 +171,10 @@ export async function getServerSideProps(context) {
       model: Category,
     })
     .lean();
-  let colors = await Product.find().distinct("subProducts.color.color");
-  let brandsDb = await Product.find().distinct("brand");
-  let sizes = await Product.find().distinct("subProducts.sizes.size");
-  let details = await Product.find().distinct("details");
+  let colors = await Product.find({ ...category }).distinct("subProducts.color.color");
+  let brandsDb = await Product.find({ ...category }).distinct("brand");
+  let sizes = await Product.find({ ...category }).distinct("subProducts.sizes.size");
+  let details = await Product.find({ ...category }).distinct("details");
   let stylesDb = filterArray(details, "Style");
   let patternsDb = filterArray(details, "Pattern Type");
   let materialsDb = filterArray(details, "Material");
@@ -138,7 +182,6 @@ export async function getServerSideProps(context) {
   let patterns = removeDuplicates(patternsDb);
   let materials = removeDuplicates(materialsDb);
   let brands = removeDuplicates(brandsDb);
-
   db.disconnectDb();
 
   return {
