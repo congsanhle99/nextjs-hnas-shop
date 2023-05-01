@@ -5,10 +5,10 @@ import { BsPlusLg } from "react-icons/bs";
 import { FaMinus } from "react-icons/fa";
 import styles from "../styles.module.scss";
 
-const BrandsFilter = ({ brands, brandHandler }) => {
+const BrandsFilter = ({ brands, brandHandler, replaceQuery }) => {
   const [show, setShow] = useState(true);
   const router = useRouter();
-  const existedBrand = router.query.brand || "";
+  // const existedBrand = router.query.brand || "";
 
   return (
     <div className={styles.filter}>
@@ -17,15 +17,20 @@ const BrandsFilter = ({ brands, brandHandler }) => {
       </h3>
       {show && (
         <div className={styles.filter__brands}>
-          {brands.map((brand, idx) => (
-            <button
-              className={styles.filter__brands_brand}
-              key={idx}
-              onClick={() => brandHandler(existedBrand ? `${existedBrand}_${brand}` : brand)}
-            >
-              <img src={`../../../images/brands/${brand}.png`} alt="" />
-            </button>
-          ))}
+          {brands.map((brand, idx) => {
+            const check = replaceQuery("brand", brand);
+            return (
+              <button
+                className={`${styles.filter__brands_brand} ${check.active ? styles.activeFilter : ""}`}
+                key={idx}
+                onClick={() => {
+                  brandHandler(check.result);
+                }}
+              >
+                <img src={`../../../images/brands/${brand}.png`} alt="" />
+              </button>
+            );
+          })}
         </div>
       )}
     </div>
