@@ -136,11 +136,11 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
 
   function replaceQuery(queryName, value) {
     const existedQuery = router.query[queryName];
-    console.log("existedQuery:", existedQuery);
+    // console.log("existedQuery:", existedQuery);
     const valueCheck = existedQuery?.search(value);
-    console.log("valueCheck:", valueCheck);
+    // console.log("valueCheck:", valueCheck);
     const _check = existedQuery?.search(`_${value}`);
-    console.log("_check:", _check);
+    // console.log("_check:", _check);
     const result = "";
 
     if (existedQuery) {
@@ -186,12 +186,12 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
             <button className={styles.browse__clearBtn}>Clear All (3)</button>
             <CategoryFilter categories={categories} subCategories={subCategories} categoryHandler={categoryHandler} />
             <SizesFilter sizes={sizes} sizeHandler={sizeHandler} />
-            <ColorsFilter colors={colors} colorHandler={colorHandler} />
+            <ColorsFilter colors={colors} colorHandler={colorHandler} replaceQuery={replaceQuery} />
             <BrandsFilter brands={brands} brandHandler={brandHandler} replaceQuery={replaceQuery} />
-            <StylesFilter dataStyles={dataStyles} styleHandler={styleHandler} />
-            <PatternsFilter patterns={patterns} patternHandler={patternHandler} />
-            <MaterialsFilter materials={materials} materialHandler={materialHandler} />
-            <GenderFilter genderHandler={genderHandler} />
+            <StylesFilter dataStyles={dataStyles} styleHandler={styleHandler} replaceQuery={replaceQuery} />
+            <PatternsFilter patterns={patterns} patternHandler={patternHandler} replaceQuery={replaceQuery} />
+            <MaterialsFilter materials={materials} materialHandler={materialHandler} replaceQuery={replaceQuery} />
+            <GenderFilter genderHandler={genderHandler} replaceQuery={replaceQuery} />
           </div>
           <div className={styles.browse__store_products_wrap}>
             <HeadingFilter priceHandler={priceHandler} multiPriceHandler={multiPriceHandler} />

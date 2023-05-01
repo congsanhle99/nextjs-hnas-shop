@@ -4,7 +4,7 @@ import { BsPlusLg } from "react-icons/bs";
 import { FaMinus } from "react-icons/fa";
 import styles from "../styles.module.scss";
 
-const MaterialsFilter = ({ materials, materialHandler }) => {
+const MaterialsFilter = ({ materials, materialHandler, replaceQuery }) => {
   const [show, setShow] = useState(true);
   const router = useRouter();
   const existedMaterial = router.query.material || "";
@@ -16,16 +16,20 @@ const MaterialsFilter = ({ materials, materialHandler }) => {
       </h3>
       {show && (
         <div className={styles.filter__materials}>
-          {materials.map((material, idx) => (
-            <div
-              className={styles.filter__materials_material}
-              key={idx}
-              onClick={() => materialHandler(existedMaterial ? `${existedMaterial}_${material}` : material)}
-            >
-              <input type="checkbox" name="material" id={material} />
-              <label htmlFor={material}>{material.length > 10 ? `${material.substring(0, 10)}...` : material}</label>
-            </div>
-          ))}
+          {materials.map((material, idx) => {
+            const check = replaceQuery("material", material);
+            return (
+              <label
+                htmlFor={material}
+                className={styles.filter__materials_material}
+                key={idx}
+                onClick={() => materialHandler(check.result)}
+              >
+                <input type="checkbox" name="material" id={material} checked={check.active} />
+                <label htmlFor={material}>{material.length > 10 ? `${material.substring(0, 10)}...` : material}</label>
+              </label>
+            );
+          })}
         </div>
       )}
     </div>

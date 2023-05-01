@@ -1,13 +1,10 @@
-import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 import { FaMinus } from "react-icons/fa";
 import styles from "../styles.module.scss";
 
-const ColorsFilter = ({ colors, colorHandler }) => {
+const ColorsFilter = ({ colors, colorHandler, replaceQuery }) => {
   const [show, setShow] = useState(true);
-  const router = useRouter();
-  const existedColor = router.query.color || "";
 
   return (
     <div className={styles.filter}>
@@ -16,13 +13,17 @@ const ColorsFilter = ({ colors, colorHandler }) => {
       </h3>
       {show && (
         <div className={styles.filter__colors}>
-          {colors.map((color, idx) => (
-            <button
-              style={{ background: `${color}` }}
-              key={color}
-              onClick={() => colorHandler(existedColor ? `${existedColor}_${color}` : color)}
-            ></button>
-          ))}
+          {colors.map((color, idx) => {
+            const check = replaceQuery("color", color);
+            return (
+              <button
+                style={{ background: `${color}` }}
+                key={color}
+                className={check.active ? styles.activeFilterColor : ""}
+                onClick={() => colorHandler(check.result)}
+              ></button>
+            );
+          })}
         </div>
       )}
     </div>

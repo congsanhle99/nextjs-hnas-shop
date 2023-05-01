@@ -98,11 +98,6 @@
         outline: 1px solid #000;
         outline-offset: 2px;
       }
-
-      &:focus {
-        outline: 1px solid #000;
-        outline-offset: 2px;
-      }
     }
   }
   //
@@ -234,4 +229,9 @@
 
 .activeFilter {
   border: 1px solid #000;
+}
+
+.activeFilterColor {
+  outline: 1px solid #000;
+  outline-offset: 2px;
 }

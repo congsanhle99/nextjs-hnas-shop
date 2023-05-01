@@ -4,7 +4,7 @@ import { BsPlusLg } from "react-icons/bs";
 import { FaMinus } from "react-icons/fa";
 import styles from "../styles.module.scss";
 
-const StylesFilter = ({ dataStyles, styleHandler }) => {
+const StylesFilter = ({ dataStyles, styleHandler, replaceQuery }) => {
   const [show, setShow] = useState(true);
   const router = useRouter();
   const existedStyle = router.query.style || "";
@@ -16,16 +16,20 @@ const StylesFilter = ({ dataStyles, styleHandler }) => {
       </h3>
       {show && (
         <div className={styles.filter__styles}>
-          {dataStyles.map((style, idx) => (
-            <div
-              className={styles.filter__styles_style}
-              key={idx}
-              onClick={() => styleHandler(existedStyle ? `${existedStyle}_${style}` : style)}
-            >
-              <input type="checkbox" name="style" id={style} />
-              <label htmlFor={style}>{style}</label>
-            </div>
-          ))}
+          {dataStyles.map((style, idx) => {
+            const check = replaceQuery("style", style);
+            return (
+              <label
+                htmlFor={style}
+                className={styles.filter__styles_style}
+                key={idx}
+                onClick={() => styleHandler(check.result)}
+              >
+                <input type="checkbox" name="style" id={style} checked={check.active} />
+                <label htmlFor={style}>{style}</label>
+              </label>
+            );
+          })}
         </div>
       )}
     </div>
