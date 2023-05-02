@@ -7,11 +7,19 @@ import { BsCheckLg } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
 import styles from "./styles.module.scss";
 
-const HeadingFilter = ({ priceHandler, multiPriceHandler, shippingHandler, replaceQuery, ratingHandler }) => {
+const HeadingFilter = ({
+  priceHandler,
+  multiPriceHandler,
+  shippingHandler,
+  replaceQuery,
+  ratingHandler,
+  sortHandler,
+}) => {
   const router = useRouter();
   const [show, setShow] = useState(false);
   const check = replaceQuery("shipping", router.query.shipping == "0" ? false : "0");
   const checkRating = replaceQuery("rating", "4");
+  const sortQuery = router.query.sort || "";
 
   return (
     <div className={styles.filters}>
@@ -109,34 +117,20 @@ const HeadingFilter = ({ priceHandler, multiPriceHandler, shippingHandler, repla
           onMouseLeave={() => setShow(false)}
         >
           <button>
-            Recommend
+            {sortQuery == "" ? "Recommend" : sortingOptions.find((x) => x.value === sortQuery).name}
             <div style={{ transform: `${show ? "rotate(180deg)" : "rotate(0)"}` }}>
               <IoIosArrowDown />
             </div>
           </button>
           <ul style={{ transform: `${show ? "scale3d(1,1,1)" : "scale3d(1,0,1)"}` }}>
-            <li>
-              <Link href="">
-                <b>
-                  Recommend <BsCheckLg />
-                </b>
-              </Link>
-            </li>
-            <li>
-              <Link href="">Most Popular</Link>
-            </li>
-            <li>
-              <Link href="">New Arrivals</Link>
-            </li>
-            <li>
-              <Link href="">Top Reviewed</Link>
-            </li>
-            <li>
-              <Link href="">Price (low to high)</Link>
-            </li>
-            <li>
-              <Link href="">Price (high to low)</Link>
-            </li>
+            {sortingOptions.map((option, idx) => (
+              <li key={idx} onClick={() => sortHandler(option.value)}>
+                <a>
+                  {sortQuery == option.value ? <b>{option.name}</b> : option.name}
+                  {sortQuery == option.value ? <BsCheckLg /> : ""}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
@@ -145,3 +139,34 @@ const HeadingFilter = ({ priceHandler, multiPriceHandler, shippingHandler, repla
 };
 
 export default HeadingFilter;
+
+const sortingOptions = [
+  {
+    name: "Recommend",
+    value: "",
+  },
+  {
+    name: "Most Popular",
+    value: "popular",
+  },
+  {
+    name: "New Arrivals",
+    value: "newest",
+  },
+  {
+    name: "Top Selling",
+    value: "topSelling",
+  },
+  {
+    name: "Top Reviewed",
+    value: "topReviewed",
+  },
+  {
+    name: "Price (low to high)",
+    value: "priceLowToHight",
+  },
+  {
+    name: "Price (high to low)",
+    value: "priceHighToLow",
+  },
+];
