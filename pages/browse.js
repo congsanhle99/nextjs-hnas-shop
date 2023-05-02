@@ -2,7 +2,7 @@
 import { Pagination } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import BrandsFilter from "../components/browse/brandsFilter";
 import CategoryFilter from "../components/browse/categoryFilter";
 import ColorsFilter from "../components/browse/colorsFilter";
@@ -227,24 +227,54 @@ const browse = ({
     };
   }
 
+  //
+  const [scrollY, setScrollY] = useState(0);
+  const [height, setHeight] = useState(0);
+  const headerRef = useRef(null);
+  const el = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    setHeight(headerRef.current?.offsetHeight + el.current?.offsetHeight);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  //
+
   return (
     <div className={styles.browse}>
-      <Header searchHandler={searchHandler} />
+      <div ref={headerRef}>
+        <Header searchHandler={searchHandler} />
+      </div>
       <div className={styles.browse__container}>
-        <div className={styles.browse__path}>Home / Browse</div>
-        <div className={styles.browse__tags}>
-          {categories.map((c) => (
-            <Link href="" key={c._id}>
-              <a> {c.name}</a>
-            </Link>
-          ))}
+        <div ref={el}>
+          <div className={styles.browse__path}>Home / Browse</div>
+          <div className={styles.browse__tags}>
+            {categories.map((c) => (
+              <Link href="" key={c._id}>
+                <a> {c.name}</a>
+              </Link>
+            ))}
+          </div>
         </div>
 
-        <div className={styles.browse__store}>
+        <div className={`${styles.browse__store} ${scrollY >= height ? styles.fixed : ""}`}>
           <div className={`${styles.browse__store_filters} ${styles.scrollbar}`}>
-            <button className={styles.browse__clearBtn}>Clear All (3)</button>
+            {Object.keys(router.query).length > 0 ? (
+              <button className={styles.browse__clearBtn} onClick={() => router.push("/browse")}>
+                Clear All ({Object.keys(router.query).length})
+              </button>
+            ) : (
+              ""
+            )}
             <CategoryFilter categories={categories} subCategories={subCategories} categoryHandler={categoryHandler} />
-            <SizesFilter sizes={sizes} sizeHandler={sizeHandler} />
+            <SizesFilter sizes={sizes} sizeHandler={sizeHandler} replaceQuery={replaceQuery} />
             <ColorsFilter colors={colors} colorHandler={colorHandler} replaceQuery={replaceQuery} />
             <BrandsFilter brands={brands} brandHandler={brandHandler} replaceQuery={replaceQuery} />
             <StylesFilter dataStyles={dataStyles} styleHandler={styleHandler} replaceQuery={replaceQuery} />
@@ -294,7 +324,7 @@ export async function getServerSideProps(context) {
   const shippingQuery = query.shipping || 0;
   const ratingQuery = query.rating || "";
   const sortQuery = query.sort || "";
-  const pageSize = 2;
+  const pageSize = 10;
   const page = query.page || 1;
   // const brandQuery = query.brand || "";
   // --- mul filter stye
@@ -342,10 +372,7 @@ export async function getServerSideProps(context) {
     styleQuery && styleQuery !== ""
       ? {
           "details.value": {
-            // regex operator is used to search for strings in collection
             $regex: styleSearchRegex,
-            // provide some additional options in regex operator
-            // "i" searching a result without considering case sensitivity
             $options: "i",
           },
         }

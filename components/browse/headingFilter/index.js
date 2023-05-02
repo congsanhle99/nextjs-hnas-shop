@@ -117,7 +117,7 @@ const HeadingFilter = ({
           onMouseLeave={() => setShow(false)}
         >
           <button>
-            {sortQuery == "" ? "Recommend" : sortingOptions.find((x) => x.value === sortQuery).name}
+            {sortQuery == "" ? "Recommend" : sortingOptions.find((x) => x.value === sortQuery)?.name}
             <div style={{ transform: `${show ? "rotate(180deg)" : "rotate(0)"}` }}>
               <IoIosArrowDown />
             </div>
