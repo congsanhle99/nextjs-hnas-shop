@@ -50,6 +50,7 @@ const browse = ({
     price,
     shipping,
     rating,
+    sort,
     page,
   }) => {
     const path = router.pathname;
@@ -90,6 +91,9 @@ const browse = ({
     }
     if (rating) {
       query.rating = rating;
+    }
+    if (sort) {
+      query.sort = sort;
     }
     if (page) {
       query.page = page;
@@ -174,6 +178,14 @@ const browse = ({
     filter({ page });
   };
 
+  const sortHandler = (sort) => {
+    if (sort == "") {
+      filter({ sort: {} });
+    } else {
+      filter({ sort });
+    }
+  };
+
   function checkChecked(queryName, value) {
     if (router.query[queryName]?.search(value) !== -1) {
       return true;
@@ -247,6 +259,7 @@ const browse = ({
               shippingHandler={shippingHandler}
               replaceQuery={replaceQuery}
               ratingHandler={ratingHandler}
+              sortHandler={sortHandler}
             />
             <div className={styles.browse__store_products}>
               {products.map((product) => (
@@ -280,6 +293,7 @@ export async function getServerSideProps(context) {
   const priceQuery = query.price?.split("_") || "";
   const shippingQuery = query.shipping || 0;
   const ratingQuery = query.rating || "";
+  const sortQuery = query.sort || "";
   const pageSize = 2;
   const page = query.page || 1;
   // const brandQuery = query.brand || "";
@@ -418,9 +432,26 @@ export async function getServerSideProps(context) {
     ratingQuery && ratingQuery !== ""
       ? {
           rating: {
-            $gte: ratingQuery,
+            $gte: Number(ratingQuery),
           },
         }
+      : {};
+
+  const sort =
+    sortQuery == ""
+      ? {}
+      : sortQuery == "popular"
+      ? { rating: -1, "subProducts.sold": -1 }
+      : sortQuery == "newest"
+      ? { createAt: -1 }
+      : sortQuery == "topSelling"
+      ? { "subProducts.sold": -1 }
+      : sortQuery == "topReviewed"
+      ? { rating: -1 }
+      : sortQuery == "priceHighToLow"
+      ? { "subProducts.sizes.price": -1 }
+      : sortQuery == "priceLowToHigh"
+      ? { "subProducts.sizes.price": 1 }
       : {};
 
   function createRegex(data, styleRegex) {
@@ -450,9 +481,9 @@ export async function getServerSideProps(context) {
   })
     .skip(pageSize * (page - 1))
     .limit(pageSize)
-    .sort({ createAt: -1 })
+    .sort(sort)
     .lean();
-  let products = randomize(productsDb);
+  let products = sortQuery && sortQuery !== "" ? productsDb : randomize(productsDb);
   let categories = await Category.find().lean();
   let subCategories = await SubCategory.find()
     .populate({
