@@ -22,7 +22,31 @@ const Sizes = ({ sizes, product, setProduct }) => {
   return (
     <>
       <div className={styles.header}>Sizes / Quantity / Price</div>
-      <button type="reset" className={styles.click_btn} onClick={() => setNoSize((prev) => !prev)}>
+      <button
+        type="reset"
+        className={styles.click_btn}
+        onClick={() => {
+          if (!noSize) {
+            let data = sizes.map((item) => {
+              return {
+                qty: item.qty,
+                price: item.price,
+              };
+            });
+            setProduct({ ...product, sizes: data });
+          } else {
+            let data = sizes.map((item) => {
+              return {
+                sizes: item.size || "",
+                qty: item.qty,
+                price: item.price,
+              };
+            });
+            setProduct({ ...product, sizes: data });
+          }
+          setNoSize((prev) => !prev);
+        }}
+      >
         {noSize ? "Click if Product has size " : "Click if Product has NO size"}
       </button>
       {sizes
