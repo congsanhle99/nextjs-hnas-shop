@@ -48,24 +48,26 @@ const create = ({ parents, categories }) => {
   const [product, setProduct] = useState(initialState);
   const [subs, setSubs] = useState([]);
 
-  // useEffect(() => {
-  //   const getParentData = async () => {
-  //     const { data } = await axios.post(`/api/product/${product.parent || ""}`);
-  //     if (data) {
-  //       setProduct({
-  //         ...product,
-  //         name: data.name,
-  //         description: data.description,
-  //         brand: data.brand,
-  //         category: data.category,
-  //         subCategories: data.subCategories,
-  //         questions: [],
-  //         details: [],
-  //       });
-  //     }
-  //   };
-  //   getParentData();
-  // }, [product.parent]);
+  useEffect(() => {
+    const getParentData = async () => {
+      if (product.parent) {
+        const { data } = await axios.post(`/api/product/${product.parent || ""}`);
+        if (data) {
+          setProduct({
+            ...product,
+            name: data.name,
+            description: data.description,
+            brand: data.brand,
+            category: data.category,
+            subCategories: data.subCategories,
+            questions: [],
+            details: [],
+          });
+        }
+      }
+    };
+    getParentData();
+  }, [product.parent]);
 
   useEffect(() => {
     async function getSubs() {
@@ -89,7 +91,7 @@ const create = ({ parents, categories }) => {
 export default create;
 
 export async function getServerSideProps(context) {
-  await db.connectDb();
+  db.connectDb();
   const results = await Product.find().select("name subProducts").lean();
   const categories = await Category.find().lean();
 
