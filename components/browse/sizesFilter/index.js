@@ -1,11 +1,14 @@
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 import { FaMinus } from "react-icons/fa";
 import styles from "../styles.module.scss";
 import Size from "./Size";
 
-const SizesFilter = ({ sizes }) => {
+const SizesFilter = ({ sizes, sizeHandler }) => {
   const [show, setShow] = useState(true);
+  const router = useRouter();
+  const existedSize = router.query.size || "";
 
   return (
     <div className={styles.filter}>
@@ -15,7 +18,9 @@ const SizesFilter = ({ sizes }) => {
       {show && (
         <div className={styles.filter__sizes}>
           {sizes.map((size, idx) => (
-            <Size size={size} key={idx} />
+            <div onClick={() => sizeHandler(existedSize ? `${existedSize}_${size}` : size)} key={idx}>
+              <Size size={size} />
+            </div>
           ))}
         </div>
       )}

@@ -1,4 +1,3 @@
-import styleFunctionSx from "@mui/system/styleFunctionSx";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
@@ -21,7 +20,7 @@ const StylesFilter = ({ dataStyles, styleHandler }) => {
             <div
               className={styles.filter__styles_style}
               key={idx}
-              onClick={() => styleHandler(existedStyle ? `${existedStyle}_${styleFunctionSx}` : style)}
+              onClick={() => styleHandler(existedStyle ? `${existedStyle}_${style}` : style)}
             >
               <input type="checkbox" name="style" id={style} />
               <label htmlFor={style}>{style}</label>

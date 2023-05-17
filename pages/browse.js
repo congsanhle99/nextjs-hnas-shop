@@ -25,7 +25,7 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
   const path = router.pathname;
   const { query } = router;
 
-  const filter = ({ search, category, brand, style }) => {
+  const filter = ({ search, category, brand, style, size, color }) => {
     const path = router.pathname;
     const { query } = router;
 
@@ -40,6 +40,12 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
     }
     if (style) {
       query.style = style;
+    }
+    if (size) {
+      query.size = size;
+    }
+    if (color) {
+      query.color = color;
     }
 
     router.push({
@@ -68,6 +74,14 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
     filter({ style });
   };
 
+  const sizeHandler = (size) => {
+    filter({ size });
+  };
+
+  const colorHandler = (color) => {
+    filter({ color });
+  };
+
   return (
     <div className={styles.browse}>
       <Header searchHandler={searchHandler} />
@@ -85,8 +99,8 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
           <div className={`${styles.browse__store_filters} ${styles.scrollbar}`}>
             <button className={styles.browse__clearBtn}>Clear All (3)</button>
             <CategoryFilter categories={categories} subCategories={subCategories} categoryHandler={categoryHandler} />
-            <SizesFilter sizes={sizes} />
-            <ColorsFilter colors={colors} />
+            <SizesFilter sizes={sizes} sizeHandler={sizeHandler} />
+            <ColorsFilter colors={colors} colorHandler={colorHandler} />
             <BrandsFilter brands={brands} brandHandler={brandHandler} />
             <StylesFilter dataStyles={dataStyles} styleHandler={styleHandler} />
             <PatternsFilter patterns={patterns} />
@@ -114,10 +128,23 @@ export async function getServerSideProps(context) {
   const { query } = context;
   const searchQuery = query.search || "";
   const categoryQuery = query.category || "";
-  const brandQuery = query.brand || "";
+  // const brandQuery = query.brand || "";
+  // --- mul filter stye
   const styleQuery = query.style?.split("_") || "";
   const styleRegex = `^${styleQuery[0]}`;
   const styleSearchRegex = createRegex(styleQuery, styleRegex);
+  // --- mul filter size
+  const sizeQuery = query.size?.split("_") || "";
+  const sizeRegex = `^${sizeQuery[0]}`;
+  const sizeSearchRegex = createRegex(sizeQuery, sizeRegex);
+  // --- mul filter color
+  const colorQuery = query.color?.split("_") || "";
+  const colorRegex = `^${colorQuery[0]}`;
+  const colorSearchRegex = createRegex(colorQuery, colorRegex);
+  // --- mul filter brand
+  const brandQuery = query.brand?.split("_") || "";
+  const brandRegex = `^${brandQuery[0]}`;
+  const brandSearchRegex = createRegex(brandQuery, brandRegex);
 
   const search =
     searchQuery && searchQuery !== ""
@@ -133,8 +160,7 @@ export async function getServerSideProps(context) {
       : {};
 
   const category = categoryQuery && categoryQuery !== "" ? { category: categoryQuery } : {};
-
-  const brand = brandQuery && brandQuery !== "" ? { brand: brandQuery } : {};
+  // const brand = brandQuery && brandQuery !== "" ? { brand: brandQuery } : {};
 
   const style =
     styleQuery && styleQuery !== ""
@@ -144,6 +170,36 @@ export async function getServerSideProps(context) {
             $regex: styleSearchRegex,
             // provide some additional options in regex operator
             // "i" searching a result without considering case sensitivity
+            $options: "i",
+          },
+        }
+      : {};
+
+  const size =
+    sizeQuery && sizeQuery !== ""
+      ? {
+          "subProducts.sizes.size": {
+            $regex: sizeSearchRegex,
+            $options: "i",
+          },
+        }
+      : {};
+
+  const color =
+    colorQuery && colorQuery !== ""
+      ? {
+          "subProducts.color.color": {
+            $regex: colorSearchRegex,
+            $options: "i",
+          },
+        }
+      : {};
+
+  const brand =
+    brandQuery && brandQuery !== ""
+      ? {
+          brand: {
+            $regex: brandSearchRegex,
             $options: "i",
           },
         }
@@ -160,7 +216,7 @@ export async function getServerSideProps(context) {
   //
 
   await db.connectDb();
-  let productsDb = await Product.find({ ...search, ...category, ...brand, ...style })
+  let productsDb = await Product.find({ ...search, ...category, ...brand, ...style, ...size, ...color })
     .sort({ createAt: -1 })
     .lean();
   let products = randomize(productsDb);
