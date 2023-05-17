@@ -5,7 +5,7 @@ import AddReview from "./AddReview";
 import Table from "./Table";
 import styles from "./styles.module.scss";
 
-const Review = ({ product }) => {
+const Reviews = ({ product }) => {
   const { data: session } = useSession();
   const [rating, setRating] = useState("");
   const [reviews, setReviews] = useState(product.reviews);
@@ -53,4 +53,4 @@ const Review = ({ product }) => {
   );
 };
 
-export default Review;
+export default Reviews;

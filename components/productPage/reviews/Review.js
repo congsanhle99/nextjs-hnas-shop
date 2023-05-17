@@ -41,7 +41,7 @@ const Review = ({ review }) => {
             {review.likes && review.likes?.likes}
             <AiOutlineLike />
           </div>
-          <div className={styles.review__extra_date}>{review.updateAt.slice(0, 10)}</div>
+          <div className={styles.review__extra_date}>{review?.updateAt?.slice(0, 10)}</div>
         </div>
       </div>
     </div>

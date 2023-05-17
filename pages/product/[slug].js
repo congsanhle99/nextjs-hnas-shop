@@ -5,7 +5,7 @@ import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 import Infos from "../../components/productPage/infos";
 import MainSwiper from "../../components/productPage/mainSwiper";
-import Review from "../../components/productPage/reviews";
+import Reviews from "../../components/productPage/reviews";
 import Category from "../../models/Category";
 import Product from "../../models/Product";
 import User from "../../models/User";
@@ -33,7 +33,7 @@ export default function product({ product }) {
             <MainSwiper images={product.images} activeImg={activeImg} />
             <Infos product={product} setActiveImg={setActiveImg} />
           </div>
-          <Review product={product} />
+          <Reviews product={product} />
         </div>
       </div>
       <Footer />
@@ -105,6 +105,7 @@ export async function getServerSideProps(context) {
         percentage: 0,
       },
     ],
+    reviews: product.reviews.reverse(),
     allSizes: product.subProducts
       .map((p) => {
         return p.sizes;
