@@ -48,7 +48,7 @@ const Questions = ({ questions, product, setProduct }) => {
                 name="question"
                 placeholder="Questions"
                 min={1}
-                value={question.questions}
+                value={question.question}
                 onChange={(e) => handleQuestions(idx, e)}
               />
               <input

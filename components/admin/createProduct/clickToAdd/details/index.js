@@ -47,7 +47,6 @@ const Details = ({ details, product, setProduct }) => {
                 type="text"
                 name="name"
                 placeholder="Name"
-                min={1}
                 value={detail.name}
                 onChange={(e) => handleDetails(idx, e)}
               />
@@ -55,7 +54,6 @@ const Details = ({ details, product, setProduct }) => {
                 type="text"
                 name="value"
                 placeholder="Value"
-                min={1}
                 value={detail.value}
                 onChange={(e) => handleDetails(idx, e)}
               />
