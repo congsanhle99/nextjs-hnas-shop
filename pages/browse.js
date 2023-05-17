@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { Pagination } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
@@ -20,7 +21,18 @@ import styles from "../styles/browse.module.scss";
 import { filterArray, randomize, removeDuplicates } from "../utils/arrays";
 import db from "../utils/db";
 
-const browse = ({ categories, subCategories, products, sizes, colors, brands, dataStyles, patterns, materials }) => {
+const browse = ({
+  categories,
+  subCategories,
+  products,
+  sizes,
+  colors,
+  brands,
+  dataStyles,
+  patterns,
+  materials,
+  paginationCount,
+}) => {
   const router = useRouter();
   const path = router.pathname;
   const { query } = router;
@@ -39,6 +51,7 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
     shipping,
     rating,
     sort,
+    page,
   }) => {
     const path = router.pathname;
     const { query } = router;
@@ -81,6 +94,9 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
     }
     if (sort) {
       query.sort = sort;
+    }
+    if (page) {
+      query.page = page;
     }
 
     router.push({
@@ -156,6 +172,10 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
 
   const ratingHandler = (rating) => {
     filter({ rating });
+  };
+
+  const pageHandler = (e, page) => {
+    filter({ page });
   };
 
   const sortHandler = (sort) => {
@@ -246,6 +266,15 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
                 <ProductCard product={product} key={product._id} />
               ))}
             </div>
+            <div className={styles.pagination}>
+              <Pagination
+                count={paginationCount}
+                defaultPage={Number(router.query.page) || 1}
+                onChange={pageHandler}
+                variant="outlined"
+                color="primary"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -265,6 +294,8 @@ export async function getServerSideProps(context) {
   const shippingQuery = query.shipping || 0;
   const ratingQuery = query.rating || "";
   const sortQuery = query.sort || "";
+  const pageSize = 2;
+  const page = query.page || 1;
   // const brandQuery = query.brand || "";
   // --- mul filter stye
   const styleQuery = query.style?.split("_") || "";
@@ -448,6 +479,8 @@ export async function getServerSideProps(context) {
     ...shipping,
     ...rating,
   })
+    .skip(pageSize * (page - 1))
+    .limit(pageSize)
     .sort(sort)
     .lean();
   let products = sortQuery && sortQuery !== "" ? productsDb : randomize(productsDb);
@@ -469,6 +502,20 @@ export async function getServerSideProps(context) {
   let patterns = removeDuplicates(patternsDb);
   let materials = removeDuplicates(materialsDb);
   let brands = removeDuplicates(brandsDb);
+  let totalProduct = await Product.countDocuments({
+    ...search,
+    ...category,
+    ...brand,
+    ...style,
+    ...size,
+    ...color,
+    ...pattern,
+    ...material,
+    ...gender,
+    ...price,
+    ...shipping,
+    ...rating,
+  });
   db.disconnectDb();
 
   return {
@@ -482,6 +529,7 @@ export async function getServerSideProps(context) {
       dataStyles: styles,
       patterns,
       materials,
+      paginationCount: Math.ceil(totalProduct / pageSize),
     },
   };
 }
