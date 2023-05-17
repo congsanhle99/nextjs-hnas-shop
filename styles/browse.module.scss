@@ -88,3 +88,20 @@
   justify-content: flex-end;
   padding: 2rem;
 }
+
+.fixed {
+  position: relative;
+  min-height: 100vh;
+
+  .browse__store_filters {
+    position: fixed;
+    top: 1rem;
+    width: 300px;
+    margin-right: 6px;
+  }
+
+  .browse__store_products_wrap {
+    position: absolute;
+    left: 316px;
+  }
+}
