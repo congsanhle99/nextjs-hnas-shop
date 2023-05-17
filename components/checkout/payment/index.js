@@ -3,12 +3,14 @@ import React from "react";
 import { paymentMethods } from "../../../data/paymentMethods";
 import styles from "./styles.module.scss";
 
-const Payment = ({ paymentMethod, setPaymentMethod }) => {
+const Payment = ({ paymentMethod, setPaymentMethod, profile }) => {
   return (
     <div className={styles.payment}>
-      <div className={styles.header}>
-        <h3>Payment Method</h3>
-      </div>
+      {!profile && (
+        <div className={styles.header}>
+          <h3>Payment Method</h3>
+        </div>
+      )}
       {paymentMethods.map((pm) => (
         <label
           htmlFor={pm.id}
