@@ -1,8 +1,13 @@
 import Link from "next/link";
 import React from "react";
+import BrandsFilter from "../components/browse/brandsFilter";
 import CategoryFilter from "../components/browse/categoryFilter";
 import ColorsFilter from "../components/browse/colorsFilter";
+import GenderFilter from "../components/browse/genderFilter";
+import MaterialsFilter from "../components/browse/materialsFilter";
+import PatternsFilter from "../components/browse/patternsFilter";
 import SizesFilter from "../components/browse/sizesFilter";
+import StylesFilter from "../components/browse/stylesFilter";
 import Header from "../components/header/Header";
 import ProductCard from "../components/productCard";
 import Category from "../models/Category";
@@ -12,9 +17,7 @@ import styles from "../styles/browse.module.scss";
 import { filterArray, randomize, removeDuplicates } from "../utils/arrays";
 import db from "../utils/db";
 
-const browse = ({ categories, subCategories, products, sizes, colors }) => {
-  console.log("categories: ", categories);
-  console.log("products: ", products);
+const browse = ({ categories, subCategories, products, sizes, colors, brands, dataStyles, patterns, materials }) => {
   return (
     <div className={styles.browse}>
       <Header />
@@ -34,6 +37,11 @@ const browse = ({ categories, subCategories, products, sizes, colors }) => {
             <CategoryFilter categories={categories} subCategories={subCategories} />
             <SizesFilter sizes={sizes} />
             <ColorsFilter colors={colors} />
+            <BrandsFilter brands={brands} />
+            <StylesFilter dataStyles={dataStyles} />
+            <PatternsFilter patterns={patterns} />
+            <MaterialsFilter materials={materials} />
+            <GenderFilter />
           </div>
           <div className={styles.browse__store_products_wrap}>
             <div className={styles.browse__store_products}>
@@ -71,8 +79,7 @@ export async function getServerSideProps(context) {
   let styles = removeDuplicates(stylesDb);
   let patterns = removeDuplicates(patternsDb);
   let materials = removeDuplicates(materialsDb);
-
-  console.log(randomize(sizes));
+  let brands = removeDuplicates(brandsDb);
 
   db.disconnectDb();
 
@@ -83,6 +90,10 @@ export async function getServerSideProps(context) {
       products: JSON.parse(JSON.stringify(products)),
       sizes,
       colors,
+      brands,
+      dataStyles: styles,
+      patterns,
+      materials,
     },
   };
 }
