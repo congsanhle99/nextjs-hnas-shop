@@ -7,9 +7,11 @@ import { BsCheckLg } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
 import styles from "./styles.module.scss";
 
-const HeadingFilter = ({ priceHandler, multiPriceHandler }) => {
+const HeadingFilter = ({ priceHandler, multiPriceHandler, shippingHandler, replaceQuery, ratingHandler }) => {
   const router = useRouter();
   const [show, setShow] = useState(false);
+  const check = replaceQuery("shipping", router.query.shipping == "0" ? false : "0");
+  const checkRating = replaceQuery("rating", "4");
 
   return (
     <div className={styles.filters}>
@@ -84,13 +86,13 @@ const HeadingFilter = ({ priceHandler, multiPriceHandler }) => {
         </Tooltip>
       </div>
 
-      <div className={styles.filters__shipping}>
-        <input type="checkbox" name="shipping" id="shipping" />
+      <div className={styles.filters__shipping} onClick={() => shippingHandler(check.result)}>
+        <input type="checkbox" name="shipping" id="shipping" checked={router.query.shipping == "0"} />
         <label htmlFor="shipping">Free Shipping</label>
       </div>
 
-      <div className={styles.filters__rating}>
-        <input type="checkbox" name="rating" id="rating" />
+      <div className={styles.filters__rating} onClick={() => ratingHandler(checkRating.result)}>
+        <input type="checkbox" name="rating" id="rating" checked={router.query.rating == "4"} />
         <label htmlFor="rating">
           <AiTwotoneStar />
           <AiTwotoneStar />

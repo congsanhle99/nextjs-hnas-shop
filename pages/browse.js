@@ -25,7 +25,20 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
   const path = router.pathname;
   const { query } = router;
 
-  const filter = ({ search, category, brand, style, size, color, pattern, material, gender, price }) => {
+  const filter = ({
+    search,
+    category,
+    brand,
+    style,
+    size,
+    color,
+    pattern,
+    material,
+    gender,
+    price,
+    shipping,
+    rating,
+  }) => {
     const path = router.pathname;
     const { query } = router;
 
@@ -58,6 +71,12 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
     }
     if (price) {
       query.price = price;
+    }
+    if (shipping) {
+      query.shipping = shipping;
+    }
+    if (rating) {
+      query.rating = rating;
     }
 
     router.push({
@@ -127,6 +146,14 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
     filter({ price: `${min}_${max}` });
   };
 
+  const shippingHandler = (shipping) => {
+    filter({ shipping });
+  };
+
+  const ratingHandler = (rating) => {
+    filter({ rating });
+  };
+
   function checkChecked(queryName, value) {
     if (router.query[queryName]?.search(value) !== -1) {
       return true;
@@ -194,7 +221,13 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
             <GenderFilter genderHandler={genderHandler} replaceQuery={replaceQuery} />
           </div>
           <div className={styles.browse__store_products_wrap}>
-            <HeadingFilter priceHandler={priceHandler} multiPriceHandler={multiPriceHandler} />
+            <HeadingFilter
+              priceHandler={priceHandler}
+              multiPriceHandler={multiPriceHandler}
+              shippingHandler={shippingHandler}
+              replaceQuery={replaceQuery}
+              ratingHandler={ratingHandler}
+            />
             <div className={styles.browse__store_products}>
               {products.map((product) => (
                 <ProductCard product={product} key={product._id} />
@@ -216,6 +249,8 @@ export async function getServerSideProps(context) {
   const categoryQuery = query.category || "";
   const genderQuery = query.gender || "";
   const priceQuery = query.price?.split("_") || "";
+  const shippingQuery = query.shipping || 0;
+  const ratingQuery = query.rating || "";
   // const brandQuery = query.brand || "";
   // --- mul filter stye
   const styleQuery = query.style?.split("_") || "";
@@ -341,6 +376,22 @@ export async function getServerSideProps(context) {
         }
       : {};
 
+  const shipping =
+    shippingQuery && shippingQuery == "0"
+      ? {
+          shipping: 0,
+        }
+      : {};
+
+  const rating =
+    ratingQuery && ratingQuery !== ""
+      ? {
+          rating: {
+            $gte: ratingQuery,
+          },
+        }
+      : {};
+
   function createRegex(data, styleRegex) {
     if (data.length > 1) {
       for (let i = 1; i < data.length; i++) {
@@ -363,6 +414,8 @@ export async function getServerSideProps(context) {
     ...material,
     ...gender,
     ...price,
+    ...shipping,
+    ...rating,
   })
     .sort({ createAt: -1 })
     .lean();
