@@ -7,7 +7,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import styles from "./styles.module.scss";
 
 const HeadingFilter = () => {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
 
   return (
     <div className={styles.filters}>
@@ -19,27 +19,27 @@ const HeadingFilter = () => {
 
       <div className={styles.filers__priceBtns}>
         <Tooltip title={<h2>Check out products under 10$</h2>} placement="top" arrow>
-          <button>
+          <button className={styles.tooltip_btn}>
             <span style={{ height: "10%" }}></span>
           </button>
         </Tooltip>
         <Tooltip title={<h2>Check out products between 10$ and 50$</h2>} placement="top" arrow>
-          <button>
-            <span></span>
+          <button className={styles.tooltip_btn}>
+            <span style={{ height: "25%" }}></span>
           </button>
         </Tooltip>
         <Tooltip title={<h2>Check out products between 50$ and 100$</h2>} placement="top" arrow>
-          <button>
+          <button className={styles.tooltip_btn}>
             <span style={{ height: "50%" }}></span>
           </button>
         </Tooltip>
         <Tooltip title={<h2>Check out products between 100$ and 500$</h2>} placement="top" arrow>
-          <button>
+          <button className={styles.tooltip_btn}>
             <span style={{ height: "75%" }}></span>
           </button>
         </Tooltip>
         <Tooltip title={<h2>Check out products for more than 500$</h2>} placement="top" arrow>
-          <button>
+          <button className={styles.tooltip_btn}>
             <span style={{ height: "100%" }}></span>
           </button>
         </Tooltip>
