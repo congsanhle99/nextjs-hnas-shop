@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import Colors from "../../../../components/admin/createProduct/colors";
 import Images from "../../../../components/admin/createProduct/images";
+import Style from "../../../../components/admin/createProduct/style";
 import Layout from "../../../../components/admin/layout";
 import AdminInput from "../../../../components/inputs/adminInput";
 import MultipleSelect from "../../../../components/selects/MultipleSelect";
@@ -155,7 +156,7 @@ const create = ({ parents, categories }) => {
               )}
             </div>
             <Colors name="color" product={product} setProduct={setProduct} colorImage={colorImage} />
-            {/* <Style name="styleInput" product={product} setProduct={setProduct} colorImage={colorImage} /> */}
+            <Style name="styleInput" product={product} setProduct={setProduct} colorImage={colorImage} />
             <SingularSelect
               name="parent"
               value={product.parent}
