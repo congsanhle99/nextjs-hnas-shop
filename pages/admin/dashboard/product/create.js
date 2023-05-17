@@ -3,6 +3,7 @@
 import axios from "axios";
 import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import Sizes from "../../../../components/admin/createProduct/clickToAdd/Sizes";
 import Details from "../../../../components/admin/createProduct/clickToAdd/details";
@@ -16,8 +17,10 @@ import MultipleSelect from "../../../../components/selects/MultipleSelect";
 import SingularSelect from "../../../../components/selects/SingularSelect";
 import Category from "../../../../models/Category";
 import Product from "../../../../models/Product";
+import { showDialog } from "../../../../store/DialogSlice";
 import styles from "../../../../styles/adminProduct.module.scss";
 import db from "../../../../utils/db";
+import { validateCreateProduct } from "../../../../utils/validation";
 
 const initialState = {
   name: "",
@@ -63,12 +66,12 @@ const create = ({ parents, categories }) => {
   const [images, setImages] = useState([]);
   const [description_images, setDescription_images] = useState("");
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getParentData = async () => {
       if (product.parent) {
         const { data } = await axios.get(`/api/product/${product.parent}`);
-        console.log("data::::::", data);
         if (data) {
           setProduct({
             ...product,
@@ -105,19 +108,32 @@ const create = ({ parents, categories }) => {
       .max(300, "Product name must between 10 and 300 characters."),
     brand: Yup.string().required("Please add a brand!"),
     category: Yup.string().required("Please select a category!"),
-    subCategories: Yup.array().min(1, "Please select at least one sub Category!"),
+    // subCategories: Yup.array().min(1, "Please select at least one sub Category!"),
     sku: Yup.string().required("Please add a sku/number!"),
     color: Yup.string().required("Please add a color!"),
     description: Yup.string().required("Please add a description!"),
   });
-  const createProduct = async () => {};
+
+  const createProduct = async () => {
+    const test = validateCreateProduct(product, images);
+    if (test == "valid") {
+      createProductHandler();
+    } else {
+      dispatch(
+        showDialog({
+          header: "Please follow our instructions!",
+          msgs: test,
+        })
+      );
+    }
+  };
+
+  const createProductHandler = async () => {};
 
   const handleChange = (e) => {
     const { value, name } = e.target;
     setProduct({ ...product, [name]: value });
   };
-
-  console.log("product=== ", product);
 
   return (
     <Layout>
@@ -220,11 +236,9 @@ const create = ({ parents, categories }) => {
               
              
             */}
-            <div className={styles.btnWrap}>
-              <button type="submit" className={styles.btn}>
-                <span> Create Product</span>
-              </button>
-            </div>
+            <button type="submit" className={`${styles.btn} ${styles.btn__primary} ${styles.submit_btn}`}>
+              <span> Create Product</span>
+            </button>
           </Form>
         )}
       </Formik>

@@ -3,8 +3,8 @@
 import { ErrorMessage, useField } from "formik";
 import React, { useState } from "react";
 import { ColorExtractor } from "react-color-extractor";
-import styles from "./styles.module.scss";
 import { TbArrowUpRightCircle } from "react-icons/tb";
+import styles from "./styles.module.scss";
 
 const Colors = ({ name, product, setProduct, colorImage, ...props }) => {
   const [toggle, setToggle] = useState(false);
@@ -31,9 +31,9 @@ const Colors = ({ name, product, setProduct, colorImage, ...props }) => {
 
   return (
     <div className={styles.colors}>
-      <div className={`${styles.header} ${meta.error ? styles.header__error : ""}`}>
+      <div className={`${styles.header} ${meta.error[name] ? styles.header__error : ""}`}>
         <div className={styles.flex}>
-          {meta.error && <img src="../../../images/admin/warning.png" alt="" />}
+          {meta.error[name] && <img src="../../../images/admin/warning.png" alt="" />}
           Pick a product color
         </div>
         <span>
