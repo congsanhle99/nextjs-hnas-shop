@@ -19,6 +19,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const DialogModal = () => {
   const dispatch = useDispatch();
   const { dialog } = useSelector((state) => ({ ...state }));
+  const headerDialog = dialog.msgs.find((x) => x.type == "error");
 
   const handleClose = () => {
     dispatch(hideDialog());
@@ -35,7 +36,9 @@ const DialogModal = () => {
         aria-describedby="alert-dialog-slide-description"
         fullWidth={true}
       >
-        <DialogTitle className={styles.header}>{dialog.header}</DialogTitle>
+        <DialogTitle className={`${styles.header} ${!headerDialog ? styles.dialog_success : ""}`}>
+          {dialog.header}
+        </DialogTitle>
         <DialogContent className={styles.body}>
           {dialog.msgs &&
             dialog.msgs.map((msg, idx) => (

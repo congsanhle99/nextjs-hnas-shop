@@ -1,13 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 import { Rating } from "@mui/material";
 import axios from "axios";
+import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { BsHandbagFill, BsHeart } from "react-icons/bs";
 import { TbMinus, TbPlus } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
+import { hideDialog, showDialog } from "../../../store/DialogSlice";
 import { addToCart, updateCart } from "../../../store/cartSlice";
+import DialogModal from "../../dialogModal";
 import Accordian from "./Accordian";
 import Share from "./share";
 import styles from "./styles.module.scss";
@@ -19,6 +22,8 @@ const Infos = ({ product, setActiveImg }) => {
   const [size, setSize] = useState(router.query.size);
   const [qty, setQty] = useState(1);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const { data: session } = useSession();
 
   // when style change
   useEffect(() => {
@@ -33,6 +38,10 @@ const Infos = ({ product, setActiveImg }) => {
     }
   }, [router.query.size]);
   //
+
+  useEffect(() => {
+    dispatch(hideDialog());
+  }, []);
 
   // add product to cart
   const addToCartHandler = async () => {
@@ -75,8 +84,47 @@ const Infos = ({ product, setActiveImg }) => {
     }
   };
   //
+
+  // add product to wishlist
+  const handleWishlist = async () => {
+    try {
+      if (!session) {
+        return signIn();
+      }
+      const { data } = await axios.put("/api/user/wishlist", {
+        product_id: product._id,
+        style: product.style,
+      });
+      dispatch(
+        showDialog({
+          header: "Product Added to Wishlist Successfully.",
+          msgs: [
+            {
+              msg: data.message,
+              type: "success",
+            },
+          ],
+        })
+      );
+    } catch (error) {
+      dispatch(
+        showDialog({
+          header: "Wishlist Error!",
+          msgs: [
+            {
+              msg: error.response.data.message,
+              type: "error",
+            },
+          ],
+        })
+      );
+    }
+  };
+  //
+
   return (
     <div className={styles.infos}>
+      <DialogModal />
       <div className={styles.infos__container}>
         <h1 className={styles.infos__name}>{product.name}</h1>
         <h2 className={styles.infos__sku}>{product.sku}</h2>
@@ -156,7 +204,7 @@ const Infos = ({ product, setActiveImg }) => {
             <BsHandbagFill />
             <b>ADD TO CARD</b>
           </button>
-          <button>
+          <button onClick={() => handleWishlist()}>
             <BsHeart />
             <b>WISHLIST</b>
           </button>
