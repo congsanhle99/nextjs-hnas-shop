@@ -1,5 +1,6 @@
 .dropdown {
   position: relative;
+  z-index: 99;
 
   &__toggle {
     width: 50px;
