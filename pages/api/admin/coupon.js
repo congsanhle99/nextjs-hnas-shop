@@ -1,9 +1,10 @@
 import nc from "next-connect";
+import admin from "../../../middleware/admin";
 import auth from "../../../middleware/auth";
 import Coupon from "../../../models/Coupon";
 import db from "../../../utils/db";
 
-const handler = nc().use(auth);
+const handler = nc().use(auth).use(admin);
 
 handler.post(async (req, res) => {
   try {

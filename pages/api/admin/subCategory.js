@@ -1,10 +1,11 @@
 import nc from "next-connect";
 import slugify from "slugify";
+import admin from "../../../middleware/admin";
 import auth from "../../../middleware/auth";
 import SubCategory from "../../../models/SubCategory";
 import db from "../../../utils/db";
 
-const handler = nc().use(auth);
+const handler = nc().use(auth).use(admin);
 
 handler.post(async (req, res) => {
   try {
