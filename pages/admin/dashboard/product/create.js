@@ -4,6 +4,7 @@ import axios from "axios";
 import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
+import Colors from "../../../../components/admin/createProduct/colors";
 import Images from "../../../../components/admin/createProduct/images";
 import Layout from "../../../../components/admin/layout";
 import AdminInput from "../../../../components/inputs/adminInput";
@@ -105,16 +106,15 @@ const create = ({ parents, categories }) => {
     color: Yup.string().required("Please add a color!"),
     description: Yup.string().required("Please add a description!"),
   });
-
   const createProduct = async () => {};
 
   const handleChange = (e) => {
     const { value, name } = e.target;
-    console.log("[name]: value", [name], value);
     setProduct({ ...product, [name]: value });
   };
-  console.log("product.parent: ", product.parent);
-  console.log("product: ", product);
+
+  console.log("product=== ", product);
+
   return (
     <Layout>
       <div className={styles.header}>Create Product</div>
@@ -154,7 +154,7 @@ const create = ({ parents, categories }) => {
                 <span className={styles.color_span} style={{ background: `${product.color.color}` }}></span>
               )}
             </div>
-            {/* <Colors name="color" product={product} setProduct={setProduct} colorImage={colorImage} /> */}
+            <Colors name="color" product={product} setProduct={setProduct} colorImage={colorImage} />
             {/* <Style name="styleInput" product={product} setProduct={setProduct} colorImage={colorImage} /> */}
             <SingularSelect
               name="parent"

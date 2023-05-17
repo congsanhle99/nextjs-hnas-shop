@@ -69,7 +69,6 @@ const Images = ({ name, header, text, images, setImages, setColorImage, ...props
       }
     });
   };
-  console.log("meta.error===", meta.error);
 
   const handleRemove = (img) => {
     setImages(images.filter((x) => x !== img));
@@ -129,7 +128,7 @@ const Images = ({ name, header, text, images, setImages, setColorImage, ...props
                   <button onClick={() => handleRemove(img)}>
                     <RiDeleteBin7Fill />
                   </button>
-                  <button>
+                  <button onClick={() => setColorImage(img)}>
                     <GiExtractionOrb />
                   </button>
                   <button>
