@@ -136,8 +136,8 @@ const Infos = ({ product, setActiveImg }) => {
             readOnly
             style={{ color: "#facf19" }}
           />
-          {product.numberReview}
-          {product.numberReview === 1 ? " review" : " reviews"}
+          {product.numReviews}
+          {product.numReviews === 1 ? " review" : " reviews"}
         </div>
         <div className={styles.infos__price}>
           {!size ? <h2>{product.priceRange}</h2> : <h1>{product.price}$</h1>}

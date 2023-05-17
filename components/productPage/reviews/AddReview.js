@@ -3,6 +3,7 @@ import { Rating } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { BeatLoader } from "react-spinners";
 import DialogModal from "../../../components/dialogModal";
 import { uploadImages } from "../../../requests/upload";
 import { hideDialog, showDialog } from "../../../store/DialogSlice";
@@ -16,8 +17,9 @@ const AddReview = ({ product, setReviews }) => {
   const [style, setStyle] = useState("");
   const [fit, setFit] = useState("");
   const [review, setReview] = useState("");
-  const [rating, setRating] = useState("");
+  const [rating, setRating] = useState(0);
   const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   // pass data from child to parent
   // Parent:
@@ -33,6 +35,7 @@ const AddReview = ({ product, setReviews }) => {
 
   let uploaded_image = [];
   const handleSubmit = async () => {
+    setLoading(true);
     let msgs = [];
     if (!size) {
       msgs.push({
@@ -97,10 +100,11 @@ const AddReview = ({ product, setReviews }) => {
       setSize("");
       setStyle("");
       setFit("");
-      setRating("");
+      setRating(0);
       setReview("");
       setImages([]);
     }
+    setLoading(false);
   };
 
   return (
@@ -143,8 +147,13 @@ const AddReview = ({ product, setReviews }) => {
           precision={0.5}
           style={{ color: "#facf19", fontSize: "3rem" }}
         />
-        <button className={styles.login_btn} onClick={() => handleSubmit()}>
-          Submit Review
+        <button
+          className={styles.login_btn}
+          disabled={loading}
+          style={{ cursor: `${loading ? "not-allowed" : ""}`, background: `${loading ? "#cccccc4f" : ""}` }}
+          onClick={() => handleSubmit()}
+        >
+          Submit Review {loading && <BeatLoader loading={loading} color="#fff" />}
         </button>
       </div>
     </div>

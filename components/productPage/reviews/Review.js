@@ -17,7 +17,7 @@ const Review = ({ review }) => {
           <img src={image} alt="" />
         </div>
         <div className={styles.review__review}>
-          <Rating name="half-rating-read" defaultValue={review.rating} style={{ color: "#facf19" }} readOnly />
+          <Rating name="half-rating-read" value={review.rating} style={{ color: "#facf19" }} readOnly />
           <p>{review.review}</p>
           <p>
             <span>Overall Fit: </span>
