@@ -35,6 +35,7 @@
   border-bottom: 1px solid #ccc;
   padding-bottom: 5px;
   margin-top: 1rem;
+  margin-bottom: 6px;
   display: flex;
   flex-direction: column;
 
@@ -53,4 +54,13 @@
   img {
     width: 30px;
   }
+}
+
+.header__error {
+  color: $error-color;
+  border-color: $error-color;
+}
+
+.error_bg {
+  background: $error-color !important;
 }
