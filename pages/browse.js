@@ -25,7 +25,7 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
   const path = router.pathname;
   const { query } = router;
 
-  const filter = ({ search, category, brand, style, size, color, pattern, material, gender }) => {
+  const filter = ({ search, category, brand, style, size, color, pattern, material, gender, price }) => {
     const path = router.pathname;
     const { query } = router;
 
@@ -55,6 +55,9 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
     }
     if (gender) {
       query.gender = gender;
+    }
+    if (price) {
+      query.price = price;
     }
 
     router.push({
@@ -107,6 +110,23 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
     }
   };
 
+  const priceHandler = (price, type) => {
+    let priceQuery = router.query.price?.split("_") || "";
+    let min = priceQuery[0] || "";
+    let max = priceQuery[1] || "";
+    let newPrice = "";
+    if (type == "min") {
+      newPrice = `${price}_${max}`;
+    } else {
+      newPrice = `${min}_${price}`;
+    }
+    filter({ price: newPrice });
+  };
+
+  const multiPriceHandler = (min, max) => {
+    filter({ price: `${min}_${max}` });
+  };
+
   return (
     <div className={styles.browse}>
       <Header searchHandler={searchHandler} />
@@ -133,7 +153,7 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
             <GenderFilter genderHandler={genderHandler} />
           </div>
           <div className={styles.browse__store_products_wrap}>
-            <HeadingFilter />
+            <HeadingFilter priceHandler={priceHandler} multiPriceHandler={multiPriceHandler} />
             <div className={styles.browse__store_products}>
               {products.map((product) => (
                 <ProductCard product={product} key={product._id} />
@@ -154,6 +174,7 @@ export async function getServerSideProps(context) {
   const searchQuery = query.search || "";
   const categoryQuery = query.category || "";
   const genderQuery = query.gender || "";
+  const priceQuery = query.price?.split("_") || "";
   // const brandQuery = query.brand || "";
   // --- mul filter stye
   const styleQuery = query.style?.split("_") || "";
@@ -269,6 +290,16 @@ export async function getServerSideProps(context) {
         }
       : {};
 
+  const price =
+    priceQuery && priceQuery !== ""
+      ? {
+          "subProducts.sizes.price": {
+            $gte: Number(priceQuery[0]) || 0,
+            $lte: Number(priceQuery[1]) || Infinity,
+          },
+        }
+      : {};
+
   function createRegex(data, styleRegex) {
     if (data.length > 1) {
       for (let i = 1; i < data.length; i++) {
@@ -290,6 +321,7 @@ export async function getServerSideProps(context) {
     ...pattern,
     ...material,
     ...gender,
+    ...price,
   })
     .sort({ createAt: -1 })
     .lean();
