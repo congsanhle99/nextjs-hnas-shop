@@ -108,6 +108,54 @@ function Row(props) {
           </Collapse>
         </TableCell>
       </TableRow>
+
+      {/* List Products Order */}
+      <TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <Box sx={{ margin: 1 }}>
+              <Typography variant="h6" gutterBottom component="div">
+                Order Item
+              </Typography>
+              <Table size="small" aria-label="purchases">
+                <TableHead>
+                  <TableRow>
+                    <TableCell></TableCell>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Size</TableCell>
+                    <TableCell>Quantity</TableCell>
+                    <TableCell>Price</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {row.products.map((p) => (
+                    <TableRow key={p._id}>
+                      <TableCell component="th" scope="row">
+                        {<img src={p.image} alt="" className={styles.table__productImg} />}
+                      </TableCell>
+                      <TableCell>{p.name}</TableCell>
+                      <TableCell>{p.size}</TableCell>
+                      <TableCell>x{p.qty}</TableCell>
+                      <TableCell>{p.price}$</TableCell>
+                    </TableRow>
+                  ))}
+                  <TableRow key={row._id}>
+                    <TableCell></TableCell>
+                    <TableCell>
+                      <span className={styles.table__productTotal}>Total Price</span>
+                    </TableCell>
+                    <TableCell></TableCell>
+                    <TableCell></TableCell>
+                    <TableCell>
+                      <span className={styles.table__productTotal}>{row.total}$</span>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
     </React.Fragment>
   );
 }
@@ -134,6 +182,9 @@ export default function CollapsibleTable({ rows }) {
   console.log("CollapsibleTable___rows: ", rows);
   return (
     <TableContainer component={Paper}>
+      <Typography sx={{ flex: "1 1 100%" }} variant="h6" id="tableTitle" component="div" paddingX="6px">
+        Orders
+      </Typography>
       <Table aria-label="collapsible table" className={styles.table}>
         <TableHead>
           <TableRow>
