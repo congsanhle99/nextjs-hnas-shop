@@ -25,7 +25,7 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
   const path = router.pathname;
   const { query } = router;
 
-  const filter = ({ search, category, brand, style, size, color }) => {
+  const filter = ({ search, category, brand, style, size, color, pattern, material, gender }) => {
     const path = router.pathname;
     const { query } = router;
 
@@ -46,6 +46,15 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
     }
     if (color) {
       query.color = color;
+    }
+    if (pattern) {
+      query.pattern = pattern;
+    }
+    if (material) {
+      query.material = material;
+    }
+    if (gender) {
+      query.gender = gender;
     }
 
     router.push({
@@ -82,6 +91,22 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
     filter({ color });
   };
 
+  const patternHandler = (pattern) => {
+    filter({ pattern });
+  };
+
+  const materialHandler = (material) => {
+    filter({ material });
+  };
+
+  const genderHandler = (gender) => {
+    if (gender == "Unisex") {
+      filter({ gender: {} });
+    } else {
+      filter({ gender });
+    }
+  };
+
   return (
     <div className={styles.browse}>
       <Header searchHandler={searchHandler} />
@@ -103,9 +128,9 @@ const browse = ({ categories, subCategories, products, sizes, colors, brands, da
             <ColorsFilter colors={colors} colorHandler={colorHandler} />
             <BrandsFilter brands={brands} brandHandler={brandHandler} />
             <StylesFilter dataStyles={dataStyles} styleHandler={styleHandler} />
-            <PatternsFilter patterns={patterns} />
-            <MaterialsFilter materials={materials} />
-            <GenderFilter />
+            <PatternsFilter patterns={patterns} patternHandler={patternHandler} />
+            <MaterialsFilter materials={materials} materialHandler={materialHandler} />
+            <GenderFilter genderHandler={genderHandler} />
           </div>
           <div className={styles.browse__store_products_wrap}>
             <HeadingFilter />
@@ -128,6 +153,7 @@ export async function getServerSideProps(context) {
   const { query } = context;
   const searchQuery = query.search || "";
   const categoryQuery = query.category || "";
+  const genderQuery = query.gender || "";
   // const brandQuery = query.brand || "";
   // --- mul filter stye
   const styleQuery = query.style?.split("_") || "";
@@ -145,6 +171,14 @@ export async function getServerSideProps(context) {
   const brandQuery = query.brand?.split("_") || "";
   const brandRegex = `^${brandQuery[0]}`;
   const brandSearchRegex = createRegex(brandQuery, brandRegex);
+  // --- mul filter pattern
+  const patternQuery = query.pattern?.split("_") || "";
+  const patternRegex = `^${patternQuery[0]}`;
+  const patternSearchRegex = createRegex(patternQuery, patternRegex);
+  // --- mul filter  material
+  const materialQuery = query.material?.split("_") || "";
+  const materialRegex = `^${materialQuery[0]}`;
+  const materialSearchRegex = createRegex(materialQuery, materialRegex);
 
   const search =
     searchQuery && searchQuery !== ""
@@ -205,6 +239,36 @@ export async function getServerSideProps(context) {
         }
       : {};
 
+  const pattern =
+    patternQuery && patternQuery !== ""
+      ? {
+          "details.value": {
+            $regex: patternSearchRegex,
+            $options: "i",
+          },
+        }
+      : {};
+
+  const material =
+    materialQuery && materialQuery !== ""
+      ? {
+          "details.value": {
+            $regex: materialSearchRegex,
+            $options: "i",
+          },
+        }
+      : {};
+
+  const gender =
+    genderQuery && genderQuery !== ""
+      ? {
+          "details.value": {
+            $regex: genderQuery,
+            $options: "i",
+          },
+        }
+      : {};
+
   function createRegex(data, styleRegex) {
     if (data.length > 1) {
       for (let i = 1; i < data.length; i++) {
@@ -216,7 +280,17 @@ export async function getServerSideProps(context) {
   //
 
   await db.connectDb();
-  let productsDb = await Product.find({ ...search, ...category, ...brand, ...style, ...size, ...color })
+  let productsDb = await Product.find({
+    ...search,
+    ...category,
+    ...brand,
+    ...style,
+    ...size,
+    ...color,
+    ...pattern,
+    ...material,
+    ...gender,
+  })
     .sort({ createAt: -1 })
     .lean();
   let products = randomize(productsDb);

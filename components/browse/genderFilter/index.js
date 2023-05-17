@@ -3,7 +3,7 @@ import { BsPlusLg } from "react-icons/bs";
 import { FaMinus } from "react-icons/fa";
 import styles from "../styles.module.scss";
 
-const GenderFilter = () => {
+const GenderFilter = ({ genderHandler }) => {
   const genders = ["Men", "Women", "Unisex"];
   const [show, setShow] = useState(true);
 
@@ -15,7 +15,7 @@ const GenderFilter = () => {
       {show && (
         <div className={styles.filter__genders}>
           {genders.map((gender, idx) => (
-            <div className={styles.filter__genders_gender} key={idx}>
+            <div className={styles.filter__genders_gender} key={idx} onClick={() => genderHandler(gender)}>
               <input type="checkbox" name="gender" id={gender} />
               <label htmlFor={gender}>{gender}</label>
             </div>
