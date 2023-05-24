@@ -134,7 +134,6 @@ const signin = ({ providers, csrfToken, callbackUrl }) => {
             >
               {(form) => (
                 <Form method="post" action="/api/auth/signin/email">
-                  <input type="text" name="csrfToken" defaultValue={csrfToken} />
                   <LoginInput
                     type="text"
                     name="login_email"
@@ -238,13 +237,8 @@ export default signin;
 
 export async function getServerSideProps(context) {
   const { req, query } = context;
-  // console.log("context".context);
-
   const session = await getSession({ req });
-  // console.log("session".session);
   const { callbackUrl } = query;
-  // console.log("callbackUrl".callbackUrl);
-
   if (session) {
     return {
       redirect: {

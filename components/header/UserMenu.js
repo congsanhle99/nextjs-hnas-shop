@@ -24,23 +24,25 @@ const UserMenu = ({ session }) => {
           </button>
         </div>
       )}
-      <ul>
-        <li>
-          <Link href="/profile">Account</Link>
-        </li>
-        <li>
-          <Link href="/profile/orders">My Orders</Link>
-        </li>
-        <li>
-          <Link href="/profile/message">Message Center</Link>
-        </li>
-        <li>
-          <Link href="/profile/address">Address</Link>
-        </li>
-        <li>
-          <Link href="/profile/whishlist">WhishList</Link>
-        </li>
-      </ul>
+      {session && (
+        <ul>
+          <li>
+            <Link href="/profile">Account</Link>
+          </li>
+          <li>
+            <Link href="/profile/orders">My Orders</Link>
+          </li>
+          <li>
+            <Link href="/profile/message">Message Center</Link>
+          </li>
+          <li>
+            <Link href="/profile/address">Address</Link>
+          </li>
+          <li>
+            <Link href="/profile/whishlist">WhishList</Link>
+          </li>
+        </ul>
+      )}
     </div>
   );
 };
