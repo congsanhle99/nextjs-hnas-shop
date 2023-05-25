@@ -3,7 +3,6 @@ import React from "react";
 import styles from "./styles.module.scss";
 
 const Products = ({ cart }) => {
-  console.log("cart=====: ", cart);
   return (
     <div className={styles.products}>
       <div className={styles.products__header}>

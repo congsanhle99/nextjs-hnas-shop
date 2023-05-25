@@ -195,11 +195,8 @@ const browse = ({
 
   function replaceQuery(queryName, value) {
     const existedQuery = router.query[queryName];
-    // console.log("existedQuery:", existedQuery);
     const valueCheck = existedQuery?.search(value);
-    // console.log("valueCheck:", valueCheck);
     const _check = existedQuery?.search(`_${value}`);
-    // console.log("_check:", _check);
     const result = "";
 
     if (existedQuery) {

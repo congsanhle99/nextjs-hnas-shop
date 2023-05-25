@@ -32,7 +32,6 @@ const initialValue = {
 };
 
 const signin = ({ providers, csrfToken, callbackUrl }) => {
-  console.log("providers", providers);
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(initialValue);
   const { login_email, login_password, name, email, password, conf_password, success, error, login_error } = user;
@@ -41,7 +40,6 @@ const signin = ({ providers, csrfToken, callbackUrl }) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };
-  console.log("user", user);
   const loginValidation = Yup.object({
     login_email: Yup.string().required("Please enter a valid email address.").email("Email Address is required."),
     login_password: Yup.string().required("Please enter a password."),
@@ -247,6 +245,7 @@ export async function getServerSideProps(context) {
   const { req, query } = context;
   const session = await getSession({ req });
   const { callbackUrl } = query;
+
   if (session) {
     return {
       redirect: {

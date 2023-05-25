@@ -20,7 +20,6 @@ const Countdown = ({ date }) => {
   }, [date]);
 
   const [remainingTime, setRemainingTime] = useState(remainingTime);
-  console.log("remainingTime", remainingTime);
   useEffect(() => {
     const interval = setInterval(() => {
       updateRemainingTime(ms);

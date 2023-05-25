@@ -6,7 +6,6 @@ import User from "../../../models/User";
 import db from "../../../utils/db";
 
 const orders = ({ orders }) => {
-  console.log("orders====", orders);
   return (
     <Layout>
       <CollapsibleTable rows={orders} />

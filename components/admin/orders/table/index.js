@@ -179,7 +179,6 @@ Row.propTypes = {
 };
 
 export default function CollapsibleTable({ rows }) {
-  console.log("CollapsibleTable___rows: ", rows);
   return (
     <TableContainer component={Paper}>
       <Typography sx={{ flex: "1 1 100%" }} variant="h6" id="tableTitle" component="div" paddingX="6px">

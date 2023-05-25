@@ -61,7 +61,6 @@ const uploadToCloudinaryHandler = async (file, path) => {
       (err, res) => {
         if (err) {
           removeTmp(file.tempFilePath);
-          console.log("err: ", err);
           return res.status(400).json({ message: "Upload image failed!" });
         }
         resolve({

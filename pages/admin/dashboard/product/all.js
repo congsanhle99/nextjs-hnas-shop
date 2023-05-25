@@ -7,7 +7,6 @@ import styles from "../../../../styles/adminProduct.module.scss";
 import db from "../../../../utils/db";
 
 const all = ({ products }) => {
-  console.log("products:::::::", products);
   return (
     <Layout>
       <div className={styles.header}>All Products</div>

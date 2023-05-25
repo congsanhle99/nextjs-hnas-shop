@@ -28,7 +28,6 @@ handler.put(async (req, res) => {
     db.disconnectDb();
     res.status(200).json({ message: "Product successfully added to your wishlist!" });
   } catch (error) {
-    console.log("Add wishlist error: ", error);
     res.status(500).json({ message: error.message });
   }
 });

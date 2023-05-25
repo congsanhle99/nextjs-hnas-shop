@@ -139,8 +139,6 @@ const create = ({ parents, categories }) => {
       let temp = images.map((img) => {
         return dataURItoBlob(img);
       });
-      console.log("images::", images);
-      console.log("temp::", temp);
       const path = "product images";
       let formData = new FormData();
       formData.append("path", path);
@@ -148,7 +146,6 @@ const create = ({ parents, categories }) => {
         formData.append("file", image);
       });
       uploaded_images = await uploadImages(formData);
-      console.log("uploaded_images: ", uploaded_images);
     }
     if (product.color.image) {
       let temp = dataURItoBlob(product.color.image);
@@ -174,7 +171,6 @@ const create = ({ parents, categories }) => {
     } catch (error) {
       setLoading(false);
       toast.error(error.response.data.message);
-      console.log(error.response.data.message);
     }
   };
 

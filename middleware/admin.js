@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import { getToken } from "next-auth/jwt";
 import User from "../models/User";
 import db from "../utils/db";
@@ -12,7 +13,6 @@ export default async (req, res, next) => {
   db.connectDb();
   let user = await User.findById(token.sub);
   db.disconnectDb();
-  console.log("User.findById(token.sub)===", user.role);
   if (user.role == "admin") {
     next();
   } else {
