@@ -12,6 +12,7 @@ import CircleIconBtn from "../components/buttons/circleIconBtn/circleIconBtn";
 import Footer from "../components/footer/Footer";
 import Header from "../components/header/Header";
 import LoginInput from "../components/inputs/loginInput/LoginInput";
+import PasswordInputValidate from "../components/inputs/passwordInputValidate/PasswordInputValidate";
 import styles from "../styles/signin.module.scss";
 //
 const initialValue = {
@@ -48,11 +49,18 @@ const signin = ({ providers, csrfToken, callbackUrl }) => {
   //
   const registerValidation = Yup.object({
     name: Yup.string()
-      .required("What is your name ?")
-      .min(2, "Name must have at least 2.")
+      .required("What is your full name?")
+      .min(2, "Full name must have at least two characters.")
       .matches(/^[aA-zZ]/, "Number and special characters are not allowed."),
     email: Yup.string().required("Please enter a valid email address.").email("Email Address is required."),
-    password: Yup.string().required("Please enter a password.").min(6, "Password must least six characters"),
+    password: Yup.string()
+      .required(
+        "Please enter a password. Password must contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character."
+      )
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+        "Password must contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character."
+      ),
     conf_password: Yup.string()
       .required("Confirm password.")
       .oneOf([Yup.ref("password")], "Password must match."),
@@ -202,7 +210,7 @@ const signin = ({ providers, csrfToken, callbackUrl }) => {
                 <Form>
                   <LoginInput type="text" name="name" icon="user" placeholder="Full Name" onChange={handleChange} />
                   <LoginInput type="text" name="email" icon="email" placeholder="Email" onChange={handleChange} />
-                  <LoginInput
+                  <PasswordInputValidate
                     type="password"
                     name="password"
                     icon="password"

@@ -21,7 +21,14 @@ const Reset = ({ user_id }) => {
   const [loading, setLoading] = useState(false);
 
   const passwordValidation = Yup.object({
-    password: Yup.string().required("Please enter a new password.").min(6, "Password must least six characters"),
+    password: Yup.string()
+      .required(
+        "Please enter a password. Password must contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character."
+      )
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+        "Password must contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character."
+      ),
     conf_password: Yup.string()
       .required("Confirm your password.")
       .oneOf([Yup.ref("password")], "Password must match."),
