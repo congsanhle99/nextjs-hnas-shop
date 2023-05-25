@@ -1,0 +1,33 @@
+.container {
+  width: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: $pink-color;
+
+  .btn {
+    display: flex;
+    gap: 8px;
+
+    &__home,
+    &__shopping {
+      font-size: 18px;
+      background-color: transparent;
+      border: 1px solid $pink-color;
+      padding: 8px 16px;
+      transition: all 0.2s ease-in;
+
+      &:hover {
+        background-color: $pink-color;
+        color: #fff;
+        border: 1px solid $pink-color;
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+  }
+}
