@@ -31,7 +31,7 @@ const index = ({ user, tab, orders }) => {
                 className={slugify(link.name, { lower: true }) == router.query.q?.split("__")[0] ? styles.active : ""}
               >
                 <Link href={`/profile/orders?tab=${tab}&q=${slugify(link.name, { lower: true })}__${link.filter}`}>
-                  <a>{link.name}</a>
+                  <a title={link.name}>{link.name}</a>
                 </Link>
               </li>
             ))}
