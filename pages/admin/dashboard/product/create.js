@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
-import Sizes from "../../../../components/admin/createProduct/clickToAdd/Sizes";
+import Sizes from "../../../../components/admin/createProduct/clickToAdd/sizes";
 import Details from "../../../../components/admin/createProduct/clickToAdd/details";
 import Questions from "../../../../components/admin/createProduct/clickToAdd/questions";
 import Colors from "../../../../components/admin/createProduct/colors";
