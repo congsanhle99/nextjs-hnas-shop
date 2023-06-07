@@ -223,6 +223,15 @@ const signin = ({ providers, csrfToken, callbackUrl }) => {
                     onChange={handleChange}
                   />
                   <CircleIconBtn type="submit" text="Sign Up" />
+                  <div className={styles.noted}>
+                    <div>Passwords must have at least 8 characters and contain at least: </div>
+                    <ul>
+                      <li>One Uppercase</li>
+                      <li>One Lowercase</li>
+                      <li>One Number</li>
+                      <li>One Special Case Character</li>
+                    </ul>
+                  </div>
                 </Form>
               )}
             </Formik>
