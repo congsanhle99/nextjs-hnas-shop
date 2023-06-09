@@ -24,7 +24,7 @@ export default function product({ product }) {
       <div className={styles.product}>
         <div className={styles.container}>
           <div className={styles.path}>
-            Home / {product.category.name}
+            Home / {product.category?.name}
             {product.subCategories.map((sub, idx) => (
               <span key={idx}>/{sub.name}</span>
             ))}
@@ -125,7 +125,7 @@ export async function getServerSideProps(context) {
       }, 0) *
         100) /
       product.reviews.length
-    );
+    ).toFixed(2);
   }
 
   db.disconnectDb();

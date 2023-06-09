@@ -59,7 +59,7 @@ handler.put(async (req, res) => {
         await product.save();
         await product.populate("reviews.reviewBy");
         await db.disconnectDb();
-        return res.status(200).json({ reviews: product.reviews });
+        return res.status(200).json({ reviews: product.reviews.reverse() });
       }
     }
   } catch (error) {

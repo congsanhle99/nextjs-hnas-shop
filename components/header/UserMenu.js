@@ -18,7 +18,9 @@ const UserMenu = ({ session }) => {
         </div>
       ) : (
         <div className={styles.flex}>
-          <button className={styles.btn_primary}>Register</button>
+          <button className={styles.btn_primary} onClick={() => signIn()}>
+            Register
+          </button>
           <button className={styles.btn_outlined} onClick={() => signIn()}>
             Login
           </button>

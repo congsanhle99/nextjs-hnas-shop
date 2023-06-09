@@ -9,7 +9,7 @@ import styles from "./styles.module.scss";
 
 const Images = ({ name, header, text, images, setImages, setColorImage, ...props }) => {
   const dispatch = useDispatch();
-  const fileInput = useRef();
+  const fileInput = useRef(null);
   const [meta, field] = useField(props);
   const handleImages = (e) => {
     let files = Array.from(e.target.files);

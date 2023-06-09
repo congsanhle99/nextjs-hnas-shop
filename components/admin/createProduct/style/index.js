@@ -7,7 +7,7 @@ import { ErrorMessage, useField } from "formik";
 
 const Style = ({ name, product, setProduct, colorImage, ...props }) => {
   const dispatch = useDispatch();
-  const fileInput = useRef();
+  const fileInput = useRef(null);
   const [field, meta] = useField(props);
 
   const handleImages = (e) => {
