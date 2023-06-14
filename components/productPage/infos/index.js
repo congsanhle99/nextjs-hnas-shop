@@ -126,8 +126,8 @@ const Infos = ({ product, setActiveImg }) => {
     <div className={styles.infos}>
       <DialogModal />
       <div className={styles.infos__container}>
-        <h1 className={styles.infos__name}>{product.name}</h1>
-        <h2 className={styles.infos__sku}>{product.sku}</h2>
+        <h3 className={styles.infos__name}>{product.name}</h3>
+        <h2 className={styles.infos__sku}>SKU: {product.sku}</h2>
         <div className={styles.infos__rating}>
           <Rating
             name="half-rating-read"

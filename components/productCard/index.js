@@ -49,7 +49,7 @@ const ProductCard = ({ product }) => {
           ""
         )}
         <div className={styles.product__infos}>
-          <h1>{product.name.length > 42 ? `${product.name.substring(0, 42)}...` : product.name}</h1>
+          <h1>{product.name.length > 35 ? `${product.name.substring(0, 32)}...` : product.name}</h1>
           <span>{prices.length === 1 ? `USD${prices[0]}$` : `USD${prices[0]} - ${prices[prices.length - 1]}$`}</span>
           <div className={styles.product__colors}>
             {styless &&

@@ -35,7 +35,7 @@ const Reviews = ({ product }) => {
                 <div className={styles.bar}>
                   <div className={styles.bar__inner} style={{ width: `${rating.percentage}%` }}></div>
                 </div>
-                <span>{rating.percentage}%</span>
+                <span>{rating.percentage && isNaN(rating.percentage) ? 0 : rating.percentage}%</span>
               </div>
             ))}
           </div>

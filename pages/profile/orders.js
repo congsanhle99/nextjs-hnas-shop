@@ -98,7 +98,7 @@ export async function getServerSideProps(context) {
   const session = await getSession({ req });
   const tab = query.tab || 0;
 
-  const filter = query.q.split("__")[1];
+  const filter = query.q?.split("__")[1];
 
   let orders = [];
   if (!filter) {

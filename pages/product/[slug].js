@@ -26,7 +26,7 @@ export default function product({ product }) {
           <div className={styles.path}>
             Home / {product.category?.name}
             {product.subCategories.map((sub, idx) => (
-              <span key={idx}>/{sub.name}</span>
+              <span key={idx}> / {sub.name}</span>
             ))}
           </div>
           <div className={styles.product__main}>

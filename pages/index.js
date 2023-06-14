@@ -28,7 +28,7 @@ export default function Home({ products }) {
 
   return (
     <>
-      <Header></Header>
+      <Header />
       <div className={styles.home}>
         <div className={styles.container}>
           <Main />
@@ -42,6 +42,7 @@ export default function Home({ products }) {
           <ProductsSwiper products={women_swiper} />
           <ProductsSwiper products={gaming_swiper} header="For Game" />
           <ProductsSwiper products={home_ImproveSwiper} header="For Home" />
+          <div className={styles.recommend}>Recommend</div>
           <div className={styles.products}>
             {products.map((product) => (
               <ProductCard key={product._id} product={product} />
@@ -49,7 +50,7 @@ export default function Home({ products }) {
           </div>
         </div>
       </div>
-      <Footer></Footer>
+      <Footer />
     </>
   );
 }
