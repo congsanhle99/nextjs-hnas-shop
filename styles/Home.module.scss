@@ -24,3 +24,13 @@
     gap: 1rem;
   }
 }
+
+.recommend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  font-size: 20px;
+  font-weight: 600;
+  color: $pink-color;
+}
